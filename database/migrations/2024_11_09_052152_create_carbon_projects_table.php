@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('carbon_projects', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('location')->nullable();
-            $table->string('type');
+            $table->string('developer')->nullable(); // Nhà phát triển dự án
+            $table->timestamp('start_date')->nullable(); // Ngày bắt đầu
+            $table->timestamp('end_date')->nullable();
             $table->timestamps();
         });
     }

@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('credit_id')->constrained('carbon_credits')->onDelete('cascade');
-            $table->foreignId('buyer_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('seller_id')->constrained('users')->onDelete('cascade');
-            $table->date('transaction_date');
-            $table->float('amount');
-            $table->decimal('price_per_unit', 10, 2);
-            $table->decimal('total_price', 15, 2);
+            $table->unsignedBigInteger('buyer_id'); // ID người mua
+            $table->unsignedBigInteger('seller_id'); // ID người bán
+            $table->unsignedBigInteger('carbon_credit_id'); // Tín chỉ được giao dịch
+            $table->decimal('price', 10, 2); // Giá giao dịch
+            $table->timestamp('transaction_date'); // Thời điểm giao dịch
             $table->timestamps();
+
+            $table->foreign('buyer_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('carbon_credit_id')->references('id')->on('carbon_credits')->onDelete('cascade');
         });
     }
 
