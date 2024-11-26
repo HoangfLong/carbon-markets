@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\CarbonCredit;
+use App\Models\CarbonProject;
+use Illuminate\Http\Request;
+
+class CarbonCreditController extends Controller
+{
+    //Hiển thị danh sách các tín chỉ carbon
+    public function index() {
+        // Lấy danh sách tín chỉ carbon với thông tin dự án đi kèm (eager loading)
+        $carbonCredits = CarbonCredit::with('project')->paginate(10); 
+            // Trả về view với dữ liệu tín chỉ carbon
+            //compact('carbonCredits'): Dữ liệu tín chỉ carbon được truyền đến view carbon-credits.index dưới dạng một biến $carbonCredits.
+            return view('carbon-credits.index',compact('carbonCredits'));
+            /*compact() dùng để truyền dữ liệu từ controller vào view. Nó tạo một mảng liên kết giữa tên biến và giá trị 
+            của biến đó. Ví dụ, compact('carbonCredits') 
+            tạo ra một mảng ['carbonCredits' => $carbonCredits] và gửi dữ liệu vào view carbon_credits.index.*/
+    }
+
+    //Hiển thị form tạo tín chỉ carbon mới
+    public function create() {
+        //Lấy tất cả các dự án carbon để người dùng chọn khi tạo tín chỉ mới
+        $projects = CarbonProject::all();
+            //Trả về view tạo tín chỉ với dữ liệu dự án
+            return view('carbon-credits.create',compact('projects'));
+            /*Dữ liệu các dự án được truyền vào view carbon-credits.create dưới dạng biến $projects, 
+            dùng để người dùng có thể chọn dự án khi tạo tín chỉ carbon mới.*/
+    }
+
+    //Lưu tín chỉ carbon vào cơ sở dữ liệu
+    public function store(Request $request) {
+        //Xác thực dữ liệu đầu vào
+        $validated = $request->validate([
+            'project_id' => 'required|exists:carbon_projects,id',
+            'serial_number' => 'required|unique:carbon_credits,serial_number|max:255',
+            'value' => 'required|numeric|min:0',
+            'status' => 'required|in:available,sold,retired',
+        ]);
+        //Lưu tín chỉ carbon vào cơ sở dữ liệu
+        CarbonCredit::create($validated);
+            //Chuyển hướng về trang danh sách với thông báo thành công
+            return redirect()->route('carbon-credits.index')->with('success','carbon bon');
+    }
+
+    //Hiển thị thông tin chi tiết tín chỉ carbon
+    public function show(CarbonCredit $carbonCredits) {
+        //Trả về view chi tiết tín chỉ với dữ liệu tín chỉ carbon
+        return view('carbon-credits.show', compact('carbonCredits'));
+    }
+
+    //Hiển thị form chỉnh sửa tín chỉ carbon
+    public function edit(CarbonCredit $carbonCredits) {
+        //Lấy tất cả các dự án để người dùng có thể chọn khi chỉnh sửa tín chỉ carbon
+        $projects = CarbonProject::all();
+            //Trả về view chỉnh sửa tín chỉ với dữ liệu tín chỉ carbon và danh sách dự án
+            return view('carbon-credits.edit',compact('carbonCredits','projects'));
+    }
+
+    //Cập nhật tín chỉ carbon trong cơ sở dữ liệu
+    public function update(Request $request, CarbonCredit $carbonCredits) {
+        //Xác thực dữ liệu đầu vào khi cập nhật
+        $validated = $request->validate([
+            'project_id' => 'required|exists:carbon_projects,id',
+            'serial_number' => 'required|max:255|unique:carbon_credits,serial_number,' . $carbonCredits->id,
+            'value' => 'required|numeric|min:0',
+            'status' => 'required|in:available,sold,retired',
+        ]);
+        //Cập nhật tín chỉ carbon trong cơ sở dữ liệu
+        $carbonCredits->update($validated);
+            //Chuyển hướng về trang danh sách với thông báo thành công
+            return redirect()->route('carbon-credits.index')->with('success','carbon up go');
+    }
+
+    //Xóa tín chỉ carbon khỏi cơ sở dữ liệu
+    public function destroy(CarbonCredit $carbonCredits) {
+        //Xóa tín chỉ carbon
+        $carbonCredits->delete();
+            //Chuyển hướng về trang danh sách với thông báo thành công
+            return redirect()->route('carbon-credits.index')->with('success','carbon deleted');
+    }
+}

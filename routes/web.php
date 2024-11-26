@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CarbonCreditController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,6 +16,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //Carbon registry route
+    Route::get('/carbon-credits',[CarbonCreditController::class,'index'])->name('carbon-credits.index');
+
+    Route::get('/carbon-credits/create',[CarbonCreditController::class,'create'])->name('carbon-credits.create');
+
+    Route::post('/carbon-credits',[CarbonCreditController::class,'store'])->name('carbon-credits.store');
+
+    Route::get('/carbon-credits/edit/{id}',[CarbonCreditController::class,'edit'])->name('carbon-credits.edit');
+
+    Route::put('/carbon-credits/{id}',[CarbonCreditController::class,'update'])->name('carbon-credits.update');
+
+    Route::delete('/carbon-credits/{id}',[CarbonCreditController::class,'destroy'])->name('carbon-credits.destroy');
 });
 
 // Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -30,5 +42,9 @@ Route::middleware('auth')->group(function () {
 // Route::middleware(['auth', 'permission:create projects'])->group(function () {
 //     Route::get('/create-projects', [UserController::class, 'admin']);
 // });
+
+
+
+
 
 require __DIR__.'/auth.php';
