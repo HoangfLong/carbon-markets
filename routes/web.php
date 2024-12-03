@@ -44,8 +44,8 @@ Route::middleware('auth')->group(function () {
 //     Route::get('/create-projects', [UserController::class, 'admin']);
 // });
 
-Route::get('/',[HomeController::class,'index']);
+Route::get('/',[HomeController::class,'home'])->name('carbon-credits.home');
 
-Route::get('/market',[HomeController::class,'market'])->name('carbon-credits.market');
+Route::get('/marketplace',[HomeController::class,'market'])->name('carbon-credits.market');
 
 require __DIR__.'/auth.php';
