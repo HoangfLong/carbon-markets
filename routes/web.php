@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\CarbonCreditController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
@@ -43,8 +44,8 @@ Route::middleware('auth')->group(function () {
 //     Route::get('/create-projects', [UserController::class, 'admin']);
 // });
 
+Route::get('/',[HomeController::class,'index']);
 
-
-
+Route::get('/market',[HomeController::class,'market'])->name('carbon-credits.market');
 
 require __DIR__.'/auth.php';
