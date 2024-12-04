@@ -3,6 +3,8 @@
 use App\Http\Controllers\CarbonCreditController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CarbonProject;
+use App\Http\Controllers\CarbonProjectController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/welcome', function () {
@@ -47,5 +49,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/',[HomeController::class,'home'])->name('carbon-credits.home');
 
 Route::get('/marketplace',[HomeController::class,'market'])->name('carbon-credits.market');
+
+Route::get('/carbon-projects',[CarbonProjectController::class,'index'])->name('carbon-projects.index');
 
 require __DIR__.'/auth.php';
