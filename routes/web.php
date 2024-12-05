@@ -46,10 +46,16 @@ Route::middleware('auth')->group(function () {
 //     Route::get('/create-projects', [UserController::class, 'admin']);
 // });
 
-Route::get('/',[HomeController::class,'home'])->name('carbon-credits.home');
 
-Route::get('/marketplace',[HomeController::class,'market'])->name('carbon-credits.market');
+ //Carbon project route
+ Route::get('/',[HomeController::class,'home'])->name('carbon-credits.home');
 
-Route::get('/carbon-projects',[CarbonProjectController::class,'index'])->name('carbon-projects.index');
+ Route::get('/marketplace',[HomeController::class,'market'])->name('carbon-credits.market');
+
+ Route::get('/carbon-projects',[CarbonProjectController::class,'index'])->name('carbon-projects.index');
+
+ Route::get('/carbon-projects/create',[CarbonProjectController::class,'create'])->name('carbon-projects.create');
+
+ Route::post('/carbon-projects',[CarbonProjectController::class,'store'])->name('carbon-projects.store');
 
 require __DIR__.'/auth.php';

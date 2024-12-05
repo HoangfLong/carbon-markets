@@ -15,8 +15,8 @@
     <link rel="icon" href="build/assets/img/core-img/favicon.ico">
 
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="build/assets/css/core-style.css">
-    <link rel="stylesheet" href="build/assets/style.css">
+    <link rel="stylesheet" href={{asset ('build/assets/css/core-style.css')}}>
+    <link rel="stylesheet" href={{asset ('build/assets/style.css')}}>
 
 </head>
 
@@ -32,7 +32,7 @@
 
         <!-- Cart Button -->
         <div class="cart-button">
-            <a href="#" id="rightSideCart"><img src="build/assets/img/core-img/bag.svg" alt=""> <span>3</span></a>
+            <a href="#" id="rightSideCart"><img src={{asset ('build/assets/img/core-img/bag.svg')}} alt=""> <span>3</span></a>
         </div>
 
         <div class="cart-content d-flex">
@@ -42,7 +42,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="build/assets/img/product-img/product-1.jpg" class="cart-thumb" alt="">
+                        <img src={{asset ('build/assets/img/product-img/product-1.jpg')}} class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                           <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -58,7 +58,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="build/assets/img/product-img/product-2.jpg" class="cart-thumb" alt="">
+                        <img src={{asset ('build/assets/img/product-img/product-2.jpg')}} class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                           <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -74,7 +74,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="build/assets/img/product-img/product-3.jpg" class="cart-thumb" alt="">
+                        <img src={{asset ('build/assets/img/product-img/product-3.jpg')}} class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                           <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -107,7 +107,7 @@
     <!-- ##### Right Side Cart End ##### -->
 
     <!-- ##### Welcome Area Start ##### -->
-    <section class="welcome_area bg-img background-overlay" style="background-image: url(build/assets/img/bg-img/bg-1.jpg);">
+    <section class="welcome_area bg-img background-overlay" style="background-image: url({{ asset('build/assets/img/bg-img/bg-1.jpg') }});">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
@@ -133,16 +133,16 @@
     <!-- ##### Footer Area End ##### -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="build/assets/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src={{asset('build/assets/js/jquery/jquery-2.2.4.min.js')}}></script>
     <!-- Popper js -->
-    <script src="build/assets/js/popper.min.js"></script>
+    <script src={{asset('build/assets/js/popper.min.js')}}></script>
     <!-- Bootstrap js -->
-    <script src="build/assets/js/bootstrap.min.js"></script>
+    <script src={{asset('build/assets/js/bootstrap.min.js')}}></script>
     <!-- Plugins js -->
-    <script src="build/assets/js/plugins.js"></script>
+    <script src={{asset('build/assets/js/plugins.js')}}></script>
     <!-- Classy Nav js -->
-    <script src="build/assets/js/classy-nav.min.js"></script>
+    <script src={{asset('build/assets/js/classy-nav.min.js')}}></script>
     <!-- Active js -->
-    <script src="build/assets/js/active.js"></script>
+    <script src={{asset('build/assets/js/active.js')}}></script>
 </body>
 </html>

@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\CarbonCredit;
 use App\Models\CarbonProject;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CarbonCreditController extends Controller
 {
     //Hiển thị danh sách các tín chỉ carbon
-    public function index() {
+    public function index(): View {
         // Lấy danh sách tín chỉ carbon với thông tin dự án đi kèm (eager loading)
         $carbonCredits = CarbonCredit::with('project')->paginate(10); 
             // Trả về view với dữ liệu tín chỉ carbon
@@ -22,7 +24,7 @@ class CarbonCreditController extends Controller
     }
 
     //Hiển thị form tạo tín chỉ carbon mới
-    public function create() {
+    public function create(): View {
         //Lấy tất cả các dự án carbon để người dùng chọn khi tạo tín chỉ mới
         $projects = CarbonProject::all();
             //Trả về view tạo tín chỉ với dữ liệu dự án
@@ -32,7 +34,7 @@ class CarbonCreditController extends Controller
     }
 
     //Lưu tín chỉ carbon vào cơ sở dữ liệu
-    public function store(Request $request) {
+    public function store(Request $request): RedirectResponse {
         //Xác thực dữ liệu đầu vào
         $validated = $request->validate([
             'project_id' => 'required|exists:carbon_projects,id',
@@ -47,13 +49,13 @@ class CarbonCreditController extends Controller
     }
 
     //Hiển thị thông tin chi tiết tín chỉ carbon
-    public function show(CarbonCredit $carbonCredits) {
+    public function show(CarbonCredit $carbonCredits): View {
         //Trả về view chi tiết tín chỉ với dữ liệu tín chỉ carbon
         return view('carbon-credits.show', compact('carbonCredits'));
     }
 
     //Hiển thị form chỉnh sửa tín chỉ carbon
-    public function edit(CarbonCredit $carbonCredits) {
+    public function edit(CarbonCredit $carbonCredits): View {
         //Lấy tất cả các dự án để người dùng có thể chọn khi chỉnh sửa tín chỉ carbon
         $projects = CarbonProject::all();
             //Trả về view chỉnh sửa tín chỉ với dữ liệu tín chỉ carbon và danh sách dự án
