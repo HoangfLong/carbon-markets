@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Carbon\CreditRequest;
 use App\Models\CarbonCredit;
 use App\Models\CarbonProject;
 use Illuminate\Contracts\View\View;
@@ -14,7 +15,7 @@ class CarbonCreditController extends Controller
     //Hiển thị danh sách các tín chỉ carbon
     public function index(): View {
         // Lấy danh sách tín chỉ carbon với thông tin dự án đi kèm (eager loading)
-        $carbonCredits = CarbonCredit::with('project')->paginate(10); 
+        $carbonCredits = CarbonCredit::with('project')->paginate(10);
             // Trả về view với dữ liệu tín chỉ carbon
             //compact('carbonCredits'): Dữ liệu tín chỉ carbon được truyền đến view carbon-credits.index dưới dạng một biến $carbonCredits.
             return view('carbon-credits.index',compact('carbonCredits'));
@@ -34,16 +35,9 @@ class CarbonCreditController extends Controller
     }
 
     //Lưu tín chỉ carbon vào cơ sở dữ liệu
-    public function store(Request $request): RedirectResponse {
-        //Xác thực dữ liệu đầu vào
-        $validated = $request->validate([
-            'project_id' => 'required|exists:carbon_projects,id',
-            'serial_number' => 'required|unique:carbon_credits,serial_number|max:255',
-            'value' => 'required|numeric|min:0',
-            'status' => 'required|in:available,sold,retired',
-        ]);
+    public function store(CreditRequest $request): RedirectResponse {
         //Lưu tín chỉ carbon vào cơ sở dữ liệu
-        CarbonCredit::create($validated);
+        CarbonCredit::create($request->validated());
             //Chuyển hướng về trang danh sách với thông báo thành công
             return redirect()->route('carbon-credits.index')->with('success','carbon bon');
     }
