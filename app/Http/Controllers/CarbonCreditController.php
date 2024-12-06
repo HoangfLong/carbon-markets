@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Carbon\CreditRequest;
+use App\Http\Requests\Carbon\CreditStoreRequest;
 use App\Models\CarbonCredit;
 use App\Models\CarbonProject;
 use Illuminate\Contracts\View\View;
@@ -35,7 +35,7 @@ class CarbonCreditController extends Controller
     }
 
     //Lưu tín chỉ carbon vào cơ sở dữ liệu
-    public function store(CreditRequest $request): RedirectResponse {
+    public function store(CreditStoreRequest $request): RedirectResponse {
         //Lưu tín chỉ carbon vào cơ sở dữ liệu
         CarbonCredit::create($request->validated());
             //Chuyển hướng về trang danh sách với thông báo thành công

@@ -13,6 +13,8 @@
 
     <!-- Favicon  -->
     <link rel="icon" href="build/assets/img/core-img/favicon.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Core Style CSS -->
     <link rel="stylesheet" href={{asset ('build/assets/css/core-style.css')}}>

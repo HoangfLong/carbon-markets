@@ -54,8 +54,16 @@ Route::middleware('auth')->group(function () {
 
  Route::get('/carbon-projects',[CarbonProjectController::class,'index'])->name('carbon-projects.index');
 
+ Route::get('/carbon-projects/{carbonProject}',[CarbonProjectController::class,'show'])->name('carbon-projects.show');
+
  Route::get('/carbon-projects/create',[CarbonProjectController::class,'create'])->name('carbon-projects.create');
 
  Route::post('/carbon-projects',[CarbonProjectController::class,'store'])->name('carbon-projects.store');
+
+ Route::get('/carbon-projects/edit/{carbonProject}',[CarbonProjectController::class,'edit'])->name('carbon-projects.edit');
+
+ Route::put('/carbon-projects/{carbonProject}',[CarbonProjectController::class,'update'])->name('carbon-projects.update');
+
+ Route::delete('/carbon-projects/{carbonProject}',[CarbonProjectController::class,'destroy'])->name('carbon-projects.destroy');
 
 require __DIR__.'/auth.php';

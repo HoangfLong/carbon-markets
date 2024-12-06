@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function home() {
-        return view('carbon-credits.home');
+        return view('home');
     }
 
     public function market() {

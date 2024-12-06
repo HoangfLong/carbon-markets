@@ -4,15 +4,16 @@ namespace App\Http\Requests\Carbon;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreditRequest extends FormRequest
+class ProjectStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return true; //allow to use this request
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -21,10 +22,12 @@ class CreditRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'project_id' => 'required|exists:carbon_projects,id',
-            'serial_number' => 'required|unique:carbon_credits,serial_number|max:255',
-            'value' => 'required|numeric|min:0',
-            'status' => 'required|in:availabe,sold,retired',
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'location' => 'required|string',
+            'developer' => 'required|string',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
         ];
     }
 }
