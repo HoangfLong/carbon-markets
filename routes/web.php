@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
 
  Route::get('/carbon-projects',[CarbonProjectController::class,'index'])->name('carbon-projects.index');
 
- Route::get('/carbon-projects/{carbonProject}',[CarbonProjectController::class,'show'])->name('carbon-projects.show');
+ Route::get('/carbon-projects/show/{carbonProjects}',[CarbonProjectController::class,'show'])->name('carbon-projects.show');
 
  Route::get('/carbon-projects/create',[CarbonProjectController::class,'create'])->name('carbon-projects.create');
 

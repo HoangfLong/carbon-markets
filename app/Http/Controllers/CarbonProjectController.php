@@ -30,8 +30,8 @@ class CarbonProjectController extends Controller
     }
 
     //View project
-    public function show(CarbonProject $carbonProject): View {
-        dd($carbonProject);
+    public function show(CarbonProject $carbonProjects): View {
+        // dd($carbonProjects);
         return view('carbon-projects.show',compact('carbonProjects'));
     }
 

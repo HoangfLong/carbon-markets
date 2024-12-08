@@ -105,30 +105,26 @@
             <!-- User Login Info -->
             <nav>
             <div class="user-login-info">
-                <a href="#">
-                    <nav>
-                    <img src="build/assets/img/core-img/user.svg" alt="">
-                    <ul class="dropdown">
-                        <li><a href="">Login</a></li>
-                        <li><a href="">Register</a></li>
-                        <li><a href="">My account</a></li>
-                        <li><a href="">Summary</a></li>
-                        <li><a href="">Transactions</a></li>
-                        <li><a href="">My projects</a></li>
-                      </ul>
-                    {{-- Login --}}
-                    <a href="{{ route('login') }}"
-                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                        Log in
-                    </a>
-                    {{-- Register --}}
-                    @if (Route::has('register'))
-                    <a href="{{ route('register') }}"
-                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                        Register
-                    </a>
-                @endif
+                {{-- <img src="build/assets/img/core-img/user.svg" alt=""> --}}
+                {{-- <ul class="dropdown">
+                    <li><a href="">Login</a></li>
+                    <li><a href="">Register</a></li>
+                    <li><a href="">My account</a></li>
+                    <li><a href="">Summary</a></li>
+                    <li><a href="">Transactions</a></li>
+                    <li><a href="">My projects</a></li>
+                </ul> --}}
+                {{-- Login --}}
+                {{-- Login --}}
+                <a href="{{ route('login') }}" class="px-4 py-2 text-black hover:text-gray-600">
+                    Log in
                 </a>
+                {{-- Register --}}
+                @if (Route::has('register'))
+                <a href="{{ route('register') }}" class="px-4 py-2 text-black hover:text-gray-600">
+                    Register
+                </a>
+                @endif
             </div>
         </nav>
             <!-- Cart Area -->
