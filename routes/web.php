@@ -60,10 +60,10 @@ Route::middleware('auth')->group(function () {
 
  Route::post('/carbon-projects',[CarbonProjectController::class,'store'])->name('carbon-projects.store');
 
- Route::get('/carbon-projects/edit/{carbonProject}',[CarbonProjectController::class,'edit'])->name('carbon-projects.edit');
+ Route::get('/carbon-projects/edit/{carbonProjects}',[CarbonProjectController::class,'edit'])->name('carbon-projects.edit');
 
- Route::put('/carbon-projects/{carbonProject}',[CarbonProjectController::class,'update'])->name('carbon-projects.update');
+ Route::put('/carbon-projects/{carbonProjects}',[CarbonProjectController::class,'update'])->name('carbon-projects.update');
 
- Route::delete('/carbon-projects/{carbonProject}',[CarbonProjectController::class,'destroy'])->name('carbon-projects.destroy');
+ Route::delete('/carbon-projects/{carbonProjects}',[CarbonProjectController::class,'destroy'])->name('carbon-projects.destroy');
 
 require __DIR__.'/auth.php';

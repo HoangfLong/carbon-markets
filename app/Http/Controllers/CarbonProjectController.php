@@ -47,8 +47,8 @@ class CarbonProjectController extends Controller
     }
 
     //Destroy project
-    public function destroy(CarbonProject $carbonProject) : RedirectResponse{
-        $carbonProject->delete();
+    public function destroy(CarbonProject $carbonProjects) : RedirectResponse{
+        $carbonProjects->delete();
             return redirect()->route('carbon-projects.index')->with('success','project deleted');
     }
 }
