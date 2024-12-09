@@ -11,7 +11,7 @@ class CreditUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class CreditUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'project_id' => 'required|exists:carbon_projects,id',
+            'serial_number' => 'required|max:255|unique:carbon_credits,serial_number',
+            'value' => 'required|numeric|min:0',
+            'status' => 'required|in:available,sold,retired',
         ];
     }
 }

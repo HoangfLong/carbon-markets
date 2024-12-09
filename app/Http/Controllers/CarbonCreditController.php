@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Carbon\CreditStoreRequest;
+use App\Http\Requests\Carbon\CreditUpdateRequest;
 use App\Models\CarbonCredit;
 use App\Models\CarbonProject;
 use Illuminate\Contracts\View\View;
@@ -27,10 +28,10 @@ class CarbonCreditController extends Controller
     //Hiển thị form tạo tín chỉ carbon mới
     public function create(): View {
         //Lấy tất cả các dự án carbon để người dùng chọn khi tạo tín chỉ mới
-        $projects = CarbonProject::all();
+        $carbonProjects = CarbonProject::all();
             //Trả về view tạo tín chỉ với dữ liệu dự án
-            return view('carbon-credits.create',compact('projects'));
-            /*Dữ liệu các dự án được truyền vào view carbon-credits.create dưới dạng biến $projects, 
+            return view('carbon-credits.create',compact('carbonProjects'));
+            /*Dữ liệu các dự án được truyền vào view carbon-credits.create dưới dạng biến $carbonProjects, 
             dùng để người dùng có thể chọn dự án khi tạo tín chỉ carbon mới.*/
     }
 
@@ -39,7 +40,7 @@ class CarbonCreditController extends Controller
         //Lưu tín chỉ carbon vào cơ sở dữ liệu
         CarbonCredit::create($request->validated());
             //Chuyển hướng về trang danh sách với thông báo thành công
-            return redirect()->route('carbon-credits.index')->with('success','carbon bon');
+            return redirect()->route('carbon-credits.index')->with('success','carbon');
     }
 
     //Hiển thị thông tin chi tiết tín chỉ carbon
@@ -51,22 +52,16 @@ class CarbonCreditController extends Controller
     //Hiển thị form chỉnh sửa tín chỉ carbon
     public function edit(CarbonCredit $carbonCredits): View {
         //Lấy tất cả các dự án để người dùng có thể chọn khi chỉnh sửa tín chỉ carbon
-        $projects = CarbonProject::all();
+        $carbonProjects = CarbonProject::all();
             //Trả về view chỉnh sửa tín chỉ với dữ liệu tín chỉ carbon và danh sách dự án
-            return view('carbon-credits.edit',compact('carbonCredits','projects'));
+            return view('carbon-credits.edit',compact('carbonCredits','carbonProjects'));
     }
 
     //Cập nhật tín chỉ carbon trong cơ sở dữ liệu
-    public function update(Request $request, CarbonCredit $carbonCredits) {
-        //Xác thực dữ liệu đầu vào khi cập nhật
-        $validated = $request->validate([
-            'project_id' => 'required|exists:carbon_projects,id',
-            'serial_number' => 'required|max:255|unique:carbon_credits,serial_number,' . $carbonCredits->id,
-            'value' => 'required|numeric|min:0',
-            'status' => 'required|in:available,sold,retired',
-        ]);
+    public function update(CreditUpdateRequest $request, CarbonCredit $carbonCredits) {
+      
         //Cập nhật tín chỉ carbon trong cơ sở dữ liệu
-        $carbonCredits->update($validated);
+        $carbonCredits->update($request->validated());
             //Chuyển hướng về trang danh sách với thông báo thành công
             return redirect()->route('carbon-credits.index')->with('success','carbon up go');
     }

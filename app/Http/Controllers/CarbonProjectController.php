@@ -14,7 +14,7 @@ class CarbonProjectController extends Controller
 {   
     //View project
     public function index(): View {
-        $carbonProjects = CarbonProject::with('credits')->paginate(15);
+        $carbonProjects = CarbonProject::with('credit')->paginate(15);
             return view('carbon-projects.index',compact('carbonProjects'));
     }
 

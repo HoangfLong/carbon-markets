@@ -11,7 +11,7 @@
                 <label for="project_id">Select Project</label>
                 <select name="project_id" id="project_id" class="form-control" style="background-color: #495057; color: white; border: none; border-radius: 5px;">
                     <option value="" disabled selected>-- Select a Project --</option>
-                    @foreach ($projects as $project)
+                    @foreach ($carbonProjects as $project)
                         <option value="{{ $project->id }}">{{ $project->name }}</option>
                     @endforeach
                 </select>

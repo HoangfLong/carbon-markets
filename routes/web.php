@@ -27,11 +27,11 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/carbon-credits',[CarbonCreditController::class,'store'])->name('carbon-credits.store');
 
-    Route::get('/carbon-credits/edit/{id}',[CarbonCreditController::class,'edit'])->name('carbon-credits.edit');
+    Route::get('/carbon-credits/edit/{carbonCredits}',[CarbonCreditController::class,'edit'])->name('carbon-credits.edit');
 
-    Route::put('/carbon-credits/{id}',[CarbonCreditController::class,'update'])->name('carbon-credits.update');
+    Route::put('/carbon-credits/{carbonCredits}',[CarbonCreditController::class,'update'])->name('carbon-credits.update');
 
-    Route::delete('/carbon-credits/{id}',[CarbonCreditController::class,'destroy'])->name('carbon-credits.destroy');
+    Route::delete('/carbon-credits/{carbonCredits}',[CarbonCreditController::class,'destroy'])->name('carbon-credits.destroy');
 });
 
 // Route::middleware(['auth', 'role:admin'])->group(function () {
