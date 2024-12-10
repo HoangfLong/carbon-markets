@@ -3,7 +3,7 @@
         <!-- Classy Menu -->
         <nav class="classy-navbar" id="essenceNav">
             <!-- Logo -->
-            <a class="nav-brand" href="{{ route('carbon-credits.home') }}"><img src="build/assets/img/core-img/logo.png" alt=""></a>
+            <a class="nav-brand" href="{{ route('home') }}"><img src="build/assets/img/core-img/logo.png" alt=""></a>
             <!-- Navbar Toggler -->
             <div class="classy-navbar-toggler">
                 <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -49,7 +49,7 @@
                         </li>
                         <li><a href="#">Solutions</a>
                             <ul class="dropdown">
-                                <li><a href="{{ route('carbon-credits.market') }}">Marketplace</a></li>
+                                <li><a href="{{ route('carbon-projects.marketplace') }}">Marketplace</a></li>
                                 <li><a href="">Climate Saas API</a></li>
                                 <li><a href="">Partnerships</a></li>
                                 {{-- <li><a href="checkout.html">Checkout</a></li>
@@ -61,7 +61,7 @@
                         </li>
                         <li><a href="blog.html">Resources</a>
                             <ul class="dropdown">
-                                <li><a href="{{ route('carbon-credits.home') }}">Home</a></li>
+                                <li><a href="{{ route('home') }}">Home</a></li>
                                 <li><a href="shop.html">Shop</a></li>
                                 <li><a href="single-product-details.html">Product Details</a></li>
                                 <li><a href="checkout.html">Checkout</a></li>
@@ -73,7 +73,7 @@
                         </li>
                         <li><a href="contact.html">Sell</a>
                             <ul class="dropdown">
-                                <li><a href="{{ route('carbon-credits.home') }}">Home</a></li>
+                                <li><a href="{{ route('home') }}">Home</a></li>
                                 <li><a href="shop.html">Shop</a></li>
                                 <li><a href="single-product-details.html">Product Details</a></li>
                                 <li><a href="checkout.html">Checkout</a></li>

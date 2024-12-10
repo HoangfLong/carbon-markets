@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\CarbonProject;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function home() {
+    public function home(): View {
         return view('home');
     }
-
-    public function market() {
-        return view('carbon-credits.market');
+     //Marketplace view
+     public function market(): View {
+        $carbonProjects = CarbonProject::latest()->get();
+            return view('carbon-projects.marketplace',compact('carbonProjects'));
     }
 }

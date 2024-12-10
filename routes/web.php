@@ -46,12 +46,11 @@ Route::middleware('auth')->group(function () {
 //     Route::get('/create-projects', [UserController::class, 'admin']);
 // });
 
+//Home
+Route::get('/',[HomeController::class,'home'])->name('home');
+Route::get('/marketplace',[HomeController::class,'market'])->name('carbon-projects.marketplace');
 
  //Carbon project route
- Route::get('/',[HomeController::class,'home'])->name('carbon-credits.home');
-
- Route::get('/marketplace',[HomeController::class,'market'])->name('carbon-credits.market');
-
  Route::get('/carbon-projects',[CarbonProjectController::class,'index'])->name('carbon-projects.index');
 
  Route::get('/carbon-projects/show/{carbonProjects}',[CarbonProjectController::class,'show'])->name('carbon-projects.show');
