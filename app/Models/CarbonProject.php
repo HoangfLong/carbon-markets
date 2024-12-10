@@ -17,9 +17,12 @@ class CarbonProject extends Model
         'end_date',
     ];
 
-    public function credit() {
+    public function credits() {
         return $this->hasMany(CarbonCredit::class,'project_id');
         //Trong model CarbonProject, ta sẽ định nghĩa mối quan hệ 
         //hasMany để lấy danh sách các CarbonCredit thuộc về dự án đó
+    }
+    public function images() {
+        return $this->hasMany(Image::class,'project_id');
     }
 }

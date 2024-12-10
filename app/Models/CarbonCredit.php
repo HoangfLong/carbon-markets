@@ -18,7 +18,7 @@ class CarbonCredit extends Model
     ];
 
 
-    public function project() {
+    public function projects() {
         return $this->belongsTo(CarbonProject::class,'project_id');
         /*Bảng carbon_credits có trường project_id làm khóa ngoại trỏ tới bảng carbon_projects, 
         vì vậy trong model CarbonCredit, ta sẽ định nghĩa quan hệ belongsTo*/

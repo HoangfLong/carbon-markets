@@ -28,7 +28,7 @@
                             <td class="text-center border">{{ $project->location }}</td>
                             <td class="text-center border">{{ $project->developer }}</td>
                             <td class="border">{{ Str::limit($project->description, 50, '...')}}</td>
-                            <td class="text-center border">{{ $project->credit->count() }}</td>
+                            <td class="text-center border">{{ $project->credits->count() }}</td>
                             <td class="text-center border">{{ $project->start_date ? \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') : 'N/A' }}</td>
                             <td class="text-center border">{{ $project->end_date ? \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') : 'N/A' }}</td>
                             <td class="text-center border">{{ \Carbon\Carbon::parse($project->created_at)->format('d/m/Y H:i') }}</td>

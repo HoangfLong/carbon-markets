@@ -16,7 +16,7 @@ class CarbonCreditController extends Controller
     //Hiển thị danh sách các tín chỉ carbon
     public function index(): View {
         // Lấy danh sách tín chỉ carbon với thông tin dự án đi kèm (eager loading)
-        $carbonCredits = CarbonCredit::with('project')->paginate(10);
+        $carbonCredits = CarbonCredit::with('projects')->paginate(10);
             // Trả về view với dữ liệu tín chỉ carbon
             //compact('carbonCredits'): Dữ liệu tín chỉ carbon được truyền đến view carbon-credits.index dưới dạng một biến $carbonCredits.
             return view('carbon-credits.index',compact('carbonCredits'));

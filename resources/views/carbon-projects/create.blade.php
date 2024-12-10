@@ -9,7 +9,7 @@
                     <h4 class="mb-0">Thêm Dự Án Mới</h4>
                 </div>
                 <div class="card-body bg-light">
-                    <form action="{{ route('carbon-projects.store') }}" method="POST">
+                    <form action="{{ route('carbon-projects.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         
                         <!-- Name -->
@@ -72,6 +72,12 @@
                             @error('description')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                        </div>
+
+                        <!--Image-->
+                        <div>
+                            <label for="images">Upload Images:</label>
+                            <input type="file" name="images[]" multiple>
                         </div>
 
                         <!-- Start Date -->
