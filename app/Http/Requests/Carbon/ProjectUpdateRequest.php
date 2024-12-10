@@ -26,6 +26,8 @@ class ProjectUpdateRequest extends FormRequest
             'description' => 'nullable|string',
             'location' => 'required|string',
             'developer' => 'required|string',
+            'images' => 'nullable|array', // Đảm bảo 'images' là mảng file
+            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048',// Mỗi phần tử trong mảng phải là ảnh và có định dạng jpg, jpeg, png
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
         ];

@@ -47,7 +47,7 @@ class CarbonProjectController extends Controller
         // dd($carbonProjects->images); // kiểm tra ảnh liên kết với dự án
         return redirect()->route('carbon-projects.index')->with('success', 'Project created successfully.');
     }
-    
+
     //View project
     public function show(CarbonProject $carbonProjects): View {
         // dd($carbonProjects);
@@ -62,24 +62,38 @@ class CarbonProjectController extends Controller
     //update project
     public function update(ProjectUpdateRequest $request, CarbonProject $carbonProjects) : RedirectResponse {
 
+        //Cập nhật các thông tin dự án
         $carbonProjects->update($request->validated());
 
         if ($request->hasFile('images')) {
+            // Xóa các ảnh cũ liên quan đến dự án
+            $carbonProjects->images()->delete(); // Xóa ảnh cũ nếu có
+            // Lưu các ảnh mới
             foreach ($request->file('images') as $image) {
                 $path = $image->store('projects', 'public');
+                // Lưu đường dẫn ảnh vào bảng 'images'
                 Image::create([
                     'project_id' => $carbonProjects->id,
                     'image_path' => $path,
                 ]);
             }
         }
-            return redirect()->route('carbon-projects.index')->with('success','project up go');
+        return redirect()->route('carbon-projects.index')->with('success','project up go');
     }
 
     //Destroy project
     public function destroy(CarbonProject $carbonProjects) : RedirectResponse{
 
         $carbonProjects->delete();
+        foreach ($carbonProjects->images as $image) {
+            // Kiểm tra nếu file tồn tại trong storage và xóa
+            if (Storage::disk('public')->exists($image->image_path)) {
+                Storage::disk('public')->delete($image->image_path);
+            }
+        }
+        // Xóa các ảnh trong cơ sở dữ liệu
+        $carbonProjects->images()->delete();
+        
             return redirect()->route('carbon-projects.index')->with('success','project deleted');
     }
 }

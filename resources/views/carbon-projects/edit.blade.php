@@ -7,7 +7,7 @@
             <h3>Edit Project</h3>
         </div>
         <div class="card-body">
-            <form action="{{ route('carbon-projects.update', $carbonProjects->id) }}" method="POST">
+            <form action="{{ route('carbon-projects.update', $carbonProjects->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
@@ -25,6 +25,10 @@
                 <div class="mb-3">
                     <label for="developer" class="form-label">Developer</label>
                     <input type="text" class="form-control" id="developer" name="developer" value="{{ $carbonProjects->developer }}">
+                </div>
+                <div class="mb-3">
+                    <label for="images" class="form-label">Upload New Images:</label>
+                    <input type="file" class="form-control" id="image" name="images[]" multiple>
                 </div>
                 <div class="mb-3">
                     <label for="start_date" class="form-label">Start Date</label>
