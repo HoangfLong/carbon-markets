@@ -23,11 +23,12 @@ return new class extends Migration
                     ->onDelete('cascade');
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('project_images');
     }
 };

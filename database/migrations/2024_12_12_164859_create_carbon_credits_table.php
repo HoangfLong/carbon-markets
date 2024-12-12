@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('project_id'); // Khóa ngoại
             $table->string('serial_number')->unique();
+            $table->decimal('price_per_ton', 10, 2)->nullable(); // Giá bán 1 tín chỉ (1 tấn CO2)
             $table->decimal('value', 8, 2);
             $table->enum('status', ['available', 'sold', 'retired'])->default('available');
             $table->timestamps();;

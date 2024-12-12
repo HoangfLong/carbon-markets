@@ -17,6 +17,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('location')->nullable();
             $table->string('developer')->nullable(); // Nhà phát triển dự án
+            $table->string('validation_entity')->nullable(); // Đơn vị xác minh
+            $table->enum('project_type',['forestry', 'renewable energy', 'waste Management', 'other'])->default('Forestry'); // Loại dự án
+            $table->enum('status',['development', 'operational', 'completed'])->default('development'); // Trạng thái
             $table->timestamp('start_date')->nullable(); // Ngày bắt đầu
             $table->timestamp('end_date')->nullable();
             $table->timestamps();
