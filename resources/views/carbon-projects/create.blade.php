@@ -2,120 +2,130 @@
 
 @section('content')
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-lg">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Thêm Dự Án Mới</h4>
-                </div>
-                <div class="card-body bg-light">
-                    <form action="{{ route('carbon-projects.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        
-                        <!-- Name -->
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Tên Dự Án</label>
-                            <input 
-                                type="text" 
-                                class="form-control @error('name') is-invalid @enderror" 
-                                id="name" 
-                                name="name" 
-                                value="{{ old('name') }}" 
-                                placeholder="Nhập tên dự án" 
-                                required>
-                            @error('name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+    <h2>Create New Project</h2>
 
-                        <!-- Location -->
-                        <div class="mb-3">
-                            <label for="location" class="form-label">Vị Trí</label>
-                            <input 
-                                type="text" 
-                                class="form-control @error('location') is-invalid @enderror" 
-                                id="location" 
-                                name="location" 
-                                value="{{ old('location') }}" 
-                                placeholder="Nhập vị trí" 
-                                required>
-                            @error('location')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <!-- Developer -->
-                        <div class="mb-3">
-                            <label for="developer" class="form-label">Nhà Phát Triển</label>
-                            <input 
-                                type="text" 
-                                class="form-control @error('developer') is-invalid @enderror" 
-                                id="developer" 
-                                name="developer" 
-                                value="{{ old('developer') }}" 
-                                placeholder="Nhập tên nhà phát triển" 
-                                required>
-                            @error('developer')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <!-- Description -->
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Mô Tả</label>
-                            <textarea 
-                                class="form-control @error('description') is-invalid @enderror" 
-                                id="description" 
-                                name="description" 
-                                rows="4" 
-                                placeholder="Nhập mô tả">{{ old('description') }}</textarea>
-                            @error('description')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <!--Image-->
-                        <div>
-                            <label for="images">Upload Images:</label>
-                            <input type="file" name="images[]" multiple>
-                        </div>
-
-                        <!-- Start Date -->
-                        <div class="mb-3">
-                            <label for="start_date" class="form-label">Ngày Bắt Đầu</label>
-                            <input 
-                                type="date" 
-                                class="form-control @error('start_date') is-invalid @enderror" 
-                                id="start_date" 
-                                name="start_date" 
-                                value="{{ old('start_date') }}">
-                            @error('start_date')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <!-- End Date -->
-                        <div class="mb-3">
-                            <label for="end_date" class="form-label">Ngày Kết Thúc</label>
-                            <input 
-                                type="date" 
-                                class="form-control @error('end_date') is-invalid @enderror" 
-                                id="end_date" 
-                                name="end_date" 
-                                value="{{ old('end_date') }}">
-                            @error('end_date')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Thêm Dự Án</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <!-- Hiển thị thông báo thành công -->
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
-    </div>
+    @endif
+
+    <!-- Hiển thị lỗi xác thực -->
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('projects.store') }}" method="POST">
+        @csrf
+
+        <!-- Project Type -->
+        <div class="mb-3">
+            <label for="project_type_ID" class="form-label">Project Type</label>
+            <select name="project_type_ID" id="project_type_ID" class="form-select" required>
+                <option value="">-- Select Project Type --</option>
+                @foreach($projectTypes as $type)
+                    <option value="{{ $type->id }}">{{ $type->type_name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <!-- Carbon Credit ID -->
+        {{-- <div class="mb-3">
+            <label for="carbon_credit_ID" class="form-label">Carbon Credit ID</label>
+            <input type="number" name="carbon_credit_ID" id="carbon_credit_ID" class="form-control" required>
+        </div> --}}
+
+        <!-- Standard -->
+        <div class="mb-3">
+            <label for="standards_ID" class="form-label">Standard</label>
+            <select name="standards_ID" id="standards_ID" class="form-select" required>
+                <option value="">-- Select Standard --</option>
+                @foreach($standards as $standard)
+                    <option value="{{ $standard->id }}">{{ $standard->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <!-- Validator -->
+        <div class="mb-3">
+            <label for="validator" class="form-label">Validator</label>
+            <input type="text" name="validator" id="validator" class="form-control">
+        </div>
+
+        <!-- Project Name -->
+        <div class="mb-3">
+            <label for="name" class="form-label">Project Name</label>
+            <input type="text" name="name" id="name" class="form-control" required>
+        </div>
+
+        <!-- Location -->
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" name="location" id="location" class="form-control">
+        </div>
+
+        <!-- Developer -->
+        <div class="mb-3">
+            <label for="developer" class="form-label">Developer</label>
+            <input type="text" name="developer" id="developer" class="form-control">
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" id="description" class="form-control" rows="3" required></textarea>
+        </div>
+
+        <!-- Start Date -->
+        <div class="mb-3">
+            <label for="start_date" class="form-label">Start Date</label>
+            <input type="date" name="start_date" id="start_date" class="form-control">
+        </div>
+
+        <!-- End Date -->
+        <div class="mb-3">
+            <label for="end_date" class="form-label">End Date</label>
+            <input type="date" name="end_date" id="end_date" class="form-control">
+        </div>
+
+        <!-- Registered At -->
+        <div class="mb-3">
+            <label for="registered_at" class="form-label">Registered At</label>
+            <input type="date" name="registered_at" id="registered_at" class="form-control">
+        </div>
+
+        <!-- Total Credits -->
+        <div class="mb-3">
+            <label for="total_credits" class="form-label">Total Credits</label>
+            <input type="number" step="0.01" name="total_credits" id="total_credits" class="form-control" required>
+        </div>
+
+        <!-- Status -->
+        <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select name="status" id="status" class="form-select" required>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+                <option value="pending">Pending</option>
+            </select>
+        </div>
+
+        <!-- Is Verified -->
+        <div class="mb-3">
+            <label for="is_verified" class="form-label">Is Verified</label>
+            <select name="is_verified" id="is_verified" class="form-select" required>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Project</button>
+    </form>
 </div>
 @endsection

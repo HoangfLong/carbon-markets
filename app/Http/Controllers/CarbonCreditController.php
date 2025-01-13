@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Carbon\CreditStoreRequest;
 use App\Http\Requests\Carbon\CreditUpdateRequest;
 use App\Models\CarbonCredit;
-use App\Models\CarbonProject;
+use App\Models\Project;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -28,7 +28,7 @@ class CarbonCreditController extends Controller
     //Hiển thị form tạo tín chỉ carbon mới
     public function create(): View {
         //Lấy tất cả các dự án carbon để người dùng chọn khi tạo tín chỉ mới
-        $carbonProjects = CarbonProject::all();
+        $carbonProjects = Project::all();
             //Trả về view tạo tín chỉ với dữ liệu dự án
             return view('carbon-credits.create',compact('carbonProjects'));
             /*Dữ liệu các dự án được truyền vào view carbon-credits.create dưới dạng biến $carbonProjects, 
@@ -52,7 +52,7 @@ class CarbonCreditController extends Controller
     //Hiển thị form chỉnh sửa tín chỉ carbon
     public function edit(CarbonCredit $carbonCredits): View {
         //Lấy tất cả các dự án để người dùng có thể chọn khi chỉnh sửa tín chỉ carbon
-        $carbonProjects = CarbonProject::all();
+        $carbonProjects = Project::all();
             //Trả về view chỉnh sửa tín chỉ với dữ liệu tín chỉ carbon và danh sách dự án
             return view('carbon-credits.edit',compact('carbonCredits','carbonProjects'));
     }

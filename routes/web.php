@@ -3,8 +3,7 @@
 use App\Http\Controllers\CarbonCreditController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CarbonProject;
-use App\Http\Controllers\CarbonProjectController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/welcome', function () {
@@ -51,18 +50,7 @@ Route::get('/',[HomeController::class,'home'])->name('home');
 Route::get('/marketplace',[HomeController::class,'market'])->name('carbon-projects.marketplace');
 
  //Carbon project route
- Route::get('/carbon-projects',[CarbonProjectController::class,'index'])->name('carbon-projects.index');
+Route::resource('/projects', ProjectController::class);
 
- Route::get('/carbon-projects/show/{carbonProjects}',[CarbonProjectController::class,'show'])->name('carbon-projects.show');
-
- Route::get('/carbon-projects/create',[CarbonProjectController::class,'create'])->name('carbon-projects.create');
-
- Route::post('/carbon-projects',[CarbonProjectController::class,'store'])->name('carbon-projects.store');
-
- Route::get('/carbon-projects/edit/{carbonProjects}',[CarbonProjectController::class,'edit'])->name('carbon-projects.edit');
-
- Route::put('/carbon-projects/{carbonProjects}',[CarbonProjectController::class,'update'])->name('carbon-projects.update');
-
- Route::delete('/carbon-projects/{carbonProjects}',[CarbonProjectController::class,'destroy'])->name('carbon-projects.destroy');
 
 require __DIR__.'/auth.php';

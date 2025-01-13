@@ -15,6 +15,6 @@ class Image extends Model
     ];
 
     public function projects() {
-        return $this->belongsTo(CarbonProject::class,'project_id');
+        return $this->belongsTo(Project::class,'project_id');
     }
 }
