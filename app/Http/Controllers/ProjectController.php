@@ -48,7 +48,7 @@ class ProjectController extends Controller
     public function store(ProjectStoreRequest $request): RedirectResponse {
         
         // Lưu thông tin dự án vào cơ sở dữ liệu
-        $carbonProjects = Project::create($request->validated());
+        $this->projectRepository->create($request->validated());
 
         // Kiểm tra nếu có ảnh được tải lên
         // if ($request->hasFile('images')) {

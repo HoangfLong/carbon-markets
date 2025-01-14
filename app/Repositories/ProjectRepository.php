@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Repositories;
+
+use App\Interfaces\IProjectRepository;
 use App\Models\Project;
 
 //use Your Model

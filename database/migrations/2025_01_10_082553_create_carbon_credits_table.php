@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('price_per_ton', 10, 2);
             $table->integer('quantity_available');
             $table->integer('minimum_purchase')->nullable();
-            $table->enum('status', ['active', 'expired', 'pending'])->default('pending');
+            $table->enum('status', ['available', 'sold', 'retired'])->default('available');
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->timestamps();

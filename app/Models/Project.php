@@ -38,7 +38,7 @@ class Project extends Model
 
     public function credits()
     {
-        return $this->belongsTo(CarbonCredit::class, 'carbon_credit_ID');
+        return $this->belongsTo(Credit::class, 'carbon_credit_ID');
     }
 
     public function standard()

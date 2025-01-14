@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CarbonCreditController;
+use App\Http\Controllers\CreditController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -18,19 +18,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    //Carbon registry route
-    Route::get('/carbon-credits',[CarbonCreditController::class,'index'])->name('carbon-credits.index');
-
-    Route::get('/carbon-credits/create',[CarbonCreditController::class,'create'])->name('carbon-credits.create');
-
-    Route::post('/carbon-credits',[CarbonCreditController::class,'store'])->name('carbon-credits.store');
-
-    Route::get('/carbon-credits/edit/{carbonCredits}',[CarbonCreditController::class,'edit'])->name('carbon-credits.edit');
-
-    Route::put('/carbon-credits/{carbonCredits}',[CarbonCreditController::class,'update'])->name('carbon-credits.update');
-
-    Route::delete('/carbon-credits/{carbonCredits}',[CarbonCreditController::class,'destroy'])->name('carbon-credits.destroy');
 });
 
 // Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -46,11 +33,13 @@ Route::middleware('auth')->group(function () {
 // });
 
 //Home
-Route::get('/',[HomeController::class,'home'])->name('home');
-Route::get('/marketplace',[HomeController::class,'market'])->name('carbon-projects.marketplace');
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/marketplace', [HomeController::class, 'market'])->name('carbon-projects.marketplace');
 
- //Carbon project route
+//Project route
 Route::resource('/projects', ProjectController::class);
+//Credit route
+Route::resource('/credits', CreditController::class);
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -22,10 +22,13 @@ class CreditUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'project_id' => 'required|exists:carbon_projects,id',
-            'serial_number' => 'required|max:255|unique:carbon_credits,serial_number',
-            'value' => 'required|numeric|min:0',
+            'project_ID' => 'required|exists:carbon_projects,id',
+            'price_per_ton' => 'required|numeric|min:0',
+            'quantity_available' => 'required|integer|min:0',
+            'minimum_purchase' => 'required|integer|min:1',
             'status' => 'required|in:available,sold,retired',
+            'start_date' => 'nullable|date|before_or_equal:end_date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
         ];
     }
 }

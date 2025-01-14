@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\CarbonProject;
+use App\Models\Project;
 use Illuminate\Contracts\View\View;
 
 class HomeController extends Controller
@@ -13,7 +13,7 @@ class HomeController extends Controller
     }
      //Marketplace view
      public function market(): View {
-        $carbonProjects = CarbonProject::latest()->get();
+        $carbonProjects = Project::latest()->get();
             return view('carbon-projects.marketplace',compact('carbonProjects'));
     }
 }

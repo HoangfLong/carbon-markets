@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Carbon;
 
+use App\Services\SerialNumberGenerator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreditStoreRequest extends FormRequest
@@ -21,10 +22,19 @@ class CreditStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'project_id' => 'required|exists:carbon_projects,id',
-            'serial_number' => 'required|unique:carbon_credits,serial_number|max:255',
-            'value' => 'required|numeric|min:0',
+            'project_ID' => 'required|exists:carbon_projects,id',
+            'price_per_ton' => 'required|numeric|min:0',
+            'quantity_available' => 'required|integer|min:0',
+            'minimum_purchase' => 'required|integer|min:1',
             'status' => 'required|in:available,sold,retired',
+            'start_date' => 'nullable|date|before_or_equal:end_date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
         ];
+    }
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'serial_number' => $this->serial_number ?? SerialNumberGenerator::generate(),
+        ]);
     }
 }
