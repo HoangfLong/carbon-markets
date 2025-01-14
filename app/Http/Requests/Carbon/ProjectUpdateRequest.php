@@ -30,15 +30,15 @@ class ProjectUpdateRequest extends FormRequest
             'name' => 'required|string|max:255',
             'location' => 'nullable|string|max:255',
             'developer' => 'nullable|string|max:255',
-            'description' => 'nullable|string|max:255',
+            'description' => 'nullable|string|max:5000',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
             'registered_at' => 'nullable|date',
             'total_credits' => 'required|numeric',
             'status' => 'required|in:active,inactive,pending', // Kiểm tra giá trị hợp lệ
             'is_verified' => 'required|boolean',
-            // 'images' => 'nullable|array', // Đảm bảo 'images' là mảng file
-            // 'images.*' => 'image|mimes:jpg,jpeg,png|max:2048', // Mỗi phần tử trong mảng phải là ảnh và có định dạng jpg, jpeg, png
+            'images' => 'nullable|array', // Đảm bảo 'images' là mảng file
+            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048', // Mỗi phần tử trong mảng phải là ảnh và có định dạng jpg, jpeg, png
         ];
     }
 }

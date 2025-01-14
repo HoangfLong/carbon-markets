@@ -37,8 +37,8 @@ class ProjectStoreRequest extends FormRequest
             'total_credits' => 'required|numeric',
             'status' => 'required|in:active,inactive,pending', // Kiểm tra giá trị hợp lệ
             'is_verified' => 'required|boolean',
-            // 'images' => 'nullable|array', // Đảm bảo 'images' là mảng file
-            // 'images.*' => 'image|mimes:jpg,jpeg,png|max:2048', // Mỗi phần tử trong mảng phải là ảnh và có định dạng jpg, jpeg, png
+            'images' => 'nullable|array', // Đảm bảo 'images' là mảng file
+            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048', // Mỗi phần tử trong mảng phải là ảnh và có định dạng jpg, jpeg, png
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\IProjectRepository;
+use App\Models\Image;
 use App\Models\Project;
 
 //use Your Model
@@ -31,7 +32,18 @@ class ProjectRepository implements IProjectRepository
 
     public function create(array $data)
     {
-        return Project::create($data);
+        $project = Project::create($data);
+        // Lưu hình ảnh nếu có
+        if (!empty($data['images'])) {
+            foreach ($data['images'] as $image) {
+                $path = $image->store('images', 'public');
+
+                $project->images()->create([
+                    'image_path' => $path,
+                ]);
+            }
+        }
+        return $project;
     }
 
     public function update($id, array $data)
@@ -47,3 +59,4 @@ class ProjectRepository implements IProjectRepository
             return $project->delete();
     }
 }
+

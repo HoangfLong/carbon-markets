@@ -10,11 +10,11 @@ class Image extends Model
     protected $table = 'project_images';
 
     protected $fillable = [
-        'project_id',
+        'project_ID',
         'image_path',
     ];
 
     public function projects() {
-        return $this->belongsTo(Project::class,'project_id');
+        return $this->belongsTo(Project::class, 'project_ID');
     }
 }

@@ -50,7 +50,8 @@ class Project extends Model
     {
         return $this->belongsTo(User::class, 'user_ID');
     }
-    // public function images() {
-    //     return $this->hasMany(Image::class,'project_id');
-    // }
+
+    public function images() {
+        return $this->hasMany(Image::class, 'project_ID');
+    }
 }

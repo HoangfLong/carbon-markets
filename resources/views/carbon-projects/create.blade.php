@@ -22,7 +22,7 @@
         </div>
     @endif
 
-    <form action="{{ route('projects.store') }}" method="POST">
+    <form action="{{ route('projects.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <!-- Project Type -->
@@ -123,6 +123,15 @@
                 <option value="1">Yes</option>
                 <option value="0">No</option>
             </select>
+        </div>
+
+         <!-- Upload Images -->
+        <div class="mb-3">
+            <label for="images" class="form-label">Upload Images</label>
+            <input type="file" name="images[]" id="images" class="form-control" multiple>
+            <small class="form-text text-muted">
+                You can upload multiple images. Only JPG, JPEG, PNG formats are allowed (Max size: 2MB per image).
+            </small>
         </div>
 
         <button type="submit" class="btn btn-primary">Save Project</button>

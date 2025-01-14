@@ -49,22 +49,6 @@ class ProjectController extends Controller
         
         // Lưu thông tin dự án vào cơ sở dữ liệu
         $this->projectRepository->create($request->validated());
-
-        // Kiểm tra nếu có ảnh được tải lên
-        // if ($request->hasFile('images')) {
-        //     foreach ($request->file('images') as $image) {
-        //         // Lưu trữ ảnh với các quy định cụ thể về định dạng và dung lượng
-        //         $path = $image->store('projects', 'public'); //// Lưu ảnh vào thư mục 'projects' với định dạng 'public'
-        //         // Mỗi ảnh sẽ được lưu vào bảng 'images' kèm theo ID của dự án
-        //         Image::create([
-        //             'project_id' => $carbonProjects->id,
-        //             'image_path' => $path,
-        //         ]);
-        //     }
-        // }
-        // dd($request->all()); // kiểm tra dữ liệu gửi từ form
-        // dd($request->file('images')); // kiểm tra file được upload
-        // dd($carbonProjects->images); // kiểm tra ảnh liên kết với dự án
             return redirect()->route('projects.index')->with('success', 'Project created successfully.');
     }
 
