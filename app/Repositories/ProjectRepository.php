@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\IProjectRepository;
 use App\Models\Image;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Project;
 
 //use Your Model
@@ -49,14 +50,29 @@ class ProjectRepository implements IProjectRepository
     public function update($id, array $data)
     {
         $project = $this->project->findOrFail($id);
-        $project->update($data);
+        if (!empty($data['images'])) {
+            $project->images()->delete();
+            foreach ($data['images'] as $image) {
+
+                $path = $image->store('images', 'public');
+
+                $project->images()->create([
+                    'image_path' => $path,
+                ]);
+            }
+        }
             return $project;
     }
 
     public function delete($id)
     {
         $project = $this->project->findOrFail($id);
-            return $project->delete();
+        foreach($project->images as $image) { 
+            if(Storage::disk('public')->exists($image->image_path)) {
+                Storage::disk('public')->delete($image->image_path);
+            }
+        }
+        return $project->delete();
     }
 }
 

@@ -63,36 +63,15 @@ class ProjectController extends Controller
 
     //update project
     public function update(ProjectUpdateRequest $request, $id) : RedirectResponse {
-
+       
         //Cập nhật các thông tin dự án
         $this->projectRepository->update($id, $request->validated());
-
-        // if ($request->hasFile('images')) {
-        //     // Xóa các ảnh cũ liên quan đến dự án
-        //     $carbonProjects->images()->delete(); // Xóa ảnh cũ nếu có
-        //     // Lưu các ảnh mới
-        //     foreach ($request->file('images') as $image) {
-        //         $path = $image->store('projects', 'public');
-        //         // Lưu đường dẫn ảnh vào bảng 'images'
-        //         Image::create([
-        //             'project_id' => $carbonProjects->id,
-        //             'image_path' => $path,
-        //         ]);
-        //     }
-        // }
             return redirect()->route('projects.index')->with('success','project up go');
     }
 
     //Destroy project
     public function destroy($id) : RedirectResponse{
 
-        // foreach ($carbonProjects->images as $image) {
-        //     // Kiểm tra nếu file tồn tại trong storage và xóa
-        //     if (Storage::disk('public')->exists($image->image_path)) {
-        //         Storage::disk('public')->delete($image->image_path);
-        //     }
-        // }
-        // Xóa các ảnh trong cơ sở dữ liệu
         $this->projectRepository->delete($id);
             return redirect()->route('projects.index')->with('success','project deleted');
     }

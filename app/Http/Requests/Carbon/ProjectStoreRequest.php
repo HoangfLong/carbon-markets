@@ -30,7 +30,7 @@ class ProjectStoreRequest extends FormRequest
             'name' => 'required|string|max:255',
             'location' => 'nullable|string|max:255',
             'developer' => 'nullable|string|max:255',
-            'description' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
             'registered_at' => 'nullable|date',
