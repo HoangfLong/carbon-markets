@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
 //Home
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/marketplace', [HomeController::class, 'market'])->name('carbon-projects.marketplace');
+Route::get('/details/{id}', [HomeController::class, 'details'])->name('details');
 
 //Project route
 Route::resource('/projects', ProjectController::class);

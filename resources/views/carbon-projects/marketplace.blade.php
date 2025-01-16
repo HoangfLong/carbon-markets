@@ -315,11 +315,11 @@
 
                                     <!-- Product Description -->
                                     <div class="product-description">
-                                        <span>topshop</span>
-                                        <a href="single-product-details.html">
+                                        <span>Tag ở đây</span>
+                                        <a href="{{ route('details', $project->id) }}">
                                             <h6>{{ $project->name }}</h6>
                                         </a>
-                                        <p class="product-price"><span class="old-price">$75.00</span> $55.00</p>
+                                        <p class="product-price">{{ $project->credits->first()->price_per_ton }} $</p>
 
                                         <!-- Hover Content -->
                                         <div class="hover-content">
