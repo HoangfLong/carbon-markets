@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CreditController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +43,7 @@ Route::get('/details/{id}', [HomeController::class, 'details'])->name('details')
 Route::resource('/projects', ProjectController::class);
 //Credit route
 Route::resource('/credits', CreditController::class);
+
 
 
 require __DIR__ . '/auth.php';

@@ -5,8 +5,8 @@ namespace App\Providers;
 use App\Interfaces\IProjectRepository;
 use App\Repositories\CreditRepository;
 use App\Interfaces\ICreditRepository;
+use App\Interfaces\IOrderRepository;
 use App\Repositories\ProjectRepository;
-use App\Services\ProjectService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

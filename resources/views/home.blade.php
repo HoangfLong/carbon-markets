@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.app')
 
 @section('content')
  <div class="top_catagory_area section-padding-80 clearfix">

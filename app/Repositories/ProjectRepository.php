@@ -23,17 +23,17 @@ class ProjectRepository implements IProjectRepository
 
     public function getAll()
     {
-        return Project::all();
+        return $this->project->all();
     }
 
     public function getById($id)
     {
-        return Project::findOrFail($id);
+        return $this->project->findOrFail($id);
     }
 
     public function create(array $data)
     {
-        $project = Project::create($data);
+        $project = $this->project->create($data);
         // Lưu hình ảnh nếu có
         if (!empty($data['images'])) {
             foreach ($data['images'] as $image) {

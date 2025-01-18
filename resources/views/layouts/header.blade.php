@@ -104,34 +104,40 @@
             </div>
             <!-- User Login Info -->
             <nav>
-            <div class="user-login-info">
-                {{-- <img src="build/assets/img/core-img/user.svg" alt=""> --}}
-                {{-- <ul class="dropdown">
-                    <li><a href="">Login</a></li>
-                    <li><a href="">Register</a></li>
-                    <li><a href="">My account</a></li>
-                    <li><a href="">Summary</a></li>
-                    <li><a href="">Transactions</a></li>
-                    <li><a href="">My projects</a></li>
-                </ul> --}}
-                {{-- Login --}}
-                {{-- Login --}}
-                <a href="{{ route('login') }}" class="px-4 py-2 text-black hover:text-gray-600">
-                    Log in
-                </a>
-                {{-- Register --}}
-                @if (Route::has('register'))
-                <a href="{{ route('register') }}" class="px-4 py-2 text-black hover:text-gray-600">
-                    Register
-                </a>
-                @endif
-            </div>
+                <div class="user-login-info">
+                    <div class="user-login-info">
+                            @auth
+                            <!-- Nếu người dùng đã đăng nhập -->
+                            <ul class="dropdown">
+                                <li><a href="{{ route('profile.edit') }}">My Account</a></li>
+                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a></li>
+                            </ul>
+                        
+                            <!-- Form đăng xuất -->
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                @csrf
+                            </form>
+                        @else
+                            <!-- Nếu người dùng chưa đăng nhập -->
+                            <div class="flex items-center space-x-4"> <!-- Sử dụng flexbox để căn chỉnh các nút trên một dòng -->
+                                <a href="{{ route('login') }}" class="px-4 py-2 text-black hover:text-gray-600">
+                                    Log in
+                                </a>
+                        
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="px-4 py-2 text-black hover:text-gray-600">
+                                        Register
+                                    </a>
+                                @endif
+                            </div>
+                        @endauth
+                    </div>
+                </div>
         </nav>
             <!-- Cart Area -->
             <div class="cart-area">
                 <a href="#" id="essenceCartBtn"><img src="build/assets/img/core-img/bag.svg" alt=""> <span>3</span></a>
             </div>
         </div>
-
     </div>
 </header>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Stripe\FinancialConnections\Transaction;
 
 class Credit extends Model
 {
@@ -26,5 +27,9 @@ class Credit extends Model
         /*Bảng carbon_credits có trường project_id làm khóa ngoại trỏ tới bảng carbon_projects, 
         vì vậy trong model CarbonCredit, ta sẽ định nghĩa quan hệ belongsTo*/
         //cho phép mỗi CarbonCredit liên kết với một CarbonProject thông qua project_id
+    }
+
+    public function transaction() {
+        return $this->morphMany(Transaction::class, 'carbon_credit_ID');
     }
 }

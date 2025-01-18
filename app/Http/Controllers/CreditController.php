@@ -8,6 +8,7 @@ use App\Http\Requests\Carbon\CreditUpdateRequest;
 use App\Models\Credit;
 use App\Models\Project;
 use App\Repositories\CreditRepository;
+use App\Repositories\ProjectRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,10 +16,15 @@ use Illuminate\Http\Request;
 class CreditController extends Controller
 {
     protected $creditRepository;
+    protected $projectRepository;
 
-    public function __construct(CreditRepository $creditRepository)
+    public function __construct(
+        CreditRepository $creditRepository,
+        ProjectRepository $projectRepository,
+        )
     {
         $this->creditRepository = $creditRepository;
+        $this->projectRepository = $projectRepository;
     }
 
     //Index
@@ -35,7 +41,7 @@ class CreditController extends Controller
     public function create(): View
     {
         //Lấy tất cả các dự án carbon để người dùng chọn khi tạo tín chỉ mới
-        $carbonProjects = Project::all();
+        $carbonProjects = $this->projectRepository->getAll();
         //Trả về view tạo tín chỉ với dữ liệu dự án
         return view('carbon-credits.create', compact('carbonProjects'));
         /*Dữ liệu các dự án được truyền vào view carbon-credits.create dưới dạng biến $carbonProjects, 
@@ -61,8 +67,8 @@ class CreditController extends Controller
     //Edit
     public function edit($id): View
     {
-        $carbonProjects = Project::all();
         $carbonCredits = $this->creditRepository->getById($id);
+        $carbonProjects =  $carbonProjects = $this->projectRepository->getAll();
         //Return a view
             return view('carbon-credits.edit', compact('carbonCredits', 'carbonProjects'));
     }

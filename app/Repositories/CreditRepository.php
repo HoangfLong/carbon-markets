@@ -22,19 +22,19 @@ class CreditRepository implements ICreditRepository
 
     public function getAll()
     {
-        return Credit::all();
+        return $this->credit->all();
     }
 
     public function getById($id)
     {
-        return Credit::findOrFail($id);
+        return $this->credit->findOrFail($id);
     }
 
     public function create(array $data)
     {
         $data['serial_number'] = $data['serial_number'] ?? SerialNumberGenerator::generate();
 
-        $credit = Credit::create($data);
+        $credit = $this->credit->create($data);
 
         if(isset($data['project_ID'])) {
             $project = Project::find($data['project_ID']);
