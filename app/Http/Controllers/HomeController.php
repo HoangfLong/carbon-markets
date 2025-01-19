@@ -24,9 +24,4 @@ class HomeController extends Controller
         $carbonProjects = $this->projectRepository->getAll();
             return view('carbon-projects.marketplace',compact('carbonProjects'));
     }
-
-    public function details($id): View {
-        $carbonProjects = $this->projectRepository->getById($id);
-            return view('details', compact('carbonProjects'));
-    }
 }

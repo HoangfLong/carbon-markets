@@ -17,16 +17,18 @@ class Order extends Model
         'address'
     ];
 
-    public function items() {
-        return $this->hasMany(OrderItem::class);
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class, 'order_ID');
     }
 
-    public function user() {
+    public function user() 
+    {
         return $this->belongsTo(User::class, 'user_ID');
     }
 
     public function transaction()
     {
-        return $this->hasOne(Transaction::class);
+        return $this->hasOne(Transaction::class, 'order_ID');
     }
 }

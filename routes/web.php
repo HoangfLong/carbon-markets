@@ -20,6 +20,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    //Project route
+    Route::resource('/projects', ProjectController::class);
+    //Credit route
+    Route::resource('/credits', CreditController::class);
+    //Payment
+    Route::get('payment/{carbonProjectId}', [PaymentController::class, 'show'])->name('payment.show');
+    Route::post('payment/{carbonProjectId}/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
+    Route::get('payment/success/{orderId}', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
+
+
+
 });
 
 // Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -37,12 +49,7 @@ Route::middleware('auth')->group(function () {
 //Home
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/marketplace', [HomeController::class, 'market'])->name('carbon-projects.marketplace');
-Route::get('/details/{id}', [HomeController::class, 'details'])->name('details');
 
-//Project route
-Route::resource('/projects', ProjectController::class);
-//Credit route
-Route::resource('/credits', CreditController::class);
 
 
 

@@ -316,7 +316,7 @@
                                     <!-- Product Description -->
                                     <div class="product-description">
                                         <span>Tag ở đây</span>
-                                        <a href="{{ route('details', $project->id) }}">
+                                        <a href="{{ route('payment.show', $project->id) }}">
                                             <h6>{{ $project->name }}</h6>
                                         </a>
                                         <p class="product-price">{{ $project->credits->first()->price_per_ton }} $</p>

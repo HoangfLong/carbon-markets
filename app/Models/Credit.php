@@ -22,14 +22,16 @@ class Credit extends Model
     ];
 
 
-    public function projects() {
+    public function projects() 
+    {
         return $this->belongsTo(Project::class,'project_ID');
         /*Bảng carbon_credits có trường project_id làm khóa ngoại trỏ tới bảng carbon_projects, 
         vì vậy trong model CarbonCredit, ta sẽ định nghĩa quan hệ belongsTo*/
         //cho phép mỗi CarbonCredit liên kết với một CarbonProject thông qua project_id
     }
 
-    public function transaction() {
-        return $this->morphMany(Transaction::class, 'carbon_credit_ID');
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'carbon_credit_ID');
     }
 }
