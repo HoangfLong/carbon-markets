@@ -9,6 +9,9 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -56,4 +59,33 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+
+    // Admin-only access
+    Route::middleware(['role:admin'])->group(function () {
+        Route::get('/admin', function () {
+            return view('auth.admin.dashboard');
+        })->name('admin.dashboard');
+    });
+
+    // Admin & Manager access for CRUD
+    Route::middleware(['role:admin,manager'])->group(function () {
+        Route::resource('projects', ProjectController::class);
+    });
+
+    // General user access
+    Route::middleware('role:user')->group(function () {
+        Route::get('/user-dashboard', function () {
+            return view('user.dashboard');
+        })->name('user.dashboard');
+    });
+});
+
+// Routes for guests (no login required)
+Route::middleware(['guest'])->group(function () {
+    // Public-facing pages
+    Route::get('/', [HomeController::class, 'home'])->name('home');
+    Route::get('/about', function () {
+        return view('about');
+    })->name('about');
+    // Other public pages can be added here
 });

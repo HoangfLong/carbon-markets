@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.app')
 
 @section('content')
     <h1 class="text-center text-white mb-4">Edit Carbon Credit</h1>

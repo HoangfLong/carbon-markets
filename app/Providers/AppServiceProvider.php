@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Interfaces\IProjectRepository;
 use App\Repositories\CreditRepository;
 use App\Interfaces\ICreditRepository;
-use App\Interfaces\IOrderRepository;
 use App\Interfaces\IPaymentRepository;
 use App\Repositories\PaymentRepository;
 use App\Repositories\ProjectRepository;

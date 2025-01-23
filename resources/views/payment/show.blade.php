@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.app')
 
 @section('content')
 <section class="product-page-container">

@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Carbon\ProjectStoreRequest;
 use App\Http\Requests\Carbon\ProjectUpdateRequest;
-use App\Models\Project;
 use App\Models\ProjectType;
 use App\Models\Standard;
 use App\Repositories\ProjectRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 class ProjectController extends Controller
 {   

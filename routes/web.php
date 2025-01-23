@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     //Project route
-    Route::resource('/projects', ProjectController::class);
+    
     //Credit route
     Route::resource('/credits', CreditController::class);
     //Payment
@@ -29,23 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::post('payment/{carbonProjectId}/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
     Route::get('payment/success/{orderId}', [PaymentController::class, 'success'])->name('payment.success');
     Route::get('payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
-
-
-
 });
-
-// Route::middleware(['auth', 'role:admin'])->group(function () {
-//     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
-// });
-
-// Route::middleware(['auth', 'role:user'])->group(function () {
-//     Route::get('/user', [UserController::class, 'index'])->name('user.dashboard');
-// });
-
-// Route::middleware(['auth', 'permission:create projects'])->group(function () {
-//     Route::get('/create-projects', [UserController::class, 'admin']);
-// });
-
 //Home
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/marketplace', [HomeController::class, 'market'])->name('carbon-projects.marketplace');
