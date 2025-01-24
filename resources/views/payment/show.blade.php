@@ -3,16 +3,47 @@
 @section('content')
 <section class="product-page-container">
     <div class="product-details">
-        <div class="product-thumbnail">
-            <img src="{{ asset('storage/'.$carbonProject->images->first()->image_path) }}" alt="Product Image">
-        </div>
         <div class="product-info">
             <span class="product-tag">Tag ở đây</span>
             <h2 class="product-name">{{$carbonProject->name}}</h2>
-            <p class="product-price">${{ $carbonProject->credits->first()->price_per_ton ?? 'N/A' }}</p>
+
+            <hr class="group-divider">
             <span class="product-desc-title">Description</span>
             <p class="product-desc">{{ $carbonProject->description }}</p>
         </div>
+        <hr class="group-divider">
+        <div class="product-info">
+            <span class="product-desc-title">Project Info</span>
+            <p class="product-desc">Country <span>{{ $carbonProject->location }}</span></p>
+            <p class="product-desc">Company <span>{{ $carbonProject->developer }}</span></p>
+            <p class="product-desc">Type <span>{{ $carbonProject->projectType->type_name }}</span></p>
+        </div>
+        <section class="certification-section">
+            <div class="product-thumbnail">
+                <img src="{{ asset('storage/'.$carbonProject->images->first()->image_path) }}" alt="Product Image">
+            </div>
+            <h4>Certification</h4>
+            <div class="certification-table">
+                <div class="row">
+                    <div class="col-md-3"><strong>Validator</strong></div>
+                    <div class="col-md-3">{{ $carbonProject->validator }}</div>
+                    <div class="col-md-3"><strong>Status</strong></div>
+                    <div class="col-md-3">{{ $carbonProject->status }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><strong>Type</strong></div>
+                    <div class="col-md-3">{{ $carbonProject->projectType->type_name }}</div>
+                    <div class="col-md-3"><strong>Standards</strong></div>
+                    <div class="col-md-3">{{ $carbonProject->standard->name }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><strong>Credit start</strong></div>
+                    <div class="col-md-3">{{ $carbonProject->credits->first()->start_date  }}</div>
+                    <div class="col-md-3"><strong>Credit end</strong></div>
+                    <div class="col-md-3">{{ $carbonProject->credits->first()->end_date }}</div>
+                </div>
+            </div>
+        </section>        
     </div>
 
     <div class="payment-section">
@@ -20,9 +51,11 @@
             @csrf
             <div class="pricing-card">
                 <h4>Pricing</h4>
-                <p id="pricePerTon">${{ $carbonProject->credits->first()->price_per_ton }} /tCO<sub>2</sub>e</p>
-
+                <p class="pricing-row">
+                    <span id="pricePerTon">${{ $carbonProject->credits->first()->price_per_ton }} /tCO<sub>2</sub>e</span>
+                </p>
                 <div class="amount-select">
+                    <hr class="group-divider">
                     <label for="amount">Amount</label>
                     <div class="input-group">
                         <button type="button" class="btn" id="decreaseAmount">-</button>
@@ -33,12 +66,18 @@
                 </div>
 
                 <div class="summary">
+                    <hr class="group-divider">
+                    <div class="grouped-info">
+                        <p>Available: <span> {{ $carbonProject->credits->first()->quantity_available }} UD</span></p>
+                        <p>Minimum purchases: <span>{{ $carbonProject->credits->first()->minimum_purchase }} UD</span></p>
+                    </div>
+                    <hr class="group-divider">
                     <p>Discount: <span id="discount">- €0.00</span></p>
                     <p>Transaction fee: <span id="transactionFee">€0.30</span></p>
                     <p>VAT: <span id="vat">€0.00</span></p>
                     <p>Total: <strong id="totalPrice">€0.00</strong></p>
                 </div>
-
+                <hr class="group-divider">
                 <div class="actions">
                     <button type="submit" class="btn btn-primary">Buy now</button>
                 </div>
@@ -46,7 +85,10 @@
         </form>
     </div>
 </section>
+<style>
+ 
 
+</style>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const amountInput = document.getElementById("amount");

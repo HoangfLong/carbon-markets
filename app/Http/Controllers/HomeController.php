@@ -12,16 +12,19 @@ class HomeController extends Controller
 
     protected $projectRepository;
 
-    public function __construct(ProjectRepository $projectRepository) {
+    public function __construct(ProjectRepository $projectRepository) 
+    {
         $this->projectRepository = $projectRepository;
     }
 
-    public function home(): View {
+    public function home(): View 
+    {
         return view('home');
     }
      //Marketplace view
-    public function market(): View {
+    public function market(): View 
+    {
         $carbonProjects = $this->projectRepository->getAll();
-            return view('carbon-projects.marketplace',compact('carbonProjects'));
+            return view('marketplace',compact('carbonProjects'));
     }
 }

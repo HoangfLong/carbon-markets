@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\CreditController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Middleware\RoleMiddleware;
@@ -69,15 +70,18 @@ Route::middleware('auth')->group(function () {
 
     // Admin & Manager access for CRUD
     Route::middleware(['role:admin,manager'])->group(function () {
-        Route::resource('projects', ProjectController::class);
+         //Project route
+        Route::resource('/projects', ProjectController::class);
+          //Credit route
+        Route::resource('/credits', CreditController::class);
     });
 
     // General user access
-    Route::middleware('role:user')->group(function () {
-        Route::get('/user-dashboard', function () {
-            return view('user.dashboard');
-        })->name('user.dashboard');
-    });
+    // Route::middleware('role:user')->group(function () {
+    //     Route::get('/user-dashboard', function () {
+    //         return view('user.dashboard');
+    //     })->name('user.dashboard');
+    // });
 });
 
 // Routes for guests (no login required)
