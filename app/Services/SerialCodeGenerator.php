@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\Credit;
+use App\Models\CreditSerial;
 use Illuminate\Support\Str;
 
-class SerialNumberGenerator
+class SerialCodeGenerator
 {
     public static function generate(): string
     {
@@ -14,10 +14,9 @@ class SerialNumberGenerator
             $date = now()->format('Ymd');
             // Sinh mã ngẫu nhiên 6 ký tự
             $random = strtoupper(Str::random(6));
-            $serialNumber = "CC-{$date}-{$random}";
-        } while (Credit::where('serial_number', $serialNumber)->exists());
-
-        // Kết hợp thành serial_number
-        return $serialNumber;
+            $serialCode = "CC-{$date}-{$random}";
+        } while (CreditSerial::where('serial_code', $serialCode)->exists());
+        // Kết hợp thành serial_code
+        return $serialCode;
     }
 }

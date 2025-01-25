@@ -21,7 +21,7 @@ class OrderItem extends Model
         return $this->belongsTo(Order::class, 'order_ID');
     }
 
-    public function carbonCredit()
+    public function credit()
     {
         return $this->belongsTo(Credit::class, 'carbon_credit_ID');
     }

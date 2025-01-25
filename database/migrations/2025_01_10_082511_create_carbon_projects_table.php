@@ -21,10 +21,9 @@ return new class extends Migration
             $table->string('name', 255);
             $table->string('location', 255)->nullable();
             $table->string('developer', 255)->nullable();
+            $table->string('address', 255)->nullable();
             $table->string('description', 255)->nullable();
             $table->enum('status', ['active', 'inactive', 'pending'])->default('pending');
-            $table->dateTime('start_date')->nullable();
-            $table->dateTime('end_date')->nullable();
             $table->dateTime('registered_at')->nullable();
             $table->decimal('total_credits', 10, 2)->nullable();
             $table->boolean('is_verified')->default(false);

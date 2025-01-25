@@ -32,7 +32,7 @@ class CreditRepository implements ICreditRepository
 
     public function create(array $data)
     {
-        $data['serial_number'] = $data['serial_number'] ?? SerialNumberGenerator::generate();
+        // $data['serial_number'] = $data['serial_number'] ?? SerialNumberGenerator::generate();
 
         $credit = $this->credit->create($data);
 

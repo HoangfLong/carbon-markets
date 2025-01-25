@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('carbon_credits', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('project_ID')->nullable();
-            $table->string('serial_number')->unique();
             $table->decimal('price_per_ton', 10, 2);
             $table->integer('quantity_available');
             $table->integer('minimum_purchase')->nullable();

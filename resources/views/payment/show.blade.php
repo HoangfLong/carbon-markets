@@ -3,10 +3,10 @@
 @section('content')
 <section class="product-page-container">
     <div class="product-details">
+        <!--Project Info-->
         <div class="product-info">
             <span class="product-tag">Tag ở đây</span>
             <h2 class="product-name">{{$carbonProject->name}}</h2>
-
             <hr class="group-divider">
             <span class="product-desc-title">Description</span>
             <p class="product-desc">{{ $carbonProject->description }}</p>
@@ -16,8 +16,12 @@
             <span class="product-desc-title">Project Info</span>
             <p class="product-desc">Country <span>{{ $carbonProject->location }}</span></p>
             <p class="product-desc">Company <span>{{ $carbonProject->developer }}</span></p>
+            <p class="product-desc">Address <span>{{ $carbonProject->address }}</span></p>
             <p class="product-desc">Type <span>{{ $carbonProject->projectType->type_name }}</span></p>
         </div>
+        <hr class="group-divider">
+
+        <!--Certification Info-->
         <section class="certification-section">
             <div class="product-thumbnail">
                 <img src="{{ asset('storage/'.$carbonProject->images->first()->image_path) }}" alt="Product Image">
@@ -79,7 +83,7 @@
                 </div>
                 <hr class="group-divider">
                 <div class="actions">
-                    <button type="submit" class="btn btn-primary">Buy now</button>
+                    <button type="submit" class="btn btn-primary" style="border-radius: 25px">Buy now</button>
                 </div>
             </div>
         </form>

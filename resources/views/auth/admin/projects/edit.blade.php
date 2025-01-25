@@ -60,6 +60,7 @@
                         <label for="total_credits" class="form-label fw-bold">Total Credits</label>
                         <input type="number" step="0.01" class="form-control shadow-sm" id="total_credits" name="total_credits" value="{{ $carbonProjects->total_credits }}" required>
                     </div>
+
                     <!-- Verified -->
                     <div class="col-md-6 mb-4">
                         <label for="is_verified" class="form-label fw-bold">Verified</label>
@@ -78,6 +79,12 @@
                             <option value="pending" {{ $carbonProjects->status == 'pending' ? 'selected' : '' }}>Pending</option>
                         </select>
                     </div>
+
+                    <!-- Address -->
+                    <div class="col-md-6 mb-4">
+                        <label for="address" class="form-label fw-bold">Address</label>
+                            <input type="text" class="form-control shadow-sm" id="location" name="location" value="{{ $carbonProjects->address }}">
+                    </div>
                 </div>
 
                 <div class="row">
@@ -91,20 +98,6 @@
                     <div class="col-md-6 mb-4">
                         <label for="location" class="form-label fw-bold">Location</label>
                         <input type="text" class="form-control shadow-sm" id="location" name="location" value="{{ $carbonProjects->location }}">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <!-- Start Date -->
-                    <div class="col-md-6 mb-4">
-                        <label for="start_date" class="form-label fw-bold">Start Date</label>
-                        <input type="date" class="form-control shadow-sm" id="start_date" name="start_date" value="{{ $carbonProjects->start_date }}">
-                    </div>
-
-                    <!-- End Date -->
-                    <div class="col-md-6 mb-4">
-                        <label for="end_date" class="form-label fw-bold">End Date</label>
-                        <input type="date" class="form-control shadow-sm" id="end_date" name="end_date" value="{{ $carbonProjects->end_date }}">
                     </div>
                 </div>
 

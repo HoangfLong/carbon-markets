@@ -23,15 +23,6 @@
                         @enderror
                     </div>
 
-                    <!-- Serial Number (Auto-generated) -->
-                    <div class="form-group mb-3">
-                        <label for="serial_number" class="text-dark">Serial Number (Auto-generated)</label>
-                        <input type="text" name="serial_number" id="serial_number" class="form-control bg-light text-dark border-0 rounded" value="{{ \App\Services\SerialNumberGenerator::generate() }}" readonly>
-                        @error('serial_number')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
                     <!-- Price Per Ton -->
                     <div class="form-group mb-3">
                         <label for="price_per_ton" class="text-dark">Price Per Ton</label>

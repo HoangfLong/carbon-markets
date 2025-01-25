@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CreditSerial;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
@@ -9,6 +10,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Project;
 use App\Models\Transaction;
+use App\Services\SerialCodeGenerator;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
@@ -25,7 +27,7 @@ class PaymentController extends Controller
         $carbonProject = Project::with('credits')->findOrFail($carbonProjectId);
         $amount = $request->input('amount');
         $totalAmount = $amount * $carbonProject->credits->first()->price_per_ton;
-        
+
         // Create order in DB
         $order = Order::create([
             'user_ID' => Auth::id(),
@@ -73,7 +75,20 @@ class PaymentController extends Controller
     public function success($orderId)
     {
         // Kiểm tra và cập nhật order nếu cần
-        $order = Order::findOrFail($orderId);
+        $order = Order::with('orderItems.credit')->findOrFail($orderId);
+
+        // Kiểm tra nếu không có order items
+        if ($order->orderItems->isEmpty()) {
+            return redirect()->back()->withErrors(['message' => 'No order items found for this order.']);
+        }
+
+        // Kiểm tra nếu mỗi orderItem không có tín chỉ (credit)
+        foreach ($order->orderItems as $orderItem) {
+            if (!$orderItem->credit) {
+                return redirect()->back()->withErrors(['message' => 'No credit found for the order item.']);
+            }
+        }
+        // Cập nhật trạng thái order
         $order->status = 'completed';
         $order->save();
 
@@ -85,7 +100,20 @@ class PaymentController extends Controller
             'status' => 'success',
             'transaction_date' => now(),
         ]);
-
+        // Sinh một mã serial code duy nhất cho tất cả các tín chỉ trong đơn hàng
+        $serialCode = SerialCodeGenerator::generate();
+        
+        // Lưu thông tin mã serial vào bảng credit_serials cho tất cả tín chỉ đã mua
+        foreach ($order->orderItems as $orderItem) {
+            $credit = $orderItem->credit; // Lấy tín chỉ (credit) từ order item
+            // Lưu thông tin mã serial vào bảng credit_serials
+            CreditSerial::create([
+                'transaction_ID' => $order->transaction->id ?? null,
+                'carbon_credit_ID' => $credit->id,
+                'quantity' => $orderItem->quantity,
+                'serial_code' => $serialCode, // Mã serial duy nhất cho tất cả tín chỉ
+            ]);
+        }
         return view('payment.success', ['order' => $order]);
     }
 

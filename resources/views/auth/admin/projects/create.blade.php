@@ -77,24 +77,18 @@
                     <input type="text" name="developer" id="developer" class="form-control" placeholder="Enter Developer Name">
                 </div>
 
+                 <!-- Address -->
+                 <div class="mb-4">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" name="address" id="address" class="form-control" placeholder="Enter Address">
+                </div>
+
                 <!-- Description -->
                 <div class="mb-4">
                     <label for="description" class="form-label">Description</label>
                     <textarea name="description" id="description" class="form-control" rows="3" placeholder="Enter Project Description" required></textarea>
                     <div class="invalid-feedback">Description is required.</div>
-                </div>
-
-                <!-- Start Date & End Date -->
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <label for="start_date" class="form-label">Start Date</label>
-                        <input type="date" name="start_date" id="start_date" class="form-control">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="end_date" class="form-label">End Date</label>
-                        <input type="date" name="end_date" id="end_date" class="form-control">
-                    </div>
-                </div>
+                </div>     
 
                 <!-- Registered At -->
                 <div class="mb-4">

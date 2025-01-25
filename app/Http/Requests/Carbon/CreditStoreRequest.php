@@ -31,10 +31,4 @@ class CreditStoreRequest extends FormRequest
             'end_date' => 'nullable|date|after_or_equal:start_date',
         ];
     }
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'serial_number' => $this->serial_number ?? SerialNumberGenerator::generate(),
-        ]);
-    }
 }

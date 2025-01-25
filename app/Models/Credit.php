@@ -12,7 +12,6 @@ class Credit extends Model
     protected $fillable = [
         //$fillable liệt kê các cột được phép gán giá trị bằng phương thức create() or fill()
         'project_ID',
-        'serial_number', 
         'price_per_ton', 
         'quantity_available', 
         'minimum_purchase', 

@@ -11,6 +11,7 @@
             <p><strong>Description: </strong>{{ $carbonProjects->description }}</p>
             <p><strong>Project Type: </strong>{{ $carbonProjects->projectType->type_name ?? 'N/A' }}</p>
             <p><strong>Developer: </strong>{{ $carbonProjects->developer }}</p>
+            <p><strong>Address: </strong>{{ $carbonProjects->address }}</p>
             <p><strong>Standard: </strong>{{ $carbonProjects->standard->name }}</p>
             <p><strong>Status: </strong>{{ ucfirst($carbonProjects->status )}}</p>
             <p><strong>Validator: </strong>{{ $carbonProjects->validator }}</p>
@@ -24,8 +25,6 @@
                 @endif
             </p>
             <p><strong>Registered At: </strong>{{ $carbonProjects->registered_at }}</p>
-            <p><strong>start date: </strong>{{ $carbonProjects->start_date }}</p>
-            <p><strong>end date: </strong>{{ $carbonProjects->end_date }}</p>
             <h3>Images:</h3>
             @if($carbonProjects->images && $carbonProjects->images->count() > 0)
                 @foreach($carbonProjects->images as $image)

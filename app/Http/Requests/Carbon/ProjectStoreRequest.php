@@ -31,8 +31,7 @@ class ProjectStoreRequest extends FormRequest
             'location' => 'nullable|string|max:255',
             'developer' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date',
+            'address' => 'nullable|string|max:255',
             'registered_at' => 'nullable|date',
             'total_credits' => 'required|numeric',
             'status' => 'required|in:active,inactive,pending', // Kiểm tra giá trị hợp lệ

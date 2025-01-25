@@ -18,7 +18,6 @@
                 <thead class="bg-primary text-white">
                     <tr>
                         <th class="text-center border">ID</th>
-                        <th class="text-center border">Serial Number</th>
                         <th class="text-center border">Value</th>
                         <th class="text-center border">Status</th>
                         <th class="text-center border">Actions</th>
@@ -28,7 +27,6 @@
                     @foreach ($carbonCredits as $credit)
                         <tr>
                             <td class="text-center border">{{ $credit->id }}</td>
-                            <td class="text-center border">{{ $credit->serial_number }}</td>
                             <td class="text-center border">{{ $credit->quantity_available }}</td>
                             <td class="text-center border">
                                 <span class="badge" style="background-color: {{ $credit->status === 'available' ? '#28a745' : ($credit->status === 'sold' ? '#ffc107' : '#dc3545') }}; padding: 5px 10px; border-radius: 5px; color: white;">
