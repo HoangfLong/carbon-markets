@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Carbon\CreditStoreRequest;
-use App\Http\Requests\Carbon\CreditUpdateRequest;
-use App\Models\Credit;
-use App\Models\Project;
+use App\Http\Requests\Credit\CreditUpdateRequest;
+use App\Http\Requests\Credit\CreditStoreRequest;
 use App\Repositories\CreditRepository;
 use App\Repositories\ProjectRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+
 
 class CreditController extends Controller
 {

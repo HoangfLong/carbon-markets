@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Carbon;
+namespace App\Http\Requests\Project;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProjectStoreRequest extends FormRequest
+class ProjectUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true; //allow to use this request
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class ProjectStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'project_type_ID' => 'required|exists:project_types,id',
+           'project_type_ID' => 'required|exists:project_types,id',
             // 'carbon_credit_ID' => 'required|numeric',
             'standards_ID' => 'required|exists:standards,id',
             'user_ID' => 'nullable|exists:users,id',

@@ -17,10 +17,10 @@ return new class extends Migration
             $table->foreign('user_ID')->references('id')->on('users');
         });
         Schema::table('carbon_credits', function (Blueprint $table) {
-            $table->foreign('project_ID')->references('id')->on('carbon_projects');
+            $table->foreign('project_ID')->references('id')->on('projects');
         });
         Schema::table('project_images', function (Blueprint $table) {
-            $table->foreign('project_ID')->references('id')->on('carbon_projects')->onDelete('cascade');
+            $table->foreign('project_ID')->references('id')->on('projects')->onDelete('cascade');
         });
     }
 

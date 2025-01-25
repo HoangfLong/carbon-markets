@@ -61,7 +61,7 @@ class ProjectRepository implements IProjectRepository
                 ]);
             }
         }
-            return $project;
+        return $project;
     }
 
     public function delete($id)

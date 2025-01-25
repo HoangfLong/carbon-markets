@@ -21,7 +21,7 @@ class Standard extends Model
     /**
      * Định nghĩa quan hệ với CarbonProject
      */
-    public function carbonProjects()
+    public function projects()
     {
         return $this->hasMany(Project::class, 'standards_ID');
     }

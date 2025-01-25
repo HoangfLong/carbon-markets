@@ -19,7 +19,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(IProjectRepository::class, ProjectRepository::class);
         $this->app->bind(ICreditRepository::class, CreditRepository::class);
-        $this->app->bind(IPaymentRepository::class, PaymentRepository::class);
     }
 
     /**

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Carbon\ProjectStoreRequest;
-use App\Http\Requests\Carbon\ProjectUpdateRequest;
+use App\Http\Requests\Project\ProjectStoreRequest;
+use App\Http\Requests\Project\ProjectUpdateRequest;
 use App\Models\ProjectType;
 use App\Models\Standard;
 use App\Repositories\ProjectRepository;

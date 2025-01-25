@@ -23,7 +23,7 @@ class ProjectType extends Model
     /**
      * Định nghĩa quan hệ với CarbonProject
      */
-    public function carbonProjects()
+    public function projects()
     {
         return $this->hasMany(Project::class, 'project_type_ID');
     }

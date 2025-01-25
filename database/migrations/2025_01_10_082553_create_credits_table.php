@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carbon_credits', function (Blueprint $table) {
+        Schema::create('credits', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('project_ID')->nullable();
             $table->decimal('price_per_ton', 10, 2);
