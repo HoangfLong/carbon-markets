@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\CreditController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Middleware\RoleMiddleware;
@@ -63,9 +64,7 @@ Route::middleware('auth')->group(function () {
 
     // Admin-only access
     Route::middleware(['role:admin'])->group(function () {
-        Route::get('/admin', function () {
-            return view('auth.admin.dashboard');
-        })->name('admin.dashboard');
+        Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
     });
 
     // Admin & Manager access for CRUD

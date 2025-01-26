@@ -24,14 +24,14 @@ class ProjectController extends Controller
     public function index(): View 
     {
         $carbonProjects = $this->projectRepository->getAll();
-            return view('auth.admin.projects.index',compact('carbonProjects'));
+            return view('admin.projects.index',compact('carbonProjects'));
     }
 
    //View project
     public function show($id): View 
     {
         $carbonProjects = $this->projectRepository->getById($id);
-            return view('auth.admin.projects.show',compact('carbonProjects'));
+            return view('admin.projects.show',compact('carbonProjects'));
     }
 
     //Create project
@@ -39,7 +39,7 @@ class ProjectController extends Controller
     {
         $projectTypes = ProjectType::all();
         $standards = Standard::all();
-            return view('auth.admin.projects.create',compact(['projectTypes','standards']));
+            return view('admin.projects.create',compact(['projectTypes','standards']));
     }
 
     //Store project
@@ -56,7 +56,7 @@ class ProjectController extends Controller
         $carbonProjects = $this->projectRepository->getById($id);
         $projectTypes = ProjectType::all();
         $standards = Standard::all();
-            return view('auth.admin.projects.edit',compact(['carbonProjects', 'projectTypes', 'standards']));
+            return view('admin.projects.edit',compact(['carbonProjects', 'projectTypes', 'standards']));
     }
 
     //update project

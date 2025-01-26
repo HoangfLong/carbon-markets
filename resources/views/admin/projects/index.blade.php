@@ -1,4 +1,4 @@
-@extends('auth.layouts.app')
+@extends('layouts.admin.app')
 @section('content')
 <div class="container mt-5 d-flex justify-content-center">
     <div class="card shadow-lg border-0 rounded-lg w-100" style="min-width: 135%; max-width: 100%;">

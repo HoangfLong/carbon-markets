@@ -15,6 +15,8 @@
     <link rel="icon" href="{{ asset('build/assets/img/core-img/favicon.ico') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('build/assets/images/logos/favicon.png') }}" />
+    <link rel="stylesheet" href="{{ asset('build/assets/css/styles.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('build/assets/css/core-style.css') }}">
     <link rel="stylesheet" href="{{ asset('build/assets/style.css') }}">
 
@@ -136,5 +138,7 @@
     <script src="{{ asset('build/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('build/assets/js/classy-nav.min.js') }}"></script>
     <script src="{{ asset('build/assets/js/active.js') }}"></script>
+    <script src="{{ asset('build/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('build/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

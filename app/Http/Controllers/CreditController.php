@@ -29,7 +29,7 @@ class CreditController extends Controller
     public function index(): View
     {
         $carbonCredits = $this->creditRepository->getAll();
-        return view('auth.admin.credits.index', compact('carbonCredits'));
+        return view('admin.credits.index', compact('carbonCredits'));
         /*compact() dùng để truyền dữ liệu từ controller vào view. Nó tạo một mảng liên kết giữa tên biến và giá trị 
             của biến đó. Ví dụ, compact('carbonCredits') 
             tạo ra một mảng ['carbonCredits' => $carbonCredits] và gửi dữ liệu vào view carbon_credits.index.*/
@@ -41,7 +41,7 @@ class CreditController extends Controller
         //Lấy tất cả các dự án carbon để người dùng chọn khi tạo tín chỉ mới
         $carbonProjects = $this->projectRepository->getAll();
         //Trả về view tạo tín chỉ với dữ liệu dự án
-        return view('auth.admin.credits.create', compact('carbonProjects'));
+        return view('admin.credits.create', compact('carbonProjects'));
         /*Dữ liệu các dự án được truyền vào view carbon-credits.create dưới dạng biến $carbonProjects, 
             dùng để người dùng có thể chọn dự án khi tạo tín chỉ carbon mới.*/
     }
@@ -59,7 +59,7 @@ class CreditController extends Controller
     {
         $carbonCredits = $this->creditRepository->getById($id);
         //Return a view
-            return view('auth.admin.credits.show', compact('carbonCredits'));
+            return view('admin.credits.show', compact('carbonCredits'));
     }
 
     //Edit
@@ -68,7 +68,7 @@ class CreditController extends Controller
         $carbonCredits = $this->creditRepository->getById($id);
         $carbonProjects =  $carbonProjects = $this->projectRepository->getAll();
         //Return a view
-            return view('auth.admin.credits.edit', compact('carbonCredits', 'carbonProjects'));
+            return view('admin.credits.edit', compact('carbonCredits', 'carbonProjects'));
     }
 
     //Update

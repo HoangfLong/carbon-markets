@@ -1,4 +1,4 @@
-@extends('auth.layouts.app')
+@extends('layouts.admin.app')
 
 @section('content')
 <div class="container mt-5 d-flex justify-content-center">
