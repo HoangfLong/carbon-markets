@@ -53,6 +53,7 @@
         </section>        
     </div>
 
+     <!--Payment Section-->
     <div class="payment-section">
         <form action="{{ route('payment.checkout', $carbonProject->id) }}" method="POST" id="checkoutForm">
             @csrf
@@ -66,7 +67,13 @@
                     <label for="amount">Amount</label>
                     <div class="input-group">
                         <button type="button" class="btn" id="decreaseAmount">-</button>
-                        <input type="number" id="amount" name="amount" value="1" min="1" max="{{ $carbonProject->credits->first()->quantity_available }}">
+                        <input 
+                            type="number" 
+                            id="amount" 
+                            name="amount" 
+                            value="{{ $carbonProject->credits->first()->minimum_purchase }}" 
+                            min="{{ $carbonProject->credits->first()->minimum_purchase }}" 
+                            max="{{ $carbonProject->credits->first()->quantity_available }}">
                         <button type="button" class="btn" id="increaseAmount">+</button>
                     </div>
                     <span>tCO<sub>2</sub>e</span>

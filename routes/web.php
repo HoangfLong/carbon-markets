@@ -1,11 +1,8 @@
 <?php
 
-use App\Http\Controllers\CreditController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/welcome', function () {
@@ -22,10 +19,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     //Payment
-    Route::get('projects/{carbonProjectId}', [PaymentController::class, 'show'])->name('payment.show');
-    Route::post('projects/{carbonProjectId}/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
-    Route::get('projects/success/{orderId}', [PaymentController::class, 'success'])->name('payment.success');
-    Route::get('projects/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
+    Route::get('project/{carbonProjectId}', [PaymentController::class, 'show'])->name('payment.show');
+    Route::post('project/{carbonProjectId}/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
+    Route::get('project/success/{orderId}', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('project/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
 });
 //Home
 Route::get('/', [HomeController::class, 'home'])->name('home');

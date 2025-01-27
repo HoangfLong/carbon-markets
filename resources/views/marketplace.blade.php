@@ -300,11 +300,11 @@
                             <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="single-product-wrapper">
                                     <!-- Product Image -->
-                                    <div class="product-img">
+                                    <div class="product-img" style="position: relative; overflow: hidden;">
                                         @if($project->images->isNotEmpty())
-                                            <img src="{{ asset('storage/'.$project->images->first()->image_path) }}" alt="Project Image">
+                                            <img src="{{ asset('storage/'.$project->images->first()->image_path) }}" alt="Project Image" class="img-fluid">
                                             <!-- Hover Thumb -->
-                                            <img class="hover-img" src="{{ asset('storage/'.$project->images->first()->image_path) }}" alt="Project Image">
+                                            <img class="hover-img" src="{{ asset('storage/'.$project->images->first()->image_path) }}" alt="Project Image" class="img-fluid">
                                         @endif
                                         <!-- Product Badge -->
                                         <div class="product-badge offer-badge">

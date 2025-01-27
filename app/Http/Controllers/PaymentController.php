@@ -18,7 +18,7 @@ class PaymentController extends Controller
     public function show($carbonProjectId)
     {
         $carbonProject = Project::with('credits')->findOrFail($carbonProjectId);
-        return view('projects.show', compact('carbonProject'));
+        return view('project.show', compact('carbonProject'));
     }
 
     public function checkout(Request $request, $carbonProjectId)
@@ -102,11 +102,20 @@ class PaymentController extends Controller
         ]);
         // Sinh một mã serial code duy nhất cho tất cả các tín chỉ trong đơn hàng
         $serialCode = SerialCodeGenerator::generate();
-        
+
         // Lưu thông tin mã serial vào bảng credit_serials cho tất cả tín chỉ đã mua
         foreach ($order->orderItems as $orderItem) {
             $credit = $orderItem->credit; // Lấy tín chỉ (credit) từ order item
             // Lưu thông tin mã serial vào bảng credit_serials
+
+            // Deduct the quantity from Quantity_available
+            if ($credit->quantity_available < $orderItem->quantity) {
+                return redirect()->back()->withErrors(['message' => 'Not enough credits available.']);
+            }
+
+            $credit->quantity_available -= $orderItem->quantity;
+            $credit->save();
+
             CreditSerial::create([
                 'transaction_ID' => $order->transaction->id ?? null,
                 'carbon_credit_ID' => $credit->id,
@@ -114,11 +123,11 @@ class PaymentController extends Controller
                 'serial_code' => $serialCode, // Mã serial duy nhất cho tất cả tín chỉ
             ]);
         }
-        return view('projects.success', ['order' => $order]);
+        return view('project.success', ['order' => $order]);
     }
 
     public function cancel()
     {
-        return view('projects.cancel');
+        return view('project.cancel');
     }
 }
