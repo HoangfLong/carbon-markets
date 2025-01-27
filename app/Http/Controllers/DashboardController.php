@@ -16,9 +16,11 @@ class DashboardController extends Controller
 
         // Doanh thu theo tháng
         $monthlyRevenue = DB::table('orders')
-        ->selectRaw('MONTH(created_at) as month, SUM(total_amount) as total')
-        ->groupByRaw('MONTH(created_at)')
+        ->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, MONTHNAME(created_at) as month_name, SUM(total_amount) as total')
+        ->groupByRaw('YEAR(created_at), MONTH(created_at), MONTHNAME(created_at)')
+        ->orderByRaw('YEAR(created_at), MONTH(created_at)')
         ->get();
+    
 
         // Đơn hàng mới nhất
         $latestOrders = Order::with('orderItems.credit.projects')->latest()->take(5)->get();

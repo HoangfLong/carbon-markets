@@ -18,7 +18,7 @@ class PaymentController extends Controller
     public function show($carbonProjectId)
     {
         $carbonProject = Project::with('credits')->findOrFail($carbonProjectId);
-        return view('payment.show', compact('carbonProject'));
+        return view('projects.show', compact('carbonProject'));
     }
 
     public function checkout(Request $request, $carbonProjectId)
@@ -114,11 +114,11 @@ class PaymentController extends Controller
                 'serial_code' => $serialCode, // Mã serial duy nhất cho tất cả tín chỉ
             ]);
         }
-        return view('payment.success', ['order' => $order]);
+        return view('projects.success', ['order' => $order]);
     }
 
     public function cancel()
     {
-        return view('payment.cancel');
+        return view('projects.cancel');
     }
 }

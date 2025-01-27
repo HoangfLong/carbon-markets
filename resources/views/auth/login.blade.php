@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.user.app')
 
 @section('content')
     <!-- Kiểm tra trạng thái đăng nhập -->
@@ -12,54 +12,104 @@
             </a>
         </div>
     @else
-        <!-- Form đăng nhập cho người dùng chưa đăng nhập -->
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <!-- Email Address -->
-            <div class="mb-4">
-                <x-input-label for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                @error('email')
-                    <div class="mt-2 text-red-600 text-sm">{{ $message }}</div>
-                @enderror
+        <!-- Giao diện Form đăng nhập tùy chỉnh -->
+        <div class="site-wrap d-md-flex align-items-stretch">
+            <div class="bg-img" style="background-image: url({{ asset('build/assets/img/img-bg-1.jpg') }}">
+                <a href="{{ url()->previous() }}" class="btn-back">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </a>
+                <div class="text-overlay">
+                    <h1 class="title">The fight against climate change is in your hands. Take action with us.</h1>
+                </div>
             </div>
+            <div class="form-wrap">
+                <div class="form-inner">
+                    <h1 class="title">Login</h1>
+                    <p class="caption mb-4">Please enter your login details to sign in.</p>
 
-            <!-- Password -->
-            <div class="mb-4">
-                <x-input-label for="password" :value="__('Password')" />
-                <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-                @error('password')
-                    <div class="mt-2 text-red-600 text-sm">{{ $message }}</div>
-                @enderror
+                    <!-- Form đăng nhập -->
+                    <form method="POST" action="{{ route('login') }}" class="pt-3">
+                        @csrf
+                        <!-- Email -->
+                        <div class="form-floating">
+                            <input 
+                                type="email" 
+                                class="form-control @error('email') is-invalid @enderror" 
+                                id="email" 
+                                name="email" 
+                                placeholder="info@example.com" 
+                                value="{{ old('email') }}" 
+                                required 
+                                autofocus 
+                                autocomplete="username">
+                            <label for="email">Email Address</label>
+                            @error('email')
+                                <div class="mt-2 text-red-600 text-sm">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-floating">
+                            <span class="password-show-toggle js-password-show-toggle">
+                                <span class="uil"></span>
+                            </span>
+                            <input 
+                                type="password" 
+                                class="form-control @error('password') is-invalid @enderror" 
+                                id="password" 
+                                name="password" 
+                                placeholder="Password" 
+                                required 
+                                autocomplete="current-password">
+                            <label for="password">Password</label>
+                            @error('password')
+                                <div class="mt-2 text-red-600 text-sm">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Remember Me + Forgot Password -->
+                        <div class="d-flex justify-content-between">
+                            <div class="form-check">
+                                <input 
+                                    type="checkbox" 
+                                    class="form-check-input" 
+                                    id="remember_me" 
+                                    name="remember">
+                                <label for="remember_me" class="form-check-label">Keep me logged in</label>
+                            </div>
+                            <div>
+                                @if (Route::has('password.request'))
+                                    <a href="{{ route('password.request') }}">Forgot password?</a>
+                                @endif
+                            </div>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="btn btn-primary">Log in</button>
+                        </div>
+
+                        <!-- Register Link -->
+                        <div class="mb-2">
+                            Don’t have an account? 
+                            <a href="{{ route('register') }}">Sign up</a>
+                        </div>
+
+                        <!-- Social Media Login -->
+                        <div class="social-account-wrap">
+                            <h4 class="mb-4"><span>or continue with</span></h4>
+                            <ul class="list-unstyled social-account d-flex justify-content-between">
+                                <li><a href="#"><img src="{{ asset('build/assets/img/icon-google.svg') }}" alt="Google logo"></a></li>
+                                <li><a href="#"><img src="{{ asset('build/assets/img/icon-facebook.svg') }}" alt="Facebook logo"></a></li>
+                                <li><a href="#"><img src="{{ asset('build/assets/img/icon-apple.svg') }}" alt="Apple logo"></a></li>
+                                <li><a href="#"><img src="{{ asset('build/assets/img/icon-twitter.svg') }}" alt="Twitter logo"></a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
             </div>
-
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                    <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-between mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-primary-button class="ms-3">
-                    {{ __('Log in') }}
-                </x-primary-button>
-            </div>
-        </form>
-
-        <!-- Nút đăng ký cho người dùng chưa đăng nhập -->
-        <div class="mt-4">
-            <a href="{{ route('register') }}" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
-                {{ __('Register') }}
-            </a>
         </div>
     @endauth
 @endsection

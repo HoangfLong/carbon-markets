@@ -1,3 +1,6 @@
+@php
+    $hideWelcomeSection = true;
+@endphp
 @extends('layouts.app')
 
 @section('content')

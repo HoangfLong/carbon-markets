@@ -109,20 +109,21 @@
     <!-- ##### Right Side Cart End ##### -->
 
     <!-- ##### Welcome Area Start ##### -->
-    <section class="welcome_area bg-img background-overlay" style="background-image: url({{ asset('build/assets/img/bg-img/bg-1.jpg') }});">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-12">
-                    <div class="hero-content">
-                        <!-- <h6>asoss</h6> -->
-                        <h2>Your all-in-one carbon offset marketplace</h2>
-                        <a href="#" class="btn essence-btn">Explore</a>
+    @if (!isset($hideWelcomeSection) || !$hideWelcomeSection)
+        <section class="welcome_area bg-img background-overlay" style="background-image: url({{ asset('build/assets/img/bg-img/bg-1.jpg') }});">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <div class="hero-content">
+                            <h2>Your all-in-one carbon offset marketplace</h2>
+                            <a href="{{ route('home') }}" class="btn essence-btn">Explore</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
+        </section>
+    @endif
+
     <!-- Nội dung chính của trang -->
     <main>
         @yield('content')

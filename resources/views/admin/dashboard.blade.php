@@ -10,11 +10,11 @@
               <h5 class="card-title fw-semibold">Sales Overview</h5>
             </div>
             <div>
-              <select id="monthFilter" class="form-select">
-                <option value="">All Months</option>
-                @foreach ($monthlyRevenue as $sale)
-                  <option value="{{ $sale->month }}">Month {{ $sale->month }}</option>
-                @endforeach
+              <select id="yearFilter" class="form-select">
+                <option value="">Year</option>
+                  @foreach ($monthlyRevenue->unique('year') as $revenue)
+                    <option value="{{ $revenue->year }}">{{ $revenue->year }}</option>
+                  @endforeach
               </select>
             </div>
           </div>
@@ -212,15 +212,21 @@
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const monthlyRevenue = @json($monthlyRevenue);
+        const monthlyRevenue = @json($monthlyRevenue); // Get data from Blade
 
-        let chart;
+        let chart; // Define the chart variable
+        const chartElement = document.querySelector('#chart_sales'); // Ensure this element exists
+
+        // Check if chartElement exists before proceeding
+        if (!chartElement) {
+            console.error('Element #chart_sales not found');
+            return;
+        }
 
         // Function to initialize the chart
         function initializeChart() {
-            // Destroy the existing chart if present
             if (chart) {
-                chart.destroy();  // Destroy existing chart
+                chart.destroy();  // Destroy the existing chart
             }
 
             const options = {
@@ -231,107 +237,90 @@
                 chart: {
                     type: 'bar',
                     height: 350,
-                    id: 'revenueChart', 
-                    toolbar: {
-                        show: false,  // Hide toolbar for a cleaner look
+                    id: 'revenueChart',
+                    toolbar: { show: false },  // Hide toolbar for a cleaner look
+                    animations: { 
+                        enabled: true, 
+                        easing: 'easeinout', 
+                        speed: 800 
                     },
-                    animations: {
-                        enabled: true,  // Enable animations
-                        easing: 'easeinout',
-                        speed: 800,
-                    }
                 },
                 plotOptions: {
                     bar: {
-                        horizontal: false, // Display bars vertically
-                        endingShape: 'rounded', // Rounded edges for bars
-                        columnWidth: '60%', // Make the bars thinner
+                        horizontal: false,
+                        endingShape: 'rounded',
+                        columnWidth: '60%',
                     }
                 },
                 xaxis: {
-                    categories: monthlyRevenue.map(sale => `Month ${sale.month}`),
-                    labels: {
-                        style: {
-                            colors: '#6c757d', // Gray color for axis labels
-                            fontSize: '14px',
-                        }
-                    },
+                    categories: monthlyRevenue.map(sale => `${sale.month_name} ${sale.year}`),
                 },
                 yaxis: {
-                    labels: {
-                        style: {
-                            colors: '#6c757d',
-                            fontSize: '14px',
-                        }
-                    },
+                    labels: { style: { colors: '#6c757d', fontSize: '14px' } }
                 },
                 fill: {
-                    opacity: 0.9, // Add opacity to the bars for a softer look
-                    colors: ['#35a3c6'], // Change color of bars
-                    type: 'gradient', // Use gradient color fill for bars
-                    gradient: {
-                        shade: 'light',
-                        type: 'horizontal', // Horizontal gradient
-                        shadeIntensity: 0.3,
-                        stops: [0, 100],
-                    }
+                    opacity: 0.9,
+                    colors: ['#35a3c6'],
+                    type: 'gradient',
+                    gradient: { shade: 'light', type: 'horizontal', shadeIntensity: 0.3, stops: [0, 100] },
                 },
                 tooltip: {
-                    theme: 'dark', // Use dark theme for the tooltip
-                    x: {
-                        show: false,
-                    },
+                    theme: 'dark',
                     y: {
                         formatter: function (val) {
-                            return '$' + val.toLocaleString(); // Format tooltips as currency
+                            return '$' + val.toLocaleString(); // Format as currency
                         }
                     }
                 },
                 title: {
                     text: 'Monthly Revenue Overview',
                     align: 'center',
-                    style: {
-                        fontSize: '16px',
-                        fontWeight: 'bold',
-                        color: '#333', // Title color
-                    },
+                    style: { fontSize: '16px', fontWeight: 'bold', color: '#333' },
                 },
                 grid: {
-                    borderColor: '#e3e3e3',  // Light grid lines for a subtle look
-                    row: {
-                        colors: ['#fff', '#f9f9f9'],  // Alternate row colors for better readability
-                        opacity: 0.5,
-                    }
-                },
+                    borderColor: '#e3e3e3',
+                    row: { colors: ['#fff', '#f9f9f9'], opacity: 0.5 },
+                }
             };
 
-            // Create and render the chart
-            chart = new ApexCharts(document.querySelector("#chart_sales"), options);
+            // Create the chart
+            chart = new ApexCharts(chartElement, options);
             chart.render();
         }
 
         // Initialize the chart on page load
         initializeChart();
 
-        // Event Listener for Dropdown to filter data
-        document.querySelector('#monthFilter').addEventListener('change', function (e) {
-            const selectedMonth = e.target.value;
+        // Event Listener for Year Filter
+        document.querySelector('#yearFilter').addEventListener('change', function (e) {
+            const selectedYear = e.target.value;
 
-            if (selectedMonth === "") {
-                // Show all months
-                chart.updateSeries([{
-                    name: 'Monthly Revenue',
-                    data: monthlyRevenue.map(sale => sale.total),
-                }]);
-            } else {
-                // Filter data for the selected month
-                const filteredData = monthlyRevenue.filter(sale => sale.month == selectedMonth);
+            let filteredData = monthlyRevenue;
 
-                chart.updateSeries([{
-                    name: 'Monthly Revenue',
-                    data: filteredData.length ? filteredData.map(sale => sale.total) : [0], // Display 0 if no data
-                }]);
+            // If a year is selected, filter by year
+            if (selectedYear) {
+                filteredData = monthlyRevenue.filter(sale => sale.year == selectedYear);
             }
+
+            // Add smooth transition effect when changing the year
+            chart.updateOptions({
+                xaxis: {
+                    categories: filteredData.map(sale => `${sale.month_name} ${sale.year}`),
+                },
+                // Add smooth animation for both series update and chart options
+                animations: {
+                    enabled: true,  // Enable animations
+                    easing: 'easeinout',  // Smooth transition
+                    speed: 800,  // Duration of animation
+                    animateGradients: true,  // Optionally animate the gradient fill
+                },
+            });
+
+            // Update the series data with animation
+            chart.updateSeries([{
+                name: 'Monthly Revenue',
+                data: filteredData.map(sale => sale.total),
+            }]);
         });
     });
 </script>
