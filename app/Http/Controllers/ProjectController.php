@@ -55,8 +55,7 @@ class ProjectController extends Controller
     {
         $carbonProjects = $this->projectRepository->getById($id);
         $projectTypes = ProjectType::all();
-        $standards = Standard::all();
-            return view('admin.projects.edit',compact(['carbonProjects', 'projectTypes', 'standards']));
+            return view('admin.projects.edit',compact(['carbonProjects', 'projectTypes']));
     }
 
     //update project

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Credit\CreditUpdateRequest;
 use App\Http\Requests\Credit\CreditStoreRequest;
+use App\Models\Credit;
+use App\Models\Standard;
 use App\Repositories\CreditRepository;
 use App\Repositories\ProjectRepository;
 use Illuminate\Contracts\View\View;
@@ -40,15 +42,16 @@ class CreditController extends Controller
     {
         //Lấy tất cả các dự án carbon để người dùng chọn khi tạo tín chỉ mới
         $carbonProjects = $this->projectRepository->getAll();
+        $standards = Standard::all();
         //Trả về view tạo tín chỉ với dữ liệu dự án
-        return view('admin.credits.create', compact('carbonProjects'));
+        return view('admin.credits.create', compact('carbonProjects','standards'));
         /*Dữ liệu các dự án được truyền vào view carbon-credits.create dưới dạng biến $carbonProjects, 
             dùng để người dùng có thể chọn dự án khi tạo tín chỉ carbon mới.*/
     }
     //Store
     public function store(CreditStoreRequest $request): RedirectResponse
     {
-
+        // dd($request->all());
         $this->creditRepository->create($request->validated());
         //Redirect if successed
             return redirect()->route('credits.index')->with('success', 'carbon');

@@ -40,27 +40,14 @@
                             @endforeach
                         </select>
                     </div>
-
-                    <!-- Standard -->
-                    <div class="col-md-6 mb-4">
-                        <label for="standard" class="form-label fw-bold">Standard</label>
-                        <select class="form-select shadow-sm" id="standard" name="standards_ID" required>
-                            @foreach($standards as $standard)
-                                <option value="{{ $standard->id }}" {{ $carbonProjects->standards_ID == $standard->id ? 'selected' : '' }}>
-                                    {{ $standard->name }}
-                                </option>
-                            @endforeach
-                        </select>
+                     <!-- Total Credits -->
+                     <div class="col-md-6 mb-4">
+                        <label for="total_credits" class="form-label fw-bold">Total Credits</label>
+                        <input type="number" step="0.01" class="form-control shadow-sm" id="total_credits" name="total_credits" value="{{ $carbonProjects->total_credits }}" required>
                     </div>
                 </div>
 
                 <div class="row">
-                    <!-- Total Credits -->
-                    <div class="col-md-6 mb-4">
-                        <label for="total_credits" class="form-label fw-bold">Total Credits</label>
-                        <input type="number" step="0.01" class="form-control shadow-sm" id="total_credits" name="total_credits" value="{{ $carbonProjects->total_credits }}" required>
-                    </div>
-
                     <!-- Verified -->
                     <div class="col-md-6 mb-4">
                         <label for="is_verified" class="form-label fw-bold">Verified</label>
@@ -74,16 +61,16 @@
                     <div class="col-md-6 mb-4">
                         <label for="status" class="form-label fw-bold">Status</label>
                         <select class="form-select shadow-sm" id="status" name="status" required>
-                            <option value="active" {{ $carbonProjects->status == 'active' ? 'selected' : '' }}>Active</option>
-                            <option value="inactive" {{ $carbonProjects->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
-                            <option value="pending" {{ $carbonProjects->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="Planned" {{ $carbonProjects->status == 'Planned' ? 'selected' : '' }}>Planned</option>
+                            <option value="Estimated" {{ $carbonProjects->status == 'Estimated' ? 'selected' : '' }}>Estimated</option>
+                            <option value="Certified" {{ $carbonProjects->status == 'Certified' ? 'selected' : '' }}>Certified</option>
                         </select>
                     </div>
 
                     <!-- Address -->
                     <div class="col-md-6 mb-4">
                         <label for="address" class="form-label fw-bold">Address</label>
-                            <input type="text" class="form-control shadow-sm" id="location" name="location" value="{{ $carbonProjects->address }}">
+                            <input type="text" class="form-control shadow-sm" id="address" name="address" value="{{ $carbonProjects->address }}">
                     </div>
                 </div>
 

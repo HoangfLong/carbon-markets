@@ -50,6 +50,9 @@ class ProjectRepository implements IProjectRepository
     public function update($id, array $data)
     {
         $project = $this->project->findOrFail($id);
+        //Update the project fields
+        $project->update($data);
+
         if (!empty($data['images'])) {
             $project->images()->delete();
             foreach ($data['images'] as $image) {

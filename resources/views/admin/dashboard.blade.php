@@ -191,15 +191,27 @@
                       <span class="fw-normal">{{ $order->user->company }}</span>                          
                   </td>
                   <td class="border-bottom-0">
-                    <p class="mb-0 fw-normal">{{ $order->orderItems->first()->credit->projects->name }}</p>
+                    @if($order->orderItems->isNotEmpty() && $order->orderItems->first()->credit && $order->orderItems->first()->credit->projects)
+                      <p class="mb-0 fw-normal">{{ $order->orderItems->first()->credit->projects->name }}</p>
+                    @else
+                        <p class="mb-0 fw-normal">No project available</p>
+                    @endif
                   </td>
                   <td class="border-bottom-0">
                     <div class="d-flex align-items-center gap-2">
-                      <span class="badge bg-primary rounded-3 fw-semibold">{{ $order->orderItems->first()->quantity }} UD</span>
+                      @if($order->orderItems->isNotEmpty())
+                          <span class="badge bg-primary rounded-3 fw-semibold">{{ $order->orderItems->first()->quantity }} UD</span>
+                      @else
+                          <span class="badge bg-secondary rounded-3 fw-semibold">No items</span>
+                      @endif
                     </div>
                   </td>
                   <td class="border-bottom-0">
-                    <h6 class="fw-semibold mb-0 fs-4">${{ $order->total_amount }}</h6>
+                    @if($order->orderItems->isNotEmpty() && $order->orderItems->first()->credit)
+                      <h6 class="fw-semibold mb-0 fs-4">${{ $order->orderItems->first()->credit->price_per_ton * $order->orderItems->first()->quantity }}</h6>
+                    @else
+                        <h6 class="fw-semibold mb-0 fs-4">$0</h6>
+                    @endif
                   </td>
                 </tr> 
                 @endforeach                      

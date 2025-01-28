@@ -23,7 +23,7 @@ class HomeController extends Controller
      //Marketplace view
     public function market(): View 
     {
-        $carbonProjects = $this->projectRepository->getAll();
+        $carbonProjects = $this->projectRepository->getAll()->where('status', 'Certified');
             return view('marketplace',compact('carbonProjects'));
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Stripe\FinancialConnections\Transaction;
 
 class Credit extends Model
 {
@@ -15,6 +14,8 @@ class Credit extends Model
         'price_per_ton', 
         'quantity_available', 
         'minimum_purchase', 
+        'standard_id',
+        'validator',
         'status', 
         'start_date', 
         'end_date'
@@ -32,5 +33,9 @@ class Credit extends Model
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class, 'carbon_credit_ID');
+    }
+    public function standard()
+    {
+        return $this->belongsTo(Standard::class, 'standard_id');
     }
 }

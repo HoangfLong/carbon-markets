@@ -25,7 +25,9 @@ class CreditStoreRequest extends FormRequest
             'price_per_ton' => 'required|numeric|min:0',
             'quantity_available' => 'required|integer|min:0',
             'minimum_purchase' => 'required|integer|min:1',
-            'status' => 'required|in:available,sold,retired',
+            'validator' => 'nullable|string|max:255',
+            'standard_id' => 'required|exists:standards,id',
+            'status' => 'required|in:Registered,Retired',
             'start_date' => 'nullable|date|before_or_equal:end_date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
         ];

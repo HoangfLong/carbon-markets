@@ -296,45 +296,48 @@
                                 </div>
                             </div>  --}}
 
-                           @foreach ($carbonProjects as $project)
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img" style="position: relative; overflow: hidden;">
-                                        @if($project->images->isNotEmpty())
-                                            <img src="{{ asset('storage/'.$project->images->first()->image_path) }}" alt="Project Image" class="img-fluid">
-                                            <!-- Hover Thumb -->
-                                            <img class="hover-img" src="{{ asset('storage/'.$project->images->first()->image_path) }}" alt="Project Image" class="img-fluid">
-                                        @endif
-                                        <!-- Product Badge -->
-                                        <div class="product-badge offer-badge">
-                                            <span>-30%</span>
+                            @foreach ($carbonProjects as $project)
+                            @if($project->status === 'Certified' && $project->credits->isNotEmpty()) <!-- Check if status is Certified -->
+                                <div class="col-12 col-sm-6 col-lg-4">
+                                    <div class="single-product-wrapper">
+                                        <!-- Product Image -->
+                                        <div class="product-img" style="position: relative; overflow: hidden;">
+                                            @if($project->images->isNotEmpty())
+                                                <img src="{{ asset('storage/'.$project->images->first()->image_path) }}" alt="Project Image" class="img-fluid">
+                                                <!-- Hover Thumb -->
+                                                <img class="hover-img" src="{{ asset('storage/'.$project->images->first()->image_path) }}" alt="Project Image" class="img-fluid">
+                                            @endif
+                                            <!-- Product Badge -->
+                                            {{-- <div class="product-badge offer-badge">
+                                                <span>-30%</span>
+                                            </div> --}}
+                                            <!-- Favourite -->
+                                            <div class="product-favourite">
+                                                <a href="#" class="favme fa fa-heart"></a>
+                                            </div>
                                         </div>
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>Tag ở đây</span>
-                                        <a href="{{ route('payment.show', $project->id) }}">
-                                            <h6>{{ $project->name }}</h6>
-                                        </a>
-                                        <p class="product-price">{{ $project->credits->first()->price_per_ton }} $</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
+                        
+                                        <!-- Product Description -->
+                                        <div class="product-description">
+                                            <span>Tag ở đây</span>
+                                            <a href="{{ route('payment.show', $project->id) }}">
+                                                <h6>{{ $project->name }}</h6>
+                                            </a>
+                                            <p class="product-price">{{ $project->credits->first()->price_per_ton }} $</p>
+                        
+                                            <!-- Hover Content -->
+                                            <div class="hover-content">
+                                                <!-- Add to Cart -->
+                                                <div class="add-to-cart-btn">
+                                                    <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div> 
-                           @endforeach
+                                </div> 
+                            @endif
+                        @endforeach
+                        
       
                     <!-- Pagination -->
                     <nav aria-label="navigation">

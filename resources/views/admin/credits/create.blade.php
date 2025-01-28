@@ -50,14 +50,31 @@
                         @enderror
                     </div>
 
+                    <!-- Standard -->
+                    <div class="mb-4">
+                        <label for="standard_id" class="form-label">Standard</label>
+                        <select name="standard_id" id="standard_id" class="form-select" required>
+                        <option value="" disabled selected>-- Select Standard --</option>
+                        @foreach($standards as $standard)
+                            <option value="{{ $standard->id }}">{{ $standard->name }}</option>
+                        @endforeach
+                        </select>
+                        <div class="invalid-feedback">Please select a standard.</div>
+                    </div>
+
+                    <!-- Validator -->
+                    <div class="mb-4">
+                        <label for="validator" class="form-label">Validator</label>
+                        <input type="text" name="validator" id="validator" class="form-control" placeholder="Enter Validator Name">
+                    </div>
+
                     <!-- Status -->
                     <div class="form-group mb-3">
                         <label for="status" class="text-dark">Status</label>
                         <select name="status" id="status" class="form-select bg-light text-dark border-0 rounded" required>
                             <option value="" disabled selected>-- Select Status --</option>
-                            <option value="available">Available</option>
-                            <option value="sold">Sold</option>
-                            <option value="retired">Retired</option>
+                            <option value="Registered">Registered</option>
+                            <option value="Retired">Retired</option>
                         </select>
                         @error('status')
                             <small class="text-danger">{{ $message }}</small>

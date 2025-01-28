@@ -16,7 +16,6 @@
                         <th class="text-center border">Project ID</th>
                         <th class="text-center border">Project Name</th>
                         <th class="text-center border">Project Type</th>
-                        <th class="text-center border">Standard</th>
                         <th class="text-center border">Status</th>
                         <th class="text-center border">Location</th>
                         <th class="text-center border">Verified</th>
@@ -29,7 +28,6 @@
                             <td class="text-center border">{{ $project->id }}</td>
                             <td class="text-center border">{{ $project->name }}</td>
                             <td class="text-center border">{{ $project->projectType->type_name ?? 'N/A' }}</td>
-                            <td class="text-center border">{{ $project->standard->name }}</td>
                             <td class="text-center border">{{ ucfirst($project->status) }}</td>
                             <td class="text-center border">{{ $project->location }}</td>
                             <td class="text-center border">

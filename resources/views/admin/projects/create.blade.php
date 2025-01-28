@@ -34,28 +34,10 @@
                     <select name="project_type_ID" id="project_type_ID" class="form-select" required>
                         <option value="" disabled selected>-- Select Project Type --</option>
                         @foreach($projectTypes as $type)
-                            <option value="{{ $type->id }}">{{ $type->type_name }}</option>
+                        <option value="{{ $type->id }}">{{ $type->type_name }}</option>
                         @endforeach
                     </select>
                     <div class="invalid-feedback">Please select a project type.</div>
-                </div>
-
-                <!-- Standard -->
-                <div class="mb-4">
-                    <label for="standards_ID" class="form-label">Standard</label>
-                    <select name="standards_ID" id="standards_ID" class="form-select" required>
-                        <option value="" disabled selected>-- Select Standard --</option>
-                        @foreach($standards as $standard)
-                            <option value="{{ $standard->id }}">{{ $standard->name }}</option>
-                        @endforeach
-                    </select>
-                    <div class="invalid-feedback">Please select a standard.</div>
-                </div>
-
-                <!-- Validator -->
-                <div class="mb-4">
-                    <label for="validator" class="form-label">Validator</label>
-                    <input type="text" name="validator" id="validator" class="form-control" placeholder="Enter Validator Name">
                 </div>
 
                 <!-- Project Name -->
@@ -107,9 +89,9 @@
                 <div class="mb-4">
                     <label for="status" class="form-label">Status</label>
                     <select name="status" id="status" class="form-select" required>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                        <option value="pending">Pending</option>
+                        <option value="Planned">Planned</option>
+                        <option value="Estimated">Estimated</option>
+                        <option value="Certified">Certified</option>
                     </select>
                     <div class="invalid-feedback">Please select the project status.</div>
                 </div>

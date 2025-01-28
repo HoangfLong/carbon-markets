@@ -11,10 +11,8 @@ class Project extends Model
     protected $fillable = [
         'project_type_ID',
         'carbon_credit_ID',
-        'standards_ID',
         'user_ID',
         'description',
-        'validator',
         'name',
         'location',
         'developer',
@@ -38,11 +36,6 @@ class Project extends Model
     public function credits()
     {
         return $this->hasMany(Credit::class, 'project_ID');
-    }
-
-    public function standard()
-    {
-        return $this->belongsTo(Standard::class, 'standards_ID');
     }
 
     public function user()

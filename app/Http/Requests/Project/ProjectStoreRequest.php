@@ -24,9 +24,7 @@ class ProjectStoreRequest extends FormRequest
         return [
             'project_type_ID' => 'required|exists:project_types,id',
             // 'carbon_credit_ID' => 'required|numeric',
-            'standards_ID' => 'required|exists:standards,id',
             'user_ID' => 'nullable|exists:users,id',
-            'validator' => 'nullable|string|max:255',
             'name' => 'required|string|max:255',
             'location' => 'nullable|string|max:255',
             'developer' => 'nullable|string|max:255',
@@ -34,7 +32,7 @@ class ProjectStoreRequest extends FormRequest
             'address' => 'nullable|string|max:255',
             'registered_at' => 'nullable|date',
             'total_credits' => 'required|numeric',
-            'status' => 'required|in:active,inactive,pending', // Kiểm tra giá trị hợp lệ
+            'status' => 'required|in:Planned,Estimated,Certified', // Kiểm tra giá trị hợp lệ
             'is_verified' => 'required|boolean',
             'images' => 'nullable|array', // Đảm bảo 'images' là mảng file
             'images.*' => 'image|mimes:jpg,jpeg,png|max:2048', // Mỗi phần tử trong mảng phải là ảnh và có định dạng jpg, jpeg, png

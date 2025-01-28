@@ -12,9 +12,7 @@
             <p><strong>Project Type: </strong>{{ $carbonProjects->projectType->type_name ?? 'N/A' }}</p>
             <p><strong>Developer: </strong>{{ $carbonProjects->developer }}</p>
             <p><strong>Address: </strong>{{ $carbonProjects->address }}</p>
-            <p><strong>Standard: </strong>{{ $carbonProjects->standard->name }}</p>
             <p><strong>Status: </strong>{{ ucfirst($carbonProjects->status )}}</p>
-            <p><strong>Validator: </strong>{{ $carbonProjects->validator }}</p>
             <p><strong>Total credits: </strong>{{ $carbonProjects->total_credits }}</p>
             <p><strong>Location: </strong>{{ $carbonProjects->location }}</p>
             <p><strong>Verified: </strong>

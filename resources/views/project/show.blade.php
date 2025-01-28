@@ -26,6 +26,8 @@
 
         <!--Certification Info-->
         <section class="certification-section">
+            <span class="product-desc-title">Gallery</span>
+            <hr class="group-divider">
             <div class="product-thumbnail">
                 <img src="{{ asset('storage/'.$carbonProject->images->first()->image_path) }}" alt="Product Image">
             </div>
@@ -33,15 +35,15 @@
             <div class="certification-table">
                 <div class="row">
                     <div class="col-md-3"><strong>Validator</strong></div>
-                    <div class="col-md-3">{{ $carbonProject->validator }}</div>
+                    <div class="col-md-3">{{ $carbonProject->credits->first()->validator }}</div>
                     <div class="col-md-3"><strong>Status</strong></div>
-                    <div class="col-md-3">{{ $carbonProject->status }}</div>
+                    <div class="col-md-3">{{ $carbonProject->credits->first()->status }}</div>
                 </div>
                 <div class="row">
                     <div class="col-md-3"><strong>Type</strong></div>
                     <div class="col-md-3">{{ $carbonProject->projectType->type_name }}</div>
                     <div class="col-md-3"><strong>Standards</strong></div>
-                    <div class="col-md-3">{{ $carbonProject->standard->name }}</div>
+                    <div class="col-md-3">{{ $carbonProject->credits->first()->standard->name }}</div>
                 </div>
                 <div class="row">
                     <div class="col-md-3"><strong>Credit start</strong></div>
