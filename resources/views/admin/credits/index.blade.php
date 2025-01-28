@@ -34,6 +34,9 @@
                                 </span>
                             </td>
                             <td class="text-center border">
+                                <a href="{{ route('credits.show', $credit->id) }}">
+                                    <button type="button" class="btn btn-outline-secondary m-1" >View</button>
+                                </a>
                                 <!-- Edit Button -->
                                 <a href="{{ route('credits.edit', $credit) }}" class="btn btn-outline-warning m-1">Edit</a>
                                 

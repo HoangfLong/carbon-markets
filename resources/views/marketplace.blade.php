@@ -175,7 +175,7 @@
                         </div>
 
                         <!-- ##### Single Widget ##### -->
-                        <div class="widget price mb-50">
+                        {{-- <div class="widget price mb-50">
                             <!-- Widget Title -->
                             <h6 class="widget-title mb-30">Filter by</h6>
                             <!-- Widget Title 2 -->
@@ -191,10 +191,10 @@
                                     <div class="range-price">Range: $49.00 - $360.00</div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <!-- ##### Single Widget ##### -->
-                        <div class="widget color mb-50">
+                        {{-- <div class="widget color mb-50">
                             <!-- Widget Title 2 -->
                             <p class="widget-title2 mb-30">Color</p>
                             <div class="widget-desc">
@@ -211,7 +211,7 @@
                                     <li><a href="#" class="color10"></a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <!-- ##### Single Widget ##### -->
                         <div class="widget brands mb-50">
