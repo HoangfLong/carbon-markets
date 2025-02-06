@@ -116,7 +116,7 @@
                     <div class="col-12">
                         <div class="hero-content">
                             <h2>Your all-in-one carbon offset marketplace</h2>
-                            <a href="{{ route('home') }}" class="btn essence-btn">Explore</a>
+                            <a href="{{ route('projects.marketplace') }}" class="btn essence-btn">Explore</a>
                         </div>
                     </div>
                 </div>

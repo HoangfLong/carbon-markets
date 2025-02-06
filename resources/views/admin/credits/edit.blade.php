@@ -5,7 +5,7 @@
         <div class="card shadow-lg border-0 rounded-lg w-100" style="min-width: 135%; max-width: 100%;">
             <div class="card-body bg-light p-4">
                 <h1 class="text-center mb-4 text-dark font-weight-bold">Edit Carbon Credit</h1>
-                <form action="{{ route('credits.update', $carbonCredits) }}" method="POST">
+                <form action="{{ route('credits.update', $carbonCredits->id) }}" method="POST">
                     @csrf
                     @method('PUT')
 
@@ -33,6 +33,24 @@
                         @enderror
                     </div>
 
+                    <!-- Standard ID -->
+                    <div class="mb-4">
+                        <label for="standard_id" class="form-label">Standard</label>
+                        <select name="standard_id" id="standard_id" class="form-select" required>
+                        <option value="" disabled selected>-- Select Standard --</option>
+                        @foreach($standards as $standard)
+                            <option value="{{ $standard->id }}">{{ $standard->name }}</option>
+                        @endforeach
+                        </select>
+                        <div class="invalid-feedback">Please select a standard.</div>
+                    </div>
+
+                    <!-- Validator -->
+                    <div class="mb-4">
+                        <label for="validator" class="form-label">Validator</label>
+                        <input type="text" name="validator" id="validator" class="form-control" placeholder="Enter Validator Name">
+                    </div>
+
                     <!-- Quantity Available -->
                     <div class="form-group mb-3">
                         <label for="quantity_available" class="text-dark">Quantity Available</label>
@@ -55,9 +73,8 @@
                     <div class="form-group mb-3">
                         <label for="status" class="text-dark">Status</label>
                         <select name="status" id="status" class="form-select bg-light text-dark border-0 rounded">
-                            <option value="available" {{ $carbonCredits->status == 'available' ? 'selected' : '' }}>Available</option>
-                            <option value="sold" {{ $carbonCredits->status == 'sold' ? 'selected' : '' }}>Sold</option>
-                            <option value="retired" {{ $carbonCredits->status == 'retired' ? 'selected' : '' }}>Retired</option>
+                            <option value="Registered" {{ $carbonCredits->status == 'Registered' ? 'selected' : '' }}>Registered</option>
+                            <option value="Retired" {{ $carbonCredits->status == 'Retired' ? 'selected' : '' }}>Retired</option>
                         </select>
                         @error('status')
                             <small class="text-danger">{{ $message }}</small>

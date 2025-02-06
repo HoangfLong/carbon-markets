@@ -2,12 +2,9 @@
 
 namespace App\Providers;
 
-use App\Interfaces\IProjectRepository;
-use App\Repositories\CreditRepository;
-use App\Interfaces\ICreditRepository;
-use App\Interfaces\IPaymentRepository;
-use App\Repositories\PaymentRepository;
-use App\Repositories\ProjectRepository;
+use App\Repositories\Contracts\IBaseRepository;
+use App\Repositories\Eloquent\CreditRepository;
+use App\Repositories\Eloquent\ProjectRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,8 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(IProjectRepository::class, ProjectRepository::class);
-        $this->app->bind(ICreditRepository::class, CreditRepository::class);
+        $this->app->bind(IBaseRepository::class,CreditRepository::class);
+        $this->app->bind(IBaseRepository::class,ProjectRepository::class);
     }
 
     /**

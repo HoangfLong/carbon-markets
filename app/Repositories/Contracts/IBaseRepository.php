@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Repositories\Contracts;
 
-interface IProjectRepository
+interface IBaseRepository
 {
     public function getAll();
     public function getById($id);

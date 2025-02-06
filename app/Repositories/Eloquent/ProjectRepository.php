@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Eloquent;
 
-use App\Interfaces\IProjectRepository;
-use App\Models\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Project;
+use App\Repositories\Contracts\IBaseRepository;
 
 //use Your Model
 
 /**
  * Class ProjectRepository.
  */
-class ProjectRepository implements IProjectRepository
+class ProjectRepository implements IBaseRepository
 {
     protected $project;
 

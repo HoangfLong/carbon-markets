@@ -19,13 +19,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     //Payment
-    Route::get('project/{carbonProjectId}', [PaymentController::class, 'show'])->name('payment.show');
     Route::post('project/{carbonProjectId}/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
     Route::get('project/success/{orderId}', [PaymentController::class, 'success'])->name('payment.success');
     Route::get('project/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
 });
 //Home
-Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::get('/marketplace', [HomeController::class, 'market'])->name('carbon-projects.marketplace');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/marketplace', [HomeController::class, 'market'])->name('projects.marketplace');
+Route::get('project/{carbonProjectId}', [PaymentController::class, 'show'])->name('payment.show');
 
 require __DIR__ . '/auth.php';

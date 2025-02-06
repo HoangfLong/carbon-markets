@@ -71,38 +71,38 @@
         <div class="row">
             <div class="col-12">
                 <div class="popular-products-slides owl-carousel">
-
-                    <!-- Single Product -->
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="build/assets/img/product-img/product-1.jpg" alt="">
-                            <!-- Hover Thumb -->
-                            <img class="hover-img" src="build/assets/img/product-img/product-2.jpg" alt="">
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
+                    @foreach($carbonProjects as $project)
+                        @if($project->status === 'Certified' && $project->credits->isNotEmpty()) <!-- Check if status is Certified -->
+                        <!-- Single Product -->
+                        <div class="single-product-wrapper">
+                            <!-- Product Image -->
+                            <div class="product-img">
+                                @if($project->images->isNotEmpty())
+                                    <img src="{{ asset('storage/'.$project->images->first()->image_path) }}" alt="Project Image" class="img-fluid">
+                                    <!-- Hover Thumb -->
+                                    <img class="hover-img" src="{{ asset('storage/'.$project->images->first()->image_path) }}" alt="Project Image" class="img-fluid">
+                                @endif
                             </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>topshop</span>
-                            <a href="single-product-details.html">
-                                <h6>Knot Front Mini Dress</h6>
-                            </a>
-                            <p class="product-price">$80.00</p>
+                            <!-- Product Description -->
+                            <div class="product-description">
+                                <span>Tag ở đây</span>
+                                    <a href="{{ route('payment.show', $project->id) }}">
+                                        <h6>{{ $project->name }}</h6>
+                                    </a>
+                                    <p class="product-price">{{ $project->credits->first()->price_per_ton }} $</p>
 
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">Add to Cart</a>
+                                <!-- Hover Content -->
+                                <div class="hover-content">
+                                    <!-- Add to Cart -->
+                                    <div class="add-to-cart-btn">
+                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Single Product -->
+                        @endif
+                    @endforeach
+                    {{-- <!-- Single Product -->
                     <div class="single-product-wrapper">
                         <!-- Product Image -->
                         <div class="product-img">
@@ -202,7 +202,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

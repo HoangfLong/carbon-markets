@@ -14,6 +14,14 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
+    public function index()
+    {
+    if (Auth::check()) {
+        return view('/'); // Người dùng đã đăng nhập vẫn được vào trang chủ
+    }
+        return redirect()->route('dashboard'); // Hoặc có thể giữ nguyên
+    }
+
     public function create(): View
     {
         return view('auth.login');

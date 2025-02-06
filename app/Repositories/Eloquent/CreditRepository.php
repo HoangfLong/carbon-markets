@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Eloquent;
 
-use App\Interfaces\ICreditRepository;
 use App\Models\Credit;
 use App\Models\Project;
-use App\Services\SerialNumberGenerator;
+use App\Repositories\Contracts\IBaseRepository;
+
 //use Your Model
 
 /**
  * Class CreditRepository.
  */
-class CreditRepository implements ICreditRepository
+class CreditRepository implements IBaseRepository
 {
     protected $credit;
 

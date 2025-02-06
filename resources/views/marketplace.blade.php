@@ -114,60 +114,53 @@
                         <!-- ##### Single Widget ##### -->
                         <div class="widget catagory mb-50">
                             <!-- Widget Title -->
-                            <h6 class="widget-title mb-30">Catagories</h6>
-
+                            <h6 class="widget-title mb-30">Popular Filters</h6>
                             <!--  Catagories  -->
                             <div class="catagories-menu">
                                 <ul id="menu-content2" class="menu-content collapse show">
                                     <!-- Single Item -->
                                     <li data-toggle="collapse" data-target="#clothing">
-                                        <a href="#">clothing</a>
+                                        <a href="#">Project kind</a>
                                         <ul class="sub-menu collapse show" id="clothing">
-                                            <li><a href="#">All</a></li>
-                                            <li><a href="#">Bodysuits</a></li>
-                                            <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Hoodies &amp; Sweats</a></li>
-                                            <li><a href="#">Jackets &amp; Coats</a></li>
-                                            <li><a href="#">Jeans</a></li>
-                                            <li><a href="#">Pants &amp; Leggings</a></li>
-                                            <li><a href="#">Rompers &amp; Jumpsuits</a></li>
-                                            <li><a href="#">Shirts &amp; Blouses</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">Sweaters &amp; Knits</a></li>
+                                            <li><a href="#">Biodiversity</a></li>
+                                            <li><a href="#">Carbon forward</a></li>
+                                            <li><a href="#">Carbon offsetting</a></li>
+                                            <li><a href="#">Contribution</a></li>
+                                            <li><a href="#">Energy Attributes Certificate (EACs)</a></li>
                                         </ul>
                                     </li>
                                     <!-- Single Item -->
                                     <li data-toggle="collapse" data-target="#shoes" class="collapsed">
-                                        <a href="#">shoes</a>
+                                        <a href="#">Registry</a>
                                         <ul class="sub-menu collapse" id="shoes">
-                                            <li><a href="#">All</a></li>
-                                            <li><a href="#">Bodysuits</a></li>
-                                            <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Hoodies &amp; Sweats</a></li>
-                                            <li><a href="#">Jackets &amp; Coats</a></li>
-                                            <li><a href="#">Jeans</a></li>
-                                            <li><a href="#">Pants &amp; Leggings</a></li>
-                                            <li><a href="#">Rompers &amp; Jumpsuits</a></li>
-                                            <li><a href="#">Shirts &amp; Blouses</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">Sweaters &amp; Knits</a></li>
+                                            <li><a href="#">CDM Registry</a></li>
+                                            <li><a href="#">Verra Registry</a></li>
+                                            <li><a href="#">Isometric Registry</a></li>
+                                            <li><a href="#">GSF Registry</a></li>
+                                            <li><a href="#">EcoRegistry</a></li>
+                                            <li><a href="#">Puro Registry</a></li>
+                                            <li><a href="#">ICR (International Carbon Registry)</a></li>
+                                            <li><a href="#">MITECO</a></li>
+                                            <li><a href="#">The Reserve</a></li>
+                                            <li><a href="#">City Forest Registry</a></li>
+                                            <li><a href="#">Evident</a></li>
                                         </ul>
                                     </li>
                                     <!-- Single Item -->
                                     <li data-toggle="collapse" data-target="#accessories" class="collapsed">
-                                        <a href="#">accessories</a>
+                                        <a href="#">Standard type</a>
                                         <ul class="sub-menu collapse" id="accessories">
-                                            <li><a href="#">All</a></li>
-                                            <li><a href="#">Bodysuits</a></li>
-                                            <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Hoodies &amp; Sweats</a></li>
-                                            <li><a href="#">Jackets &amp; Coats</a></li>
-                                            <li><a href="#">Jeans</a></li>
-                                            <li><a href="#">Pants &amp; Leggings</a></li>
-                                            <li><a href="#">Rompers &amp; Jumpsuits</a></li>
-                                            <li><a href="#">Shirts &amp; Blouses</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">Sweaters &amp; Knits</a></li>
+                                            <li><a href="#">CDM Standard</a></li>
+                                            <li><a href="#">VCS</a></li>
+                                            <li><a href="#">Isometric Standard</a></li>
+                                            <li><a href="#">Gold Standard</a></li>
+                                            <li><a href="#">CerCarbono</a></li>
+                                            <li><a href="#">Puro Standard</a></li>
+                                            <li><a href="#">ICR Standard</a></li>
+                                            <li><a href="#">MITECO</a></li>
+                                            <li><a href="#">CAR Standard</a></li>
+                                            <li><a href="#">City Forest Credits</a></li>
+                                            <li><a href="#">ACR Standard</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -175,9 +168,9 @@
                         </div>
 
                         <!-- ##### Single Widget ##### -->
-                        {{-- <div class="widget price mb-50">
+                        <div class="widget price mb-50">
                             <!-- Widget Title -->
-                            <h6 class="widget-title mb-30">Filter by</h6>
+                            {{-- <h6 class="widget-title mb-30">Filter by</h6> --}}
                             <!-- Widget Title 2 -->
                             <p class="widget-title2 mb-30">Price</p>
 
@@ -191,7 +184,7 @@
                                     <div class="range-price">Range: $49.00 - $360.00</div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
 
                         <!-- ##### Single Widget ##### -->
                         {{-- <div class="widget color mb-50">
@@ -214,7 +207,7 @@
                         </div> --}}
 
                         <!-- ##### Single Widget ##### -->
-                        <div class="widget brands mb-50">
+                        {{-- <div class="widget brands mb-50">
                             <!-- Widget Title 2 -->
                             <p class="widget-title2 mb-30">Brands</p>
                             <div class="widget-desc">
@@ -226,7 +219,7 @@
                                     <li><a href="#">Zara</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -296,7 +289,7 @@
                                 </div>
                             </div>  --}}
 
-                            @foreach ($carbonProjects as $project)
+                        @foreach ($carbonProjects as $project)
                             @if($project->status === 'Certified' && $project->credits->isNotEmpty()) <!-- Check if status is Certified -->
                                 <div class="col-12 col-sm-6 col-lg-4">
                                     <div class="single-product-wrapper">

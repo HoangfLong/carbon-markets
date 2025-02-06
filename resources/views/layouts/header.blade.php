@@ -20,27 +20,27 @@
                         <li><a href="#">Start here</a>
                             <div class="dropdown">
                                 <ul class="single-mega cn-col-4">
-                                    <li><a href="shop.html">Companies</a></li>
-                                    <li><a href="shop.html">Individuals</a></li>
-                                    <li><a href="shop.html">Calculators</a></li>
-                                    <li><a href="shop.html">About us</a></li>
-                                    <li><a href="shop.html">Contact</a></li>
+                                    <li><a href="#">Companies</a></li>
+                                    <li><a href="#">Individuals</a></li>
+                                    <li><a href="#">Calculators</a></li>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Contact</a></li>
                                 </ul>
                                 <!-- <ul class="single-mega cn-col-4">
                                     <li class="title">Men's Collection</li>
-                                    <li><a href="shop.html">T-Shirts</a></li>
-                                    <li><a href="shop.html">Polo</a></li>
-                                    <li><a href="shop.html">Shirts</a></li>
-                                    <li><a href="shop.html">Jackets</a></li>
-                                    <li><a href="shop.html">Trench</a></li>
+                                    <li><a href="#">T-Shirts</a></li>
+                                    <li><a href="#">Polo</a></li>
+                                    <li><a href="#">Shirts</a></li>
+                                    <li><a href="#">Jackets</a></li>
+                                    <li><a href="#">Trench</a></li>
                                 </ul>
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Kid's Collection</li>
-                                    <li><a href="shop.html">Dresses</a></li>
-                                    <li><a href="shop.html">Shirts</a></li>
-                                    <li><a href="shop.html">T-shirts</a></li>
-                                    <li><a href="shop.html">Jackets</a></li>
-                                    <li><a href="shop.html">Trench</a></li>
+                                    <li><a href="#">Dresses</a></li>
+                                    <li><a href="#">Shirts</a></li>
+                                    <li><a href="#">T-shirts</a></li>
+                                    <li><a href="#">Jackets</a></li>
+                                    <li><a href="#">Trench</a></li>
                                 </ul>
                                 <div class="single-mega cn-col-4">
                                     <img src="img/bg-img/bg-6.jpg" alt="">
@@ -49,9 +49,9 @@
                         </li>
                         <li><a href="#">Solutions</a>
                             <ul class="dropdown">
-                                <li><a href="{{ route('carbon-projects.marketplace') }}">Marketplace</a></li>
-                                <li><a href="">Climate Saas API</a></li>
-                                <li><a href="">Partnerships</a></li>
+                                <li><a href="{{ route('projects.marketplace') }}">Marketplace</a></li>
+                                <li><a href="#">Climate Saas API</a></li>
+                                <li><a href="#">Partnerships</a></li>
                                 {{-- <li><a href="checkout.html">Checkout</a></li>
                                 <li><a href="blog.html">Blog</a></li>
                                 <li><a href="single-blog.html">Single Blog</a></li>
@@ -62,25 +62,25 @@
                         <li><a href="blog.html">Resources</a>
                             <ul class="dropdown">
                                 <li><a href="{{ route('home') }}">Home</a></li>
-                                <li><a href="shop.html">Shop</a></li>
-                                <li><a href="single-product-details.html">Product Details</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="single-blog.html">Single Blog</a></li>
-                                <li><a href="regular-page.html">Regular Page</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="#">Shop</a></li>
+                                <li><a href="#">Product Details</a></li>
+                                <li><a href="#">Checkout</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Single Blog</a></li>
+                                <li><a href="#">Regular Page</a></li>
+                                <li><a href="#">Contact</a></li>
                             </ul>
                         </li>
                         <li><a href="contact.html">Sell</a>
                             <ul class="dropdown">
                                 <li><a href="{{ route('home') }}">Home</a></li>
-                                <li><a href="shop.html">Shop</a></li>
-                                <li><a href="single-product-details.html">Product Details</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="single-blog.html">Single Blog</a></li>
-                                <li><a href="regular-page.html">Regular Page</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="#">Shop</a></li>
+                                <li><a href="#">Product Details</a></li>
+                                <li><a href="#">Checkout</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Single Blog</a></li>
+                                <li><a href="#">Regular Page</a></li>
+                                <li><a href="#">Contact</a></li>
                             </ul>
                         </li>
                     </ul>

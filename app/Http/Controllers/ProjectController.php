@@ -7,7 +7,7 @@ use App\Http\Requests\Project\ProjectStoreRequest;
 use App\Http\Requests\Project\ProjectUpdateRequest;
 use App\Models\ProjectType;
 use App\Models\Standard;
-use App\Repositories\ProjectRepository;
+use App\Repositories\Eloquent\ProjectRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 

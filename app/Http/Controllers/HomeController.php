@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\ProjectRepository;
+use App\Repositories\Eloquent\ProjectRepository;
 use Illuminate\Contracts\View\View;
 
 class HomeController extends Controller
@@ -16,9 +16,11 @@ class HomeController extends Controller
         $this->projectRepository = $projectRepository;
     }
 
-    public function home(): View 
+    public function index(): View 
     {
-        return view('home');
+        $carbonProjects = $this->projectRepository->getAll();
+
+        return view('home',compact('carbonProjects'));
     }
      //Marketplace view
     public function market(): View 

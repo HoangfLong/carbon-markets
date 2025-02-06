@@ -74,13 +74,3 @@ Route::middleware('auth')->group(function () {
         Route::resource('/credits', CreditController::class);
     });
 });
-
-// Routes for guests (no login required)
-Route::middleware(['guest'])->group(function () {
-    // Public-facing pages
-    Route::get('/', [HomeController::class, 'home'])->name('home');
-    Route::get('/about', function () {
-        return view('about');
-    })->name('about');
-    // Other public pages can be added here
-});
