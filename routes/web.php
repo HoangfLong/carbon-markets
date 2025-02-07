@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/welcome', function () {
@@ -27,5 +28,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/marketplace', [HomeController::class, 'market'])->name('projects.marketplace');
 Route::get('project/{carbonProjectId}', [PaymentController::class, 'show'])->name('payment.show');
+Route::get('/marketplace/search', [HomeController::class, 'market'])->name('market');
 
 require __DIR__ . '/auth.php';

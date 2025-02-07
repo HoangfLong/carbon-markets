@@ -76,5 +76,21 @@ class ProjectRepository implements IBaseRepository
         }
         return $project->delete();
     }
+
+
+    public function search($search)
+    {
+        $keywords = preg_split('/\s+/', $search); // Tách theo khoảng trắng
+    
+        return $this->project->where(function ($query) use ($keywords) {
+            foreach ($keywords as $keyword) {
+                $query->whereRaw('LOWER(name) LIKE LOWER(?)', ["%{$keyword}%"])
+                    ->orWhereRaw('LOWER(description) LIKE LOWER(?)', ["%{$keyword}%"]);
+            }
+        })
+        ->where('status', 'Certified')
+        ->with(['credits', 'images'])
+        ->get();
+    }
 }
 

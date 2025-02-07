@@ -10,6 +10,7 @@ use App\Models\Standard;
 use App\Repositories\Eloquent\ProjectRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {   
@@ -24,14 +25,16 @@ class ProjectController extends Controller
     public function index(): View 
     {
         $carbonProjects = $this->projectRepository->getAll();
-            return view('admin.projects.index',compact('carbonProjects'));
+        
+        return view('admin.projects.index',compact('carbonProjects'));
     }
 
    //View project
     public function show($id): View 
     {
         $carbonProjects = $this->projectRepository->getById($id);
-            return view('admin.projects.show',compact('carbonProjects'));
+        
+        return view('admin.projects.show',compact('carbonProjects'));
     }
 
     //Create project
@@ -39,7 +42,8 @@ class ProjectController extends Controller
     {
         $projectTypes = ProjectType::all();
         $standards = Standard::all();
-            return view('admin.projects.create',compact(['projectTypes','standards']));
+        
+        return view('admin.projects.create',compact(['projectTypes','standards']));
     }
 
     //Store project
@@ -47,7 +51,8 @@ class ProjectController extends Controller
     {
         // Lưu thông tin dự án vào cơ sở dữ liệu
         $this->projectRepository->create($request->validated());
-            return redirect()->route('projects.index')->with('success', 'Project created successfully.');
+        
+        return redirect()->route('projects.index')->with('success', 'Project created successfully.');
     }
 
     //edit project
@@ -55,22 +60,24 @@ class ProjectController extends Controller
     {
         $carbonProjects = $this->projectRepository->getById($id);
         $projectTypes = ProjectType::all();
-            return view('admin.projects.edit',compact(['carbonProjects', 'projectTypes']));
+        
+        return view('admin.projects.edit',compact(['carbonProjects', 'projectTypes']));
     }
 
     //update project
     public function update(ProjectUpdateRequest $request, $id) : RedirectResponse
     {
-       
         //Cập nhật các thông tin dự án
         $this->projectRepository->update($id, $request->validated());
-            return redirect()->route('projects.index')->with('success','project up go');
+        
+        return redirect()->route('projects.index')->with('success','project up go');
     }
 
     //Destroy project
     public function destroy($id): RedirectResponse
     {
         $this->projectRepository->delete($id);
-            return redirect()->route('projects.index')->with('success','project deleted');
+        
+        return redirect()->route('projects.index')->with('success','project deleted');
     }
 }
