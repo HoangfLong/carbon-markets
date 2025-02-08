@@ -91,7 +91,7 @@
     <!-- ##### Right Side Cart End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb_area bg-img" style="background-image: url(build/assets/img/bg-img/breadcumb.jpg);">
+    <div class="breadcumb_area bg-img" style="background-image: url({{ asset('build/assets/img/bg-img/breadcumb.jpg') }});">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
@@ -99,6 +99,11 @@
                         <h2>Projects</h2>
                     </div>
                 </div>
+                <form action="{{ route('market') }}" method="GET">
+                    <div class="search-bar">
+                        <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -230,19 +235,22 @@
                                 <div class="product-topbar d-flex align-items-center justify-content-between">
                                     <!-- Total Products -->
                                     <div class="total-products">
-                                        <p><span>186</span> products found</p>
+                                        @if ($search)
+                                            <p><span>{{ $productCount }}</span> projects found"{{ $search }}"</p>
+                                        @else
+                                            <p><span>{{ $productCount }}</span> projects found</p>
+                                        @endif
                                     </div>
                                     <!-- Sorting -->
                                     <div class="product-sorting d-flex">
                                         <p>Sort by:</p>
-                                        <form action="#" method="get">
-                                            <select name="select" id="sortByselect">
-                                                <option value="value">Highest Rated</option>
-                                                <option value="value">Newest</option>
-                                                <option value="value">Price: $$ - $</option>
-                                                <option value="value">Price: $ - $$</option>
+                                        <form action="{{ route('market') }}" method="get">
+                                            <select name="sort_by" id="sortByselect" onchange="this.form.submit()">
+                                                <option value="highest_rated" {{ request('sort_by') == 'highest_rated' ? 'selected' : '' }}>Highest Rated</option>
+                                                <option value="newest" {{ request('sort_by') == 'newest' ? 'selected' : '' }}>Newest</option>
+                                                <option value="price_desc" {{ request('sort_by') == 'price_desc' ? 'selected' : '' }}>Price: $$ - $</option>
+                                                <option value="price_asc" {{ request('sort_by') == 'price_asc' ? 'selected' : '' }}>Price: $ - $$</option>
                                             </select>
-                                            <input type="submit" class="d-none" value="">
                                         </form>
                                     </div>
                                 </div>
@@ -288,7 +296,13 @@
                                     </div>
                                 </div>
                             </div>  --}}
-
+                         <!-- search bar -->
+                        @if($search) 
+                            <h4>Search results for: "{{ $search }}"</h4>
+                            @if($carbonProjects->isEmpty())
+                                <p>No matching projects found.</p>
+                            @endif
+                        @endif 
                         @foreach ($carbonProjects as $project)
                             @if($project->status === 'Certified' && $project->credits->isNotEmpty()) <!-- Check if status is Certified -->
                                 <div class="col-12 col-sm-6 col-lg-4">
