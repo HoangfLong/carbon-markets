@@ -3,7 +3,7 @@
         <!-- Classy Menu -->
         <nav class="classy-navbar" id="essenceNav">
             <!-- Logo -->
-            <a class="nav-brand" href="{{ route('home') }}"><img src="build/assets/img/core-img/logo.png" alt=""></a>
+            <a class="nav-brand" href="{{ route('home') }}"><img src="{{ asset('build/assets/img/core-img/logo.png') }}" alt=""></a>
             <!-- Navbar Toggler -->
             <div class="classy-navbar-toggler">
                 <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -92,52 +92,62 @@
         <!-- Header Meta Data -->
         <div class="header-meta d-flex clearfix justify-content-end">
             <!-- Search Area -->
-            <div class="search-area">
+            {{-- <div class="search-area">
                 <form action="#" method="post">
                     <input type="search" name="search" id="headerSearch" placeholder="Type for search">
                     <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
-            </div>
+            </div> --}}
             <!-- Favourite Area -->
             <div class="favourite-area">
                 {{-- <a href="#"><img src="build/assets/img/core-img/heart.svg" alt=""></a> --}}
             </div>
             <!-- User Login Info -->
-            <nav>
-                <div class="user-login-info">
-                    <div class="user-login-info">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
                             @auth
-                            <!-- Nếu người dùng đã đăng nhập -->
-                            <ul class="dropdown">
-                                <li><a href="{{ route('profile.edit') }}">My Account</a></li>
-                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a></li>
-                            </ul>
-                        
-                            <!-- Form đăng xuất -->
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                                @csrf
-                            </form>
-                        @else
-                            <!-- Nếu người dùng chưa đăng nhập -->
-                            <div class="flex items-center space-x-4"> <!-- Sử dụng flexbox để căn chỉnh các nút trên một dòng -->
-                                <a href="{{ route('login') }}" class="px-4 py-2 text-black hover:text-gray-600">
-                                    Log in
-                                </a>
-                        
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="px-4 py-2 text-black hover:text-gray-600">
-                                        Register
+                                <!-- Nếu người dùng đã đăng nhập -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-person-circle fs-3 me-2"></i>
+                                        <span class="fw-semibold">{{ Auth::user()->name }}</span>
                                     </a>
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-lg p-3" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="{{ route('dashboard') }}">My Account</a></li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                Log out
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                
+                                <!-- Form đăng xuất -->
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            @else
+                                <!-- Nếu người dùng chưa đăng nhập -->
+                                <li class="nav-item">
+                                    <a class="px-4 py-2 text-black hover:text-gray-600" href="{{ route('login') }}">Log in</a>
+                                </li>
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="px-4 py-2 text-black hover:text-gray-600" href="{{ route('register') }}">Register</a>
+                                    </li>
                                 @endif
-                            </div>
-                        @endauth
+                            @endauth
+                        </ul>
                     </div>
                 </div>
-        </nav>
+            </nav>
             <!-- Cart Area -->
             <div class="cart-area">
-                <a href="#" id="essenceCartBtn"><img src="build/assets/img/core-img/bag.svg" alt=""> <span>3</span></a>
+                <a href="#" id="essenceCartBtn"><img src="{{ asset('build/assets/img/core-img/bag.svg') }}" alt=""> <span>3</span></a>
             </div>
         </div>
     </div>
 </header>
+

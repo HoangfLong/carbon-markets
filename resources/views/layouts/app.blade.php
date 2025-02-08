@@ -18,7 +18,7 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('build/assets/images/logos/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('build/assets/css/styles.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('build/assets/css/core-style.css') }}">
-    <link rel="stylesheet" href="{{ asset('build/assets/style.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('build/assets/css/style.css') }}"> --}}
 
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 </head>
@@ -60,7 +60,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src={{asset ('build/assets/img/product-img/product-2.jpg')}} class="cart-thumb" alt="">
+                        <img src={{ asset ('build/assets/img/product-img/product-2.jpg')}} class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                           <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -116,7 +116,7 @@
                     <div class="col-12">
                         <div class="hero-content">
                             <h2>Your all-in-one carbon offset marketplace</h2>
-                            <a href="{{ route('projects.marketplace') }}" class="btn essence-btn">Explore</a>
+                            <a href="{{ route('projects.marketplace') }}" class="btn essence-btn">Visit the Marketplace</a>
                         </div>
                     </div>
                 </div>
@@ -133,13 +133,13 @@
     @include('layouts.footer')
 
     <!-- Các file JS của giao diện mới -->
-    <script src="{{ asset('build/assets/js/jquery/jquery-2.2.4.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="{{ asset('build/assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('build/assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('build/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('build/assets/js/classy-nav.min.js') }}"></script>
     <script src="{{ asset('build/assets/js/active.js') }}"></script>
-    <script src="{{ asset('build/assets/libs/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('build/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

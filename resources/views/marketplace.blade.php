@@ -302,10 +302,7 @@
                             @if($carbonProjects->isEmpty())
                                 <p>No matching projects found.</p>
                             @endif
-                        @else
-                            <h4>All Certified Projects</h4>
-                        @endif
-                        
+                        @endif 
                         @foreach ($carbonProjects as $project)
                             @if($project->status === 'Certified' && $project->credits->isNotEmpty()) <!-- Check if status is Certified -->
                                 <div class="col-12 col-sm-6 col-lg-4">

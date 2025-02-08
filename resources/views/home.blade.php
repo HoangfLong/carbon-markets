@@ -56,7 +56,7 @@
     @yield('content') <!-- Đây là nơi phần thân sẽ được thay đổi -->
 </div>
 <!-- ##### New Arrivals Area Start ##### -->
-<section class="new_arrivals_area section-padding-80 clearfix">
+{{-- <section class="new_arrivals_area section-padding-80 clearfix">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         @endif
-                    @endforeach
+                    @endforeach --}}
                     {{-- <!-- Single Product -->
                     <div class="single-product-wrapper">
                         <!-- Product Image -->
