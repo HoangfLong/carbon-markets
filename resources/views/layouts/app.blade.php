@@ -133,13 +133,19 @@
     @include('layouts.footer')
 
     <!-- Các file JS của giao diện mới -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('build/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+
+    <!-- Thêm jQuery Easing Plugin (nếu cần) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <!-- Tải các plugin khác -->
     <script src="{{ asset('build/assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('build/assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('build/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('build/assets/js/classy-nav.min.js') }}"></script>
     <script src="{{ asset('build/assets/js/active.js') }}"></script>
+
+    <!-- Tải Bootstrap và các thư viện cần thiết -->
+    <script src="{{ asset('build/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>
