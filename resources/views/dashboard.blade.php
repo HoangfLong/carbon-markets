@@ -73,23 +73,28 @@
                         <h5 class="card-title">Quick Actions</h5>
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                             <div class="col">
-                                <a href="{{ route('profile.edit') }}" class="btn btn-outline-primary w-100">
-                                    <i class="bi bi-person-fill"></i> Update Profile
+                                <a href="{{ route('profile.edit') }}">
+                                    <button class="btn btn-outline-primary w-100 bi bi-person-fill">Update Profile</button>
                                 </a>
                             </div>
                             <div class="col">
-                                <a href="#" class="btn btn-outline-success w-100">
-                                    <i class="bi bi-file-earmark-bar-graph"></i> View Reports
+                                <a href="{{ route('orders.index') }}" >
+                                    <button class="btn btn-outline-info w-100 bi bi-list-ul">View Orders</button>
                                 </a>
                             </div>
                             <div class="col">
-                                <a href="#" class="btn btn-outline-warning w-100">
-                                    <i class="bi bi-gear-fill"></i> Settings
+                                <a href="#">
+                                    <button class="btn btn-outline-success w-100 bi bi-file-earmark-bar-graph">View Reports</button>
                                 </a>
                             </div>
                             <div class="col">
-                                <a href="#" class="btn btn-outline-danger w-100">
-                                    <i class="bi bi-box-arrow-right"></i> Log Out
+                                <a href="#" >
+                                    <button class="btn btn-outline-warning w-100 bi bi-gear-fill">Settings</button>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="#" >
+                                    <button class="btn btn-outline-danger w-100 bi bi-box-arrow-right">Log Out</button>
                                 </a>
                             </div>
                         </div>

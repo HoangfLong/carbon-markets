@@ -38,4 +38,8 @@ class Credit extends Model
     {
         return $this->belongsTo(Standard::class, 'standard_id');
     }
+    public function creditSerials()
+    {
+        return $this->hasMany(CreditSerial::class, 'carbon_credit_ID');
+    }
 }
