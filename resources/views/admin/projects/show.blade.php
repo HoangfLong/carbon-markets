@@ -24,13 +24,39 @@
             </p>
             <p><strong>Registered At: </strong>{{ $carbonProjects->registered_at }}</p>
             <h3>Images:</h3>
-            @if($carbonProjects->images && $carbonProjects->images->count() > 0)
-                @foreach($carbonProjects->images as $image)
-                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="Project Image" style="width: 300px;">
-                @endforeach
-            @else
-                <p>No images found for this project.</p>
-            @endif
+                @if ($carbonProjects->images->count() > 1)
+                <!-- Nếu có nhiều ảnh, hiển thị Carousel -->
+                <div id="imageCarousel" class="carousel slide" data-bs-interval="false">
+                    <div class="carousel-inner">
+                        @foreach ($carbonProjects->images as $index => $image)
+                            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                <img src="{{ asset('storage/'.$image->image_path) }}" 
+                                    class="d-block mx-auto rounded shadow" 
+                                    alt="Project Image {{ $index + 1 }}" 
+                                    style="max-height: 150px; object-fit: contain;">
+                            </div>
+                        @endforeach
+                    </div>
+            
+                    <!-- Nút điều hướng Previous & Next với màu mới -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev" style="color: #ff6347; font-size: 20px;">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next" style="color: #ff6347; font-size: 20px;">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                @elseif ($carbonProjects->images->count() === 1)
+                    <!-- Nếu chỉ có 1 ảnh, hiển thị đơn giản -->
+                    <div class="product-thumbnail text-center">
+                        <img src="{{ asset('storage/'.$carbonProjects->images->first()->image_path) }}" 
+                            class="img-fluid rounded shadow" 
+                            alt="Project Image" 
+                            style="max-height: 150px; object-fit: contain;">
+                    </div>
+                @endif
             <a href="{{ route('projects.index') }}" class="btn btn-secondary">Back to List</a>
         </div>
     </div>
