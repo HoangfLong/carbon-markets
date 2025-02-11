@@ -26,7 +26,7 @@ class CreditUpdateRequest extends FormRequest
             'price_per_ton' => 'required|numeric|min:0',
             'quantity_available' => 'required|integer|min:0',
             'minimum_purchase' => 'required|integer|min:1',
-            'validator' => 'nullable|string|max:255',
+            'validator' => 'required|string|max:255',
             'standard_id' => 'required|exists:standards,id',
             'status' => 'required|in:Registered,Retired',
             'start_date' => 'nullable|date|before_or_equal:end_date',

@@ -24,7 +24,6 @@
                     </ul>
                 </div>
             @endif
-
             <form action="{{ route('projects.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                 @csrf
 
