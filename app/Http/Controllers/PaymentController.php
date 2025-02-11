@@ -15,16 +15,16 @@ use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
-    public function show($carbonProjectId)
+    public function show($projectId)
     {
-        $carbonProject = Project::with('credits')->findOrFail($carbonProjectId);
+        $carbonProject = Project::with('credits')->findOrFail($projectId);
         return view('project.show', compact('carbonProject'));
     }
 
-    public function checkout(Request $request, $carbonProjectId)
+    public function checkout(Request $request, $projectId)
     {
         // Get selected carbon project
-        $carbonProject = Project::with('credits')->findOrFail($carbonProjectId);
+        $carbonProject = Project::with('credits')->findOrFail($projectId);
         $amount = $request->input('amount');
         $totalAmount = $amount * $carbonProject->credits->first()->price_per_ton;
 

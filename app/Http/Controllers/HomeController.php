@@ -62,7 +62,7 @@ class HomeController extends Controller
             }
         }
 
-        // Tính số lượng sản phẩm
+        // Count orders
         $productCount = $carbonProjects->count();
     
         return view('marketplace', compact('carbonProjects', 'search','productCount','sortBy'));

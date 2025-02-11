@@ -44,7 +44,7 @@
                                     <li>- Logged in 2 hours ago.</li>
                                     <li>- Purchased a premium package.</li>
                                 </ul>
-                                <a href="#" class="btn btn-link text-primary">View All Activities &rarr;</a>
+                                <a href="#" class="btn-link text-primary">View All Activities &rarr;</a>
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                                     <li>- Subscription renewal due in 7 days.</li>
                                     <li>- New feature: Dark mode available.</li>
                                 </ul>
-                                <a href="#" class="btn btn-link text-primary">Manage Notifications &rarr;</a>
+                                <a href="#" class="btn-link text-primary">Manage Notifications &rarr;</a>
                             </div>
                         </div>
                     </div>

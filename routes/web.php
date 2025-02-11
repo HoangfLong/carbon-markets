@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     //Payment
-    Route::post('project/{carbonProjectId}/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
+    Route::post('project/{projectId}/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
     Route::get('project/success/{orderId}', [PaymentController::class, 'success'])->name('payment.success');
     Route::get('project/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
 
@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
 //Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/marketplace', [HomeController::class, 'market'])->name('projects.marketplace');
-Route::get('project/{carbonProjectId}', [PaymentController::class, 'show'])->name('payment.show');
+Route::get('project/{projectId}', [PaymentController::class, 'show'])->name('payment.show');
 Route::get('/marketplace/search', [HomeController::class, 'market'])->name('market');
 
 require __DIR__ . '/auth.php';
