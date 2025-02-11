@@ -29,7 +29,7 @@
                             <td class="text-center border">{{ $credit->id }}</td>
                             <td class="text-center border">{{ $credit->quantity_available }}</td>
                             <td class="text-center border">
-                                <span class="badge" style="background-color: {{ $credit->status === 'available' ? '#28a745' : ($credit->status === 'sold' ? '#ffc107' : '#dc3545') }}; padding: 5px 10px; border-radius: 5px; color: white;">
+                                <span class="badge" style="background-color: {{ $credit->status === 'Registered' ? '#28a745' : ($credit->status === 'Retired' ? '#ffc107' : '#dc3545') }}; padding: 5px 10px; border-radius: 5px; color: white;">
                                     {{ ucfirst($credit->status) }}
                                 </span>
                             </td>

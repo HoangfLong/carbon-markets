@@ -5,6 +5,23 @@
         <div class="card shadow-lg border-0 rounded-lg w-100" style="min-width: 135%; max-width: 100%;">
             <div class="card-body bg-light p-4">
                 <h1 class="text-center mb-4 text-dark font-weight-bold">Edit Carbon Credit</h1>
+                <!-- Hiển thị thông báo thành công -->
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <!-- Hiển thị lỗi xác thực -->
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{ route('credits.update', $carbonCredits->id) }}" method="POST">
                     @csrf
                     @method('PUT')
