@@ -22,7 +22,7 @@ class Credit extends Model
     ];
 
 
-    public function projects() 
+    public function project()
     {
         return $this->belongsTo(Project::class,'project_ID');
         /*Bảng credits có trường project_id làm khóa ngoại trỏ tới bảng projects, 
@@ -41,5 +41,10 @@ class Credit extends Model
     public function creditSerials()
     {
         return $this->hasMany(CreditSerial::class, 'carbon_credit_ID');
+    }
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
     }
 }

@@ -336,7 +336,12 @@
                                             <div class="hover-content">
                                                 <!-- Add to Cart -->
                                                 <div class="add-to-cart-btn">
-                                                    <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    <form action="{{ route('cart.add') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="credit_id" value="{{ $project->credits->first()->id }}">
+                                                        <input type="hidden" name="quantity" value="1">
+                                                        <button type="submit" class="btn essence-btn">Add to Cart</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

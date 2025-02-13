@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
@@ -24,8 +26,19 @@ Route::middleware('auth')->group(function () {
     Route::get('project/success/{orderId}', [PaymentController::class, 'success'])->name('payment.success');
     Route::get('project/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
 
+    //Order
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+
+    //Cart
+    Route::get('/cart',[CartController::class, 'showCart'])->name('cart.index');
+    Route::post('/cart/add',[CartController::class, 'addToCart'])->name('cart.add');
+    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::get('/cart/success/{orderId}', [CartController::class, 'success'])->name('cart.success');
+    Route::get('/cart/cancel', [CartController::class, 'cancel'])->name('cart.cancel');
+
+
+    
 });
 //Home
 Route::get('/', [HomeController::class, 'index'])->name('home');

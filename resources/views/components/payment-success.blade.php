@@ -1,9 +1,3 @@
-@php
-    $hideWelcomeSection = true;
-@endphp
-@extends('layouts.app')
-
-@section('content')
 <div class="container mt-5 text-center">
     <div class="card p-5 shadow-lg">
         <h2 class="text-success"><i class="bi bi-check-circle-fill"></i>Payment Successful!</h2>
@@ -20,4 +14,3 @@
         </div>
     </div>
 </div>
-@endsection

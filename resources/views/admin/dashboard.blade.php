@@ -191,8 +191,8 @@
                       <span class="fw-normal">{{ $order->user->company }}</span>                          
                   </td>
                   <td class="border-bottom-0">
-                    @if($order->orderItems->isNotEmpty() && $order->orderItems->first()->credit && $order->orderItems->first()->credit->projects)
-                      <p class="mb-0 fw-normal">{{ $order->orderItems->first()->credit->projects->name }}</p>
+                    @if($order->orderItems->isNotEmpty() && $order->orderItems->first()->credit && $order->orderItems->first()->credit->project)
+                      <p class="mb-0 fw-normal">{{ $order->orderItems->first()->credit->project->name }}</p>
                     @else
                         <p class="mb-0 fw-normal">No project available</p>
                     @endif
