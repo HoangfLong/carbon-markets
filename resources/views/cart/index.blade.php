@@ -67,33 +67,47 @@
             </div>
         @endif
     </div>
+@endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const quantityInputs = document.querySelectorAll('.quantity-input');
+    quantityInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            const itemId = this.dataset.itemId;
+            const newQuantity = this.value;
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const quantityInputs = document.querySelectorAll('.quantity-input');
-            quantityInputs.forEach(input => {
-                input.addEventListener('change', function() {
-                    const itemId = this.dataset.itemId;
-                    const newQuantity = this.value;
+            console.log("Item ID:", itemId);  // Check the item ID
+            console.log("New Quantity:", newQuantity);  // Check the new quantity value
 
-                    fetch(`/cart/update/${itemId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        body: JSON.stringify({ quantity: newQuantity })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            location.reload();
-                        } else {
-                            alert(data.message);
-                        }
-                    });
-                });
+            fetch(`/cart/update/${itemId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ quantity: newQuantity })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("Cart updated successfully!");
+
+                    // Find the row corresponding to this item and update the quantity and total
+                    const itemRow = document.querySelector(`[data-item-id='${itemId}']`).closest('tr');
+                    itemRow.querySelector('.quantity-input').value = newQuantity;  // Update quantity input field
+                    itemRow.querySelector('.total-price').textContent = `$${(newQuantity * data.price).toFixed(2)}`;  // Update total price for this item
+
+                    // Update the grand total
+                    const grandTotal = document.getElementById('grand-total');
+                    const totalAmount = Array.from(document.querySelectorAll('.total-price'))
+                        .reduce((total, price) => total + parseFloat(price.textContent.replace('$', '').replace(',', '')), 0);
+                    grandTotal.textContent = `$${totalAmount.toFixed(2)}`;
+                } else {
+                    console.log("Error:", data.message);
+                    alert(data.message);
+                }
             });
         });
-    </script>
-@endsection
+    });
+});
+</script>
