@@ -336,7 +336,7 @@
                                             <div class="hover-content">
                                                 <!-- Add to Cart -->
                                                 <div class="add-to-cart-btn">
-                                                    <form action="{{ route('cart.add') }}" method="POST">
+                                                    <form class="addToCartForm" action="{{ route('cart.add') }}" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="credit_id" value="{{ $project->credits->first()->id }}">
                                                         <input type="hidden" name="quantity" value="1">
@@ -369,3 +369,30 @@
     </section>
 </body>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Lắng nghe sự kiện submit của tất cả các form có class "addToCartForm"
+        $('.addToCartForm').submit(function(event) {
+            event.preventDefault(); // Ngừng việc submit form mặc định
+
+            // Lấy dữ liệu từ form
+            var formData = $(this).serialize();
+
+            // Gửi AJAX request
+            $.ajax({
+                url: $(this).attr('action'),
+                method: 'POST',
+                data: formData,
+                success: function(response) {
+                    // Cập nhật số lượng giỏ hàng trong header sau khi thành công
+                    $('#cart-count').text(response.cartItemsCount); // Lấy số lượng từ response trả về
+                    alert(response.message); // Thông báo thành công (hoặc có thể tùy chỉnh)
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error: " + error);
+                }
+            });
+        });
+    });
+</script>

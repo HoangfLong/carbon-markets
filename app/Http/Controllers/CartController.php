@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -30,10 +31,27 @@ class CartController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
-        $quantity = $request->input('quantity'); 
+        $user = Auth::user();
+
+        // Kiểm tra nếu người dùng không có giỏ hàng, tạo mới giỏ hàng
+        $cart = $user->cart;
+        if (!$cart) {
+            $cart = new Cart();
+            $cart->user_id = $user->id;
+            $cart->save();
+        }
+        
+
+        // Thêm sản phẩm vào giỏ hàng
         $this->cartItemRepo->addToCart($request->credit_id, $request->quantity);
 
-        return redirect()->back()->with('success', 'add to your cart successful');
+        // Cập nhật lại số lượng trong giỏ hàng
+        $cartItemsCount = $cart->cartItems ? $cart->cartItems->pluck('credit_id')->unique()->count() : 0;
+
+        return response()->json([
+            'cartItemsCount' => $cartItemsCount,
+            'message' => 'Product added to your cart!',
+        ]);
     }
 
     //Update cart
