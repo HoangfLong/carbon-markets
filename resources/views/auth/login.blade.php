@@ -52,7 +52,7 @@
 
                         <!-- Password -->
                         <div class="form-floating">
-                            <span class="password-show-toggle js-password-show-toggle">
+                            <span class="js-password-show-toggle">
                                 <span class="uil"></span>
                             </span>
                             <input 

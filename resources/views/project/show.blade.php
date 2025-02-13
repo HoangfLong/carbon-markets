@@ -136,6 +136,7 @@
                 <hr class="group-divider">
                 <div class="actions">
                     <button type="submit" class="btn btn-primary" style="border-radius: 25px">Buy now</button>
+                    {{-- <button type="submit" class="btn btn-primary" style="border-radius: 25px">Add to cart</button> --}}
                 </div>
             </div>
         </form>

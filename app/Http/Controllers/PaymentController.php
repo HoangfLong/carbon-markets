@@ -123,11 +123,11 @@ class PaymentController extends Controller
                 'serial_code' => $serialCode, // Mã serial duy nhất cho tất cả tín chỉ
             ]);
         }
-        return view('project.success', ['order' => $order]);
+        return view('payments.success', ['order' => $order]);
     }
 
     public function cancel()
     {
-        return view('project.cancel');
+        return view('payments.cancel');
     }
 }

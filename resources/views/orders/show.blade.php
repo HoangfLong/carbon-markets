@@ -45,8 +45,8 @@
                     <td>{{ $item->quantity }} tons</td>
                     <td>${{ number_format($item->price_per_ton, 2) }}</td>
                     <td>${{ number_format($item->total_price, 2) }}</td>
-                    <td>{{ $item->credit->projects->name ?? 'Not specified' }}</td>
-                    <td>{{ $item->credit->projects->location ?? 'Not specified' }}</td>
+                    <td>{{ $item->credit->project->name ?? 'Not specified' }}</td>
+                    <td>{{ $item->credit->project->location ?? 'Not specified' }}</td>
                     <td>
                         @if($item->credit->creditSerials)
                             @foreach ($item->credit->creditSerials as $serial)
