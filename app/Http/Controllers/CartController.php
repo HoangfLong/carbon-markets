@@ -29,11 +29,39 @@ class CartController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
+        $quantity = $request->input('quantity'); 
         $this->cartItemRepo->addToCart($request->credit_id, $request->quantity);
 
         return redirect()->back()->with('success', 'add to your cart successful');
     }
 
+    public function update(Request $request, $cartItemId)
+    {
+        // Validate the new quantity
+        $request->validate([
+            'quantity' => 'required|integer|min:1', // Ensure quantity is a positive integer
+        ]);
+
+        // Get the new quantity
+        $newQuantity = $request->input('quantity');
+        
+        // Call the repository method to update the cart item
+        $response = $this->cartItemRepo->updateCartItem($cartItemId, $newQuantity);
+
+        // Return a JSON response for AJAX request
+        if ($response['success']) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Cart item updated successfully',
+                'price' => $response['price'],  // Return updated price for calculation
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => $response['message'],
+            ]);
+        }
+    }
 
     // View cart
     public function showCart()
@@ -134,7 +162,7 @@ class CartController extends Controller
             $credit->quantity_available -= $orderItem->quantity;
             $credit->save();
         }
-
+        
         // Delete all cart item
         CartItem::where('cart_id', Auth::user()->cart->id)->delete();
 
