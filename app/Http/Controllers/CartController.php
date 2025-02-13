@@ -22,6 +22,7 @@ class CartController extends Controller
         $this->cartItemRepo = $cartItemRepo;
     }
 
+    //Add to cart
     public function addToCart(Request $request)
     {
         $request->validate([
@@ -35,6 +36,7 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'add to your cart successful');
     }
 
+    //Update cart
     public function update(Request $request, $cartItemId)
     {
         // Validate the new quantity
@@ -60,6 +62,22 @@ class CartController extends Controller
                 'success' => false,
                 'message' => $response['message'],
             ]);
+        }
+    }
+
+    //Clear cart
+    public function clearCart($cartItemId)
+    {
+        try {
+            $response = $this->cartItemRepo->clearCartItems($cartItemId); // Gọi repository để xóa mục giỏ hàng
+    
+            if ($response['success']) {
+                return redirect()->route('cart.index')->with('success', $response['message']);
+            }
+    
+            return redirect()->route('cart.index')->withErrors(['message' => $response['message']]);
+        } catch (\Exception $e) {
+            return redirect()->route('cart.index')->withErrors(['message' => 'An error occurred while removing the item from the cart']);
         }
     }
 

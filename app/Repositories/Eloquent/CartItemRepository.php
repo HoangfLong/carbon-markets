@@ -18,6 +18,7 @@ class CartItemRepository
         $this->cartRepo = $cartRepo;
     }
 
+    //Add to cart
     public function addToCart($creditId, $quantity)
     {
         $cart = $this->cartRepo->getCart();
@@ -49,23 +50,7 @@ class CartItemRepository
         ]);
     }
 
-
-    public function getCartItems()
-    {
-        $cart = $this->cartRepo->getCart();
-
-        if (!$cart) {
-            return collect(); // Trả về collection rỗng nếu không có giỏ hàng
-        }
-
-        return CartItem::where('cart_id', $cart->id)
-                ->whereHas('credit', function ($query) {
-                    $query->whereNotNull('project_ID');
-                }) // Ensure credits have valid projects
-                ->with(['credit.project'])
-                ->get();
-    }
-
+    //Update
     public function updateCartItem($cartItemId, $newQuantity)
     {
         // Find the CartItem by ID
@@ -85,5 +70,35 @@ class CartItemRepository
             'message' => 'Cart item updated successfully',
             'price' => $cartItem->price, // Return the updated price
         ];
+    }
+
+    //Delete
+    public function clearCartItems($cartItemId)
+    {
+        $cartItem = CartItem::find($cartItemId);
+    
+        if ($cartItem) {
+            $cartItem->delete();
+            return ['success' => true, 'message' => 'Cart item removed successfully'];
+        }
+    
+        return ['success' => false, 'message' => 'Cart item not found'];
+    }
+
+    
+    public function getCartItems()
+    {
+        $cart = $this->cartRepo->getCart();
+
+        if (!$cart) {
+            return collect(); // Trả về collection rỗng nếu không có giỏ hàng
+        }
+
+        return CartItem::where('cart_id', $cart->id)
+                ->whereHas('credit', function ($query) {
+                    $query->whereNotNull('project_ID');
+                }) // Ensure credits have valid projects
+                ->with(['credit.project'])
+                ->get();
     }
 }
