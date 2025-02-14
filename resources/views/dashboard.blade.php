@@ -93,7 +93,8 @@
                                 </a>
                             </div>
                             <div class="col">
-                                <a href="#" >
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    @csrf
                                     <button class="btn btn-outline-danger w-100 bi bi-box-arrow-right">Log Out</button>
                                 </a>
                             </div>

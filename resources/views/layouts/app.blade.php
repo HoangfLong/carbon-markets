@@ -130,7 +130,9 @@
     </main>
 
     <!-- Footer Area -->
-    @include('layouts.footer')
+    @if (!isset($hideFooterSection) || !$hideFooterSection)
+        @include('layouts.footer')
+    @endif    
 
     <!-- Các file JS của giao diện mới -->
     <script src="{{ asset('build/assets/libs/jquery/dist/jquery.min.js') }}"></script>

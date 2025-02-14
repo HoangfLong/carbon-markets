@@ -1,12 +1,13 @@
 @php
     $hideWelcomeSection = true;
+    $hideFooterSection = true;
 @endphp
 
 @extends('layouts.app')
 
 @section('content')
     <div class="container mt-5">
-        <h2 class="mb-4">🛒 Your Shopping Cart</h2>
+        <h2 class="mb-4">Your Shopping Cart</h2>
 
         @if($cartItems->isEmpty())
             <div class="alert alert-warning text-center">Your cart is empty! 🛍️</div>

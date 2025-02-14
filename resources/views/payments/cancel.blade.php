@@ -1,5 +1,6 @@
 @php
     $hideWelcomeSection = true;
+    $hideFooterSection = true;
 @endphp
 
 @extends('layouts.app')

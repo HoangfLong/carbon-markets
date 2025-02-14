@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="container mt-5">
-    <h2 class="text-center mb-4">🛒 Your Order</h2>
+    <h2 class="text-center mb-4">Your Order</h2>
 
     @if($orders->isEmpty())
         <div class="alert alert-warning text-center">Bạn chưa có đơn hàng nào.</div>

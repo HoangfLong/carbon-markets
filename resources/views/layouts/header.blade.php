@@ -146,13 +146,13 @@
             <!-- Cart Area -->
             <a href="{{ route('cart.index') }}" class="position-relative ms-3 d-flex align-items-center">
                 <i class='fa fa-shopping-bag'></i>
-                {{-- <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     @php
                         // Lấy số lượng từ session khi tải trang
                         $cartItemsCount = session('cartItemsCount', 0); 
                     @endphp
                     {{ $cartItemsCount }}
-                </span> --}}
+                </span>
             </a>
         </div>
 </header>

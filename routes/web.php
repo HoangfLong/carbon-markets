@@ -1,16 +1,11 @@
 <?php
 
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/welcome', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -38,9 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
     Route::get('/cart/success/{orderId}', [CartController::class, 'success'])->name('cart.success');
     Route::get('/cart/cancel', [CartController::class, 'cancel'])->name('cart.cancel');
-
-
-    
 });
 //Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
