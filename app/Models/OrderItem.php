@@ -25,4 +25,9 @@ class OrderItem extends Model
     {
         return $this->belongsTo(Credit::class, 'carbon_credit_ID');
     }
+
+    public function creditSerials()
+    {
+        return $this->hasMany(CreditSerial::class, 'order_item_ID');
+    }
 }

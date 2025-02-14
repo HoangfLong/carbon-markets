@@ -10,6 +10,7 @@ class CreditSerial extends Model
 
     protected $fillable = [
         'transaction_ID',
+        'order_item_ID',
         'carbon_credit_ID',
         'quantity',
         'serial_code',
@@ -25,5 +26,10 @@ class CreditSerial extends Model
     public function credits()
     {
         return $this->belongsTo(Credit::class, 'carbon_credits_ID');
+    }
+
+    public function orderItem()
+    {
+        return $this->belongsTo(OrderItem::class, 'order_item_ID');
     }
 }
