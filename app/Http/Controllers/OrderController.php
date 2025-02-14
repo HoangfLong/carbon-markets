@@ -25,7 +25,10 @@ class OrderController extends Controller
         if ($order->user_ID !== Auth::id()) {
             abort(403, 'Bạn không có quyền xem đơn hàng này.');
         }
-    
+
+        // Load thêm quan hệ orderItems.creditSerials
+        $order->load(['orderItems.creditSerials']);
+
         return view('orders.show', compact('order'));
     }
 }

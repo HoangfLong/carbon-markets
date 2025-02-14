@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\CreditSerial;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
 use App\Repositories\Eloquent\CartItemRepository;
+use App\Services\SerialCodeGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Stripe\Checkout\Session;
@@ -179,7 +181,7 @@ class CartController extends Controller
         $order->save();
 
         // Create transaction
-        Transaction::create([
+        $transaction = Transaction::create([
             'order_ID' => $order->id,
             'amount' => $order->total_amount,
             'payment_method' => 'credit_card',
@@ -190,13 +192,25 @@ class CartController extends Controller
         // Save serial code
         foreach ($order->orderItems as $orderItem) {
             $credit = $orderItem->credit;
-            // Update credit available
+
+            // Kiểm tra nếu tín chỉ không đủ số lượng
             if ($credit->quantity_available < $orderItem->quantity) {
                 return redirect()->back()->withErrors(['message' => 'Không đủ tín chỉ để thanh toán.']);
             }
 
+            // Giảm số lượng tín chỉ có sẵn
             $credit->quantity_available -= $orderItem->quantity;
             $credit->save();
+
+            $serialCode = SerialCodeGenerator::generate(); // Sinh mã serial duy nhất
+
+            CreditSerial::create([
+                'transaction_ID' => $transaction->id,  // Gắn mã giao dịch vào
+                'carbon_credit_ID' => $credit->id,     // Gắn ID tín chỉ vào
+                'order_item_ID' => $orderItem->id,     // Gắn order item vào
+                'quantity' => $orderItem->quantity,    // Số lượng tín chỉ của dự án này
+                'serial_code' => $serialCode,          // Mã serial duy nhất
+            ]);
         }
         
         // Delete all cart item

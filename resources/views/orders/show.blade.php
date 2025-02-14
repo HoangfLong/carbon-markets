@@ -48,14 +48,14 @@
                     <td>{{ $item->credit->project->name ?? 'Not specified' }}</td>
                     <td>{{ $item->credit->project->location ?? 'Not specified' }}</td>
                     <td>
-                        @if($item->credit->creditSerials)
-                            @foreach ($item->credit->creditSerials as $serial)
+                        @if ($item->creditSerials->isNotEmpty())
+                            @foreach ($item->creditSerials as $serial)
                                 {{ $serial->serial_code }}<br>
                             @endforeach
                         @else
                             No serial codes available
                         @endif
-                    </td>
+                    </td>        
                 </tr>
                 @endforeach
             </tbody>
