@@ -1,4 +1,4 @@
-<div class="container py-5">
+<div class="container mt-5 pt-5 mb-5 text-center"">
     <div class="row justify-content-center">
         <!-- Card for Payment Cancelled Message -->
         <div class="col-md-8 col-lg-6">

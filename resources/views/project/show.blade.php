@@ -5,6 +5,9 @@
 
 @section('content')
 <section class="product-page-container">
+    {{-- <a href="{{ url()->previous() }}" >
+        <button class="btn btn-outline-secondary position-absolute start-5 ms-5 mt-5">&larr; Back</button>
+    </a>  --}}
     <div class="product-details">
         <!--Project Info-->
         <div class="product-info">

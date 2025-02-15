@@ -1,14 +1,17 @@
 @php
     $hideWelcomeSection = true;
+    $hideFooterSection = true;
 @endphp
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
+<div class="container mt-5 pt-5 mb-5">
+    <a href="{{ url()->previous() }}" >
+        <button class="btn btn-outline-secondary position-absolute start-3 ms-3 mt-3">&larr; Back</button>
+    </a>    
     <h2 class="text-center mb-4">Your Order</h2>
-
     @if($orders->isEmpty())
-        <div class="alert alert-warning text-center">Bạn chưa có đơn hàng nào.</div>
+        <div class="alert alert-warning text-center">Your order empty.</div>
     @else
         <div class="table-responsive">
             <table class="table table-hover table-bordered">

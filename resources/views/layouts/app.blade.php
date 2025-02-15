@@ -139,6 +139,7 @@
 
     <!-- Thêm jQuery Easing Plugin (nếu cần) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
     <!-- Tải các plugin khác -->
     <script src="{{ asset('build/assets/js/popper.min.js') }}"></script>

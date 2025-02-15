@@ -1,4 +1,4 @@
-<div class="container mt-5 text-center">
+<div class="container mt-5 pt-5 mb-5 text-center">
     <div class="card p-5 shadow-lg">
         <h2 class="text-success"><i class="bi bi-check-circle-fill"></i>Payment Successful!</h2>
         <p class="mt-3">Thank you for your purchase. Your transaction has been completed.</p>
