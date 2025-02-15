@@ -6,8 +6,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-5">
-        <h2 class="mb-4">Your Shopping Cart</h2>
+    <div class="container mt-5 pt-5 mb-5">
+        <h2 class="mb-1">Your Shopping Cart</h2>
 
         @if($cartItems->isEmpty())
             <div class="alert alert-warning text-center">Your cart is empty! 🛍️</div>

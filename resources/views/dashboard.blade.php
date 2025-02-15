@@ -72,11 +72,11 @@
                     <div class="card-body">
                         <h5 class="card-title">Quick Actions</h5>
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-                            <div class="col">
+                            {{-- <div class="col">
                                 <a href="{{ route('profile.edit') }}">
                                     <button class="btn btn-outline-primary w-100 bi bi-person-fill">Update Profile</button>
                                 </a>
-                            </div>
+                            </div> --}}
                             <div class="col">
                                 <a href="{{ route('orders.index') }}" >
                                     <button class="btn btn-outline-info w-100 bi bi-list-ul">View Orders</button>
@@ -88,7 +88,7 @@
                                 </a>
                             </div>
                             <div class="col">
-                                <a href="#" >
+                                <a href="{{ route('profile.edit') }}" >
                                     <button class="btn btn-outline-warning w-100 bi bi-gear-fill">Settings</button>
                                 </a>
                             </div>
