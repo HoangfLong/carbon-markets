@@ -11,7 +11,6 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\CreditController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -68,9 +67,9 @@ Route::middleware('auth')->group(function () {
 
     // Admin & Manager access for CRUD
     Route::middleware(['role:admin,manager'])->group(function () {
-         //Project route
+        //Project route
         Route::resource('/projects', ProjectController::class);
-          //Credit route
+        //Credit route
         Route::resource('/credits', CreditController::class);
     });
 });

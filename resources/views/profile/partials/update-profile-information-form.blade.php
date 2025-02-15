@@ -3,14 +3,15 @@
         <h2 class="h3 text-primary">Update Profile Information</h2>
         <p class="text-muted">Update your account's profile information and email address.</p>
     </header>
-
+    <!-- Nút điều hướng về Dashboard -->
+    <div class="mt-4">
+        <a href="{{ route('dashboard') }}" >
+            <button class="btn btn-secondary">Go to Dashboard</button>
+        </a>
+    </div>
     <form method="post" action="{{ route('profile.update') }}" class="form-horizontal">
         @csrf
         @method('patch')
-        <!-- Nút điều hướng về Dashboard -->
-        <div class="mt-4">
-            <a href="{{ route('dashboard') }}" class="btn btn-secondary">Go to Dashboard</a>
-        </div>
         <!-- Trường Name -->
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>

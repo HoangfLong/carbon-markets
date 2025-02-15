@@ -6,7 +6,6 @@
      <title>Modern Login / Sign up Form Fully Responsive</title>
 
     <meta name="author" content="Untree.co">
-    <link rel="shortcut icon" href="favicon.png">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -22,7 +21,7 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="{{ asset('build/asset/js/custom.js') }}"></script>
+    {{-- <script src="{{ asset('build/asset/js/custom.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     </body>
 </html>

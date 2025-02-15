@@ -23,7 +23,7 @@ class DashboardController extends Controller
     
 
         // Đơn hàng mới nhất
-        $latestOrders = Order::with('orderItems.credit.projects')->latest()->take(5)->get();
+        $latestOrders = Order::with('orderItems.credit.project')->latest()->take(5)->get();
 
         return view('admin.dashboard', compact([
             'totalRevenue',

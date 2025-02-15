@@ -1,4 +1,4 @@
-<section class="container mt-5 space-y-6">
+<section class="container mt-5">
     <header class="mb-4">
         <h2 class="h3 text-danger">Delete Account</h2>
         <p class="text-muted">
@@ -6,46 +6,47 @@
         </p>
     </header>
 
+    <!-- Nút mở modal -->
     <button 
         class="btn btn-danger"
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
+        data-bs-toggle="modal"
+        data-bs-target="#confirmUserDeletionModal"
     >
         Delete Account
     </button>
 
-    <!-- Modal Confirmation -->
+    <!-- Modal Bootstrap -->
     <div 
         class="modal fade" 
-        id="confirm-user-deletion" 
+        id="confirmUserDeletionModal" 
         tabindex="-1" 
-        aria-labelledby="exampleModalLabel" 
+        aria-labelledby="deleteModalLabel" 
         aria-hidden="true"
-        x-show="open"
     >
         <div class="modal-dialog">
-            <form method="post" action="{{ route('profile.destroy') }}" class="modal-content">
+            <form method="POST" action="{{ route('profile.destroy') }}" class="modal-content">
                 @csrf
-                @method('delete')
+                @method('DELETE')
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete your account?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="deleteModalLabel">Are you sure you want to delete your account?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
                 <div class="modal-body">
                     <p class="text-muted">
-                        Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.
+                        Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm.
                     </p>
 
                     <div class="mb-3">
-                        <label for="password" class="form-label sr-only">Password</label>
+                        <label for="password" class="form-label">Password</label>
                         <input 
                             id="password"
                             name="password"
                             type="password"
                             class="form-control"
                             placeholder="Enter your password"
+                            required
                         />
                         @error('password')
                             <div class="text-danger">{{ $message }}</div>
@@ -57,7 +58,6 @@
                     <button 
                         type="button" 
                         class="btn btn-secondary" 
-                        x-on:click="$dispatch('close')"
                         data-bs-dismiss="modal"
                     >
                         Cancel

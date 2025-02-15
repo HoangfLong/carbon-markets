@@ -5,6 +5,9 @@
 
 @section('content')
 <section class="product-page-container">
+    {{-- <a href="{{ url()->previous() }}" >
+        <button class="btn btn-outline-secondary position-absolute start-5 ms-5 mt-5">&larr; Back</button>
+    </a>  --}}
     <div class="product-details">
         <!--Project Info-->
         <div class="product-info">
@@ -15,22 +18,62 @@
             <p class="product-desc">{{ $carbonProject->description }}</p>
         </div>
         <hr class="group-divider">
-        <div class="product-info">
-            <span class="product-desc-title">Project Info</span>
-            <p class="product-desc">Country <span>{{ $carbonProject->location }}</span></p>
-            <p class="product-desc">Company <span>{{ $carbonProject->developer }}</span></p>
-            <p class="product-desc">Address <span>{{ $carbonProject->address }}</span></p>
-            <p class="product-desc">Type <span>{{ $carbonProject->projectType->type_name }}</span></p>
-        </div>
+            <!-- Project Info and Map Section -->
+            <div class="row">
+                <!-- Google Map Section on the Left -->
+                {{-- <div class="col-md-6">
+                    <div class="google-map">
+                        <img src="https://maps.googleapis.com/maps/api/staticmap?center=21.0285,105.8542&zoom=14&size=600x300&markers=color:red%7Clabel:C%7C21.0285,105.8542&key=YOUR_API_KEY" alt="Google Map">
+                    </div>
+                </div> --}}
+        
+                <!-- Project Info Section on the Right -->
+                <div class="col-md-6">
+                    <div class="product-info">
+                        <h3 class="product-desc-title">Project Info</h3>
+                        <p class="product-desc"><strong>Country:</strong> <span>{{ $carbonProject->location }}</span></p>
+                        <p class="product-desc"><strong>Company:</strong> <span>{{ $carbonProject->developer }}</span></p>
+                        <p class="product-desc"><strong>Address:</strong> <span>{{ $carbonProject->address }}</span></p>
+                        <p class="product-desc"><strong>Type:</strong> <span>{{ $carbonProject->projectType->type_name }}</span></p>
+                    </div>
+                </div>
+            </div>
         <hr class="group-divider">
-
         <!--Certification Info-->
         <section class="certification-section">
             <span class="product-desc-title">Gallery</span>
             <hr class="group-divider">
-            <div class="product-thumbnail">
-                <img src="{{ asset('storage/'.$carbonProject->images->first()->image_path) }}" alt="Product Image">
-            </div>
+                @if ($carbonProject->images->count() > 1)
+                    <!-- Nếu có nhiều ảnh, hiển thị Carousel -->
+                    <div id="imageCarousel" class="carousel slide" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            @foreach ($carbonProject->images as $index => $image)
+                                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                    <img src="{{ asset('storage/'.$image->image_path) }}" 
+                                        class="d-block w-100 rounded shadow" 
+                                        alt="Project Image {{ $index + 1 }}">
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <!-- Nút điều hướng Previous & Next -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    @elseif ($carbonProject->images->count() === 1)
+                    <!-- Nếu chỉ có 1 ảnh, hiển thị đơn giản -->
+                    <div class="product-thumbnail text-center">
+                        <img src="{{ asset('storage/'.$carbonProject->images->first()->image_path) }}" 
+                            class="img-fluid rounded shadow" 
+                            alt="Project Image">
+                    </div>
+                @endif
             <h4>Certification</h4>
             <div class="certification-table">
                 <div class="row">
@@ -96,6 +139,7 @@
                 <hr class="group-divider">
                 <div class="actions">
                     <button type="submit" class="btn btn-primary" style="border-radius: 25px">Buy now</button>
+                    {{-- <button type="submit" class="btn btn-primary" style="border-radius: 25px">Add to cart</button> --}}
                 </div>
             </div>
         </form>

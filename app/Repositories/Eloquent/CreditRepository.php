@@ -46,7 +46,8 @@ class CreditRepository implements IBaseRepository
         return $credit;
     }
 
-    public function update($id, array $data) {
+    public function update($id, array $data) 
+    {
         $credit = $this->credit->findOrFail($id);
         $credit->update($data);
             return $credit;

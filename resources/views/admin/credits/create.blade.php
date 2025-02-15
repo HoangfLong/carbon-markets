@@ -6,6 +6,23 @@
 
         <div class="card bg-light text-dark mx-auto" style="max-width: 100%; width: 100%;">
             <div class="card-body">
+                <!-- Hiển thị thông báo thành công -->
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <!-- Hiển thị lỗi xác thực -->
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{ route('credits.store') }}" method="POST">
                     @csrf
 

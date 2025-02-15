@@ -11,9 +11,9 @@
                     <!-- Footer Menu -->
                     <div class="footer_menu">
                         <ul>
-                            <li><a href="shop.html">Shop</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="{{ route('market') }}">Marketplace</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -40,11 +40,27 @@
                         <h6>Subscribe</h6>
                     </div>
                     <div class="subscribtion_form">
-                        <form action="#" method="post">
-                            <input type="email" name="mail" class="mail" placeholder="Your email here">
-                            <button type="submit" class="submit"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
+                        <form id="subscribeForm">
+                            <input type="email" id="emailInput" name="mail" class="mail" placeholder="Your email here" required>
+                            <button type="submit" class="submit">
+                                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                            </button>
                         </form>
                     </div>
+                    
+                    <script>
+                        document.getElementById("subscribeForm").addEventListener("submit", function(event) {
+                            event.preventDefault(); // Ngăn chặn gửi form mặc định
+                    
+                            let email = document.getElementById("emailInput").value.trim();
+                    
+                            if (email !== "") {
+                                window.location.href = "{{ route('register') }}?email=" + encodeURIComponent(email);
+                            } else {
+                                alert("Please enter a valid email.");
+                            }
+                        });
+                    </script>    
                 </div>
             </div>
             <!-- Single Widget Area -->
@@ -58,15 +74,6 @@
                         <a href="#" data-toggle="tooltip" data-placement="top" title="Youtube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
                     </div>
                 </div>
-            </div>
-        </div>
-<div class="row mt-5">
-            <div class="col-md-12 text-center">
-                <p>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>, distributed by <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                </p>
             </div>
         </div>
     </div>
