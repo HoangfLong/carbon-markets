@@ -176,18 +176,45 @@ class CartController extends Controller
     {
         $order = Order::with('orderItems.credit')->findOrFail($orderId);
 
+        //Check transaction
+        $transaction = Transaction::where('order_ID', $orderId)->latest()->first();
+
+        //Create transaction record
+        if(!$transaction) {
+            $transaction = Transaction::create([
+                'order_ID' => $order->id,
+                'amount' => $order->total_amount,
+                'payment_method' => 'credit_card',
+                'status' => 'success',
+                'transaction_date' => now(),
+            ]);
+        }
+
+        //Kiểm tra trạng thái transaction
+        if (!$transaction || $transaction->status !== 'success') {
+            return response()->json(['error' => 'Invalid transaction'], 400);
+        }
+    
+        //Kiểm tra nếu credits đã được tạo trước đó
+        if (CreditSerial::where('transaction_ID', $transaction->id)->exists()) {
+            return response()->json(['message' => 'Invalid transaction'], 200);
+        }
+
+        //Kiểm tra nếu không có order items
+        if ($order->orderItems->isEmpty()) {
+            return redirect()->back()->withErrors(['message' => 'No order items found for this order.']);
+        }
+
+        //Kiểm tra nếu mỗi orderItem không có tín chỉ (credit)
+        foreach ($order->orderItems as $orderItem) {
+            if (!$orderItem->credit) {
+                return redirect()->back()->withErrors(['message' => 'No credit found for the order item.']);
+            }
+        }
+
         // Update order
         $order->status = 'completed';
         $order->save();
-
-        // Create transaction
-        $transaction = Transaction::create([
-            'order_ID' => $order->id,
-            'amount' => $order->total_amount,
-            'payment_method' => 'credit_card',
-            'status' => 'success',
-            'transaction_date' => now(),
-        ]);
 
         // Save serial code
         foreach ($order->orderItems as $orderItem) {
