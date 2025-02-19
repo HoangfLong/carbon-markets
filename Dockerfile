@@ -1,44 +1,32 @@
-# Sử dụng PHP 8.2 + Apache
 FROM php:8.2-apache
 
-# Cài đặt các thư viện cần thiết
-RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    zip \
-    unzip \
-    git \
-    curl \
-    && docker-php-ext-install pdo pdo_mysql gd
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y \
+    libzip-dev \
+    zip
 
-# Cài Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Enable mod_rewrite
+RUN a2enmod rewrite
 
-# Thiết lập thư mục làm việc
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql zip
+
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+# Copy the application code
+COPY . /var/www/html
+
+# Set the working directory
 WORKDIR /var/www/html
 
-# Copy toàn bộ Laravel project vào container
-COPY . .
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# 🛠️ Fix lỗi quyền sở hữu & Git
-RUN git config --global --add safe.directory '*'
-RUN git config --system --add safe.directory /var/www/html
-RUN git config --system --add safe.directory /var/www/html/vendor/theseer/tokenizer
+# Install project dependencies
+RUN composer install
 
-# 🛠️ Set quyền sở hữu thư mục để tránh lỗi
-RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 775 /var/www/html
-
-# Xóa thư mục vendor & cài lại
-RUN rm -rf vendor
-RUN composer install --no-dev --optimize-autoloader --no-interaction
-
-# Chạy quyền cho storage và bootstrap
-RUN chmod -R 777 storage bootstrap/cache
-
-# Mở cổng 80 cho Apache
-EXPOSE 80
-
-# Lệnh khởi chạy Apache
-CMD ["apache2-foreground"]
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
