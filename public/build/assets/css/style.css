@@ -220,4 +220,50 @@ a:hover {
 .form-wrap .social-account-wrap .social-account li a:hover {
   border-color: #bdbdbd;
 }
+.btn-back {
+  position: fixed; /* Cố định vị trí trên màn hình */
+  top: 20px; /* Cách mép trên 20px */
+  left: 20px; /* Cách mép trái 20px */
+  background: rgba(0, 0, 0, 0.3); /* Màu nền đen, hơi trong suốt */
+  padding: 10px 15px; /* Tạo khoảng cách bên trong */
+  border-radius: 50px; /* Bo tròn nút */
+  transition: background 0.3s, transform 0.2s;
+  z-index: 999; /* Luôn hiển thị trên cùng */
+}
+
+/* Biểu tượng SVG */
+.btn-back svg {
+  width: 24px;
+  height: 24px;
+  stroke: white; /* Màu icon trắng */
+}
+
+/* Hover - Đổi màu khi di chuột vào */
+.btn-back:hover {
+  background: rgba(0, 0, 0, 0.6); /* Giảm độ trong suốt */
+  transform: scale(1.1); /* Hiệu ứng phóng to nhẹ */
+}
+
+/* Hiệu ứng click */
+.btn-back:active {
+  transform: scale(0.95); /* Nhấn vào sẽ nhỏ đi nhẹ */
+}
+.text-overlay {
+  position: absolute; /* Cố định vị trí */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Dịch chuyển về giữa */
+  text-align: center; /* Căn giữa nội dung */
+  width: 80%; /* Độ rộng tối đa */
+  color: white; /* Màu chữ */
+  padding: 20px;
+  border-radius: 10px; /* Bo góc nhẹ */
+}
+
+/* Định dạng tiêu đề */
+.text-overlay .title {
+  font-size: 45px;
+  font-weight: bold;
+}
+
 /*# sourceMappingURL=style.css.map */

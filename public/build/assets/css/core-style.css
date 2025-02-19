@@ -59,6 +59,7 @@ a {
     font-size: 12px; }
 
 ul,
+
 ol {
   margin: 0; }
   ul li,
@@ -413,6 +414,230 @@ img {
     .header_area .cart-area a span {
         font-size: 14px;
     }
+}
+
+.product-img img {
+  width: 100%;
+  height: 350px; /* Hoặc đặt kích thước phù hợp */
+  object-fit: cover;
+  border-radius: 10px; /* Nếu muốn bo góc nhẹ */
+}
+
+.product-page-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.product-gallery img {
+    border-radius: 10px;
+    object-fit: cover;
+    max-height: 500px;
+}
+
+.payment-section { 
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.sticky-payment {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 120px;
+    z-index: 1000;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group button {
+    background: #ddd;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.input-group input {
+    text-align: center;
+    max-width: 80px;
+}
+
+/* Tổng thể */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Container chính */
+.product-page-container {
+  margin-top: 50px;
+}
+
+/* Phần thông tin dự án */
+.product-info {
+  padding: 20px;
+  
+  border-radius: 8px;
+}
+
+.product-desc-title {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.product-desc {
+  color: #555;
+  font-size: 16px;
+}
+
+/* Định dạng thư viện ảnh */
+.carousel-item img {
+  max-height: 400px;
+  object-fit: cover;
+}
+
+/* Phần thanh toán */
+.payment-section {
+  max-width: 400px;
+  margin-top: 20px;
+}
+
+.pricing-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}
+
+.pricing-row {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.summary p {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.summary p span {
+  font-weight: bold;
+}
+
+/* Cố định phần thanh toán khi cuộn */
+.sticky-top {
+  position: sticky;
+  top: 80px;
+  z-index: 1000;
+}
+/* Định dạng phần carousel */
+.carousel-inner {
+  width: 100%;
+  max-height: 400px; /* Đặt chiều cao cố định */
+}
+
+/* Ảnh trong carousel có cùng kích thước và không bị méo */
+.carousel-item img {
+  width: 100%;
+  height: 400px; /* Đặt chiều cao cố định */
+  object-fit: cover; /* Cắt ảnh vừa với khung mà không méo */
+}
+
+/* Giữ kích thước carousel để tránh layout bị nhảy */
+#imageCarousel {
+    overflow: hidden;
+}
+
+/* Ẩn tất cả ảnh trước khi carousel active */
+.carousel-item {
+    display: none;
+}
+
+/* Chỉ hiển thị ảnh đang active */
+.carousel-item.active {
+    display: block;
+}
+
+/* Ảnh trong carousel có cùng kích thước và không bị méo */
+.carousel-item img {
+    width: 100%;
+    height: 400px; /* Đặt chiều cao cố định */
+    object-fit: cover; /* Cắt ảnh vừa với khung mà không méo */
+}
+
+.certification-table {
+  border-radius: 8px; /* Bo góc nhẹ */
+  padding: 15px; /* Thêm padding */
+}
+
+.certification-table .row {
+  border-bottom: 1px solid #dee2e6; /* Đường kẻ giữa các dòng */
+  padding: 8px 0;
+}
+
+.certification-table .row:last-child {
+  border-bottom: none; /* Dòng cuối không có border */
+}
+
+.certification-table strong {
+  color: #343a40; /* Màu chữ đậm */
+  font-weight: 600;
+}
+
+.certification-table div {
+  display: flex;
+  align-items: center;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%; /* Độ rộng giống thanh tìm kiếm */
+    background: rgba(255, 255, 255, 0.8); /* Màu nền nhẹ giống input */
+    border-radius: 25px; /* Bo góc tròn */
+    padding: 15px 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Định dạng tiêu đề giống input */
+.text-overlay .title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    margin: 0;
+}
+
+.search-bar {
+  position: relative;
+  width: 60%; /* Độ rộng của thanh tìm kiếm */
+  margin: 0 auto; /* Căn giữa */
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 25px; /* Bo tròn */
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Hiệu ứng khi focus */
+.search-bar input:focus {
+  border-color: #007bff;
+  box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.2);
 }
 
   .header_area.sticky {
