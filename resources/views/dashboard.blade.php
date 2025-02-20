@@ -82,11 +82,13 @@
                                     <button class="btn btn-outline-info w-100 bi bi-list-ul">View Orders</button>
                                 </a>
                             </div>
-                            <div class="col">
-                                <a href="#">
-                                    <button class="btn btn-outline-success w-100 bi bi-file-earmark-bar-graph">View Reports</button>
-                                </a>
-                            </div>
+                            @if(Auth::check() && Auth::user()->role === 'admin')
+                                <div class="col">
+                                    <a href="{{ route('admin.dashboard') }}">
+                                        <button class="btn btn-outline-success w-100 bi bi-file-earmark-bar-graph">View Reports</button>
+                                    </a>
+                                </div>
+                            @endif
                             <div class="col">
                                 <a href="{{ route('profile.edit') }}" >
                                     <button class="btn btn-outline-warning w-100 bi bi-gear-fill">Settings</button>

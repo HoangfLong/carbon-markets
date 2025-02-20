@@ -18,7 +18,7 @@ class CartItemRepository
         $this->cartRepo = $cartRepo;
     }
 
-    //Add to cart
+    // Add to cart
     public function addToCart($creditId, $quantity)
     {
         $cart = $this->cartRepo->getCart();
@@ -27,11 +27,11 @@ class CartItemRepository
 
         $quantity = $credit->minimum_purchase;
 
-        //Check if it had project in cart
+        // Check if it had project in cart
         $existingCartItem = CartItem::where('cart_id', $cart->id)
                                     ->where('credit_ID', $credit->id)
                                     ->first();
-        //If have project
+        // If have project
         if ($existingCartItem) {
             $existingCartItem->quantity += $quantity; 
             $existingCartItem->save();
@@ -72,7 +72,7 @@ class CartItemRepository
         ];
     }
 
-    //Delete
+    // Delete
     public function clearCartItems($cartItemId)
     {
         $cartItem = CartItem::find($cartItemId);

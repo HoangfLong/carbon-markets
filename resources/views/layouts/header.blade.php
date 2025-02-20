@@ -146,13 +146,15 @@
             <!-- Cart Area -->
             <a href="{{ route('cart.index') }}" class="position-relative ms-1 d-flex align-items-center px-3">
                 <i class='fa fa-shopping-bag'></i>
-                {{-- <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{-- <span id="cart-count" class="position-absolute top-5 start-50 translate-middle badge rounded-pill bg-danger"> --}}
                     @php
                         // Lấy số lượng từ session khi tải trang
-                        $cartItemsCount = session('cartItemsCount', 2); 
+                        $cartItemsCount = session('cartItemsCount', 0); 
                     @endphp
-                    {{ $cartItemsCount }}
-                </span> --}}
+                     <script>
+                        console.log('Min value for item :', {{$cartItemsCount = session('cartItemsCount', 0);  }});
+                    </script>
+                </span>
             </a>
         </div>
 </header>
