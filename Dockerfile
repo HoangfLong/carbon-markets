@@ -31,4 +31,4 @@ RUN composer install
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-CMD php artisan storage:link && php-fpm
+RUN ln -sfn /var/www/html/storage/app/public /var/www/html/public/storage
