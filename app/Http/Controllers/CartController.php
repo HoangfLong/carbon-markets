@@ -35,7 +35,7 @@ class CartController extends Controller
 
         $user = Auth::user();
 
-        // Kiểm tra nếu người dùng không có giỏ hàng, tạo mới giỏ hàng
+        // Check if user has cart, if not create one
         $cart = $user->cart;
         if (!$cart) {
             $cart = new Cart();
@@ -43,12 +43,11 @@ class CartController extends Controller
             $cart->save();
         }
         
-
-        // Thêm sản phẩm vào giỏ hàng
+        // Add item to cart
         $this->cartItemRepo->addToCart($request->credit_id, $request->quantity);
 
-        // Cập nhật lại số lượng trong giỏ hàng
-        $cartItemsCount = $cart->cartItems ? $cart->cartItems->pluck('credit_id')->unique()->count() : 0;
+        // Update quantity item
+        $cartItemsCount = $cart->cartItems ? $cart->cartItems->quantity->count() : 0;
 
         return response()->json([
             'cartItemsCount' => $cartItemsCount,
@@ -133,7 +132,7 @@ class CartController extends Controller
             'address' => Auth::user()->address,
         ]);
 
-        // create order item
+        // Create order item
         foreach ($cartItems as $cartItem) {
             OrderItem::create([
                 'order_ID' => $order->id,
@@ -190,22 +189,22 @@ class CartController extends Controller
             ]);
         }
 
-        //Kiểm tra trạng thái transaction
+        // Check status transaction
         if (!$transaction || $transaction->status !== 'success') {
             return response()->json(['error' => 'Invalid transaction'], 400);
         }
     
-        //Kiểm tra nếu credits đã được tạo trước đó
+        // Check if credit has created before
         if (CreditSerial::where('transaction_ID', $transaction->id)->exists()) {
             return response()->json(['message' => 'Invalid transaction'], 200);
         }
 
-        //Kiểm tra nếu không có order items
+        // Check if no order item
         if ($order->orderItems->isEmpty()) {
             return redirect()->back()->withErrors(['message' => 'No order items found for this order.']);
         }
 
-        //Kiểm tra nếu mỗi orderItem không có tín chỉ (credit)
+        // Check orderItem if don't have credit
         foreach ($order->orderItems as $orderItem) {
             if (!$orderItem->credit) {
                 return redirect()->back()->withErrors(['message' => 'No credit found for the order item.']);
@@ -220,12 +219,12 @@ class CartController extends Controller
         foreach ($order->orderItems as $orderItem) {
             $credit = $orderItem->credit;
 
-            // Kiểm tra nếu tín chỉ không đủ số lượng
+            // Check if enough quantity_available
             if ($credit->quantity_available < $orderItem->quantity) {
                 return redirect()->back()->withErrors(['message' => 'Không đủ tín chỉ để thanh toán.']);
             }
 
-            // Giảm số lượng tín chỉ có sẵn
+            // Decrease available quantity
             $credit->quantity_available -= $orderItem->quantity;
             $credit->save();
 

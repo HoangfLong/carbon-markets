@@ -11,7 +11,7 @@
             <div class="product-details">
                 <!-- Thông tin dự án -->
                 <div class="product-info">
-                    <span class="product-tag badge bg-primary">Tag ở đây</span>
+                    <span class="product-tag badge bg-primary">Carbon Offset</span>
                     <h2 class="product-name mt-3">{{ $carbonProject->name }}</h2>
                     <hr class="group-divider">
                     <span class="product-desc-title">Description</span>
@@ -92,17 +92,17 @@
                             <span id="pricePerTon">${{ $carbonProject->credits->first()->price_per_ton }} /tCO<sub>2</sub>e</span>
                         </p>
                         <hr class="group-divider">
-                        <label for="amount" class="form-label">Amount</label>
-                        <div class="input-group mb-3">
-                            <button type="button" class="btn btn-outline-secondary" id="decreaseAmount">-</button>
-                            <input type="number" id="amount" name="amount" 
-                                value="{{ $carbonProject->credits->first()->minimum_purchase }}" 
-                                min="{{ $carbonProject->credits->first()->minimum_purchase }}" 
-                                max="{{ $carbonProject->credits->first()->quantity_available }}"
-                                class="form-control text-center">
-                            <button type="button" class="btn btn-outline-secondary" id="increaseAmount">+</button>
+                        <div class="mb-3">
+                            <label for="amount" class="form-label fw-bold">Amount</label>
+                            <div class="input-group">
+                                <input type="number" id="amount" name="amount" 
+                                    value="{{ $carbonProject->credits->first()->minimum_purchase }}" 
+                                    min="{{ $carbonProject->credits->first()->minimum_purchase }}" 
+                                    max="{{ $carbonProject->credits->first()->quantity_available }}"
+                                    class="form-control text-center" style="max-width: 150px;">
+                                <span class="input-group-text">tCO<sub>2</sub>e</span>
+                            </div>
                         </div>
-                        <span class="text-muted">tCO<sub>2</sub>e</span>
 
                         <hr class="group-divider">
                         <div class="summary">
