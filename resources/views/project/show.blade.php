@@ -58,7 +58,7 @@
                 <!-- Thông tin chứng nhận -->
                 <hr class="group-divider">
                 <h4>Certification</h4>
-                <div class="certification-table">
+                <div class="certification-table mb-5 pb-5">
                     <div class="row">
                         <div class="col-md-3"><strong>Validator</strong></div>
                         <div class="col-md-3">{{ $carbonProject->credits->first()->validator }}</div>

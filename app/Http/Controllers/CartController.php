@@ -25,7 +25,7 @@ class CartController extends Controller
         $this->cartItemRepo = $cartItemRepo;
     }
 
-    //Add to cart
+    // Add to cart
     public function addToCart(Request $request)
     {
         $request->validate([

@@ -9,7 +9,7 @@
             <!-- Credit Details -->
             <div class="row">
                 <div class="col-md-6">
-                    <h5><strong>Project Name:</strong> {{ $carbonCredits->projects->name ?? 'N/A' }}</h5>
+                    <h5><strong>Project Name:</strong> {{ $carbonCredits->project->name ?? 'N/A' }}</h5>
                     <h5><strong>Price per Ton:</strong> ${{ number_format($carbonCredits->price_per_ton, 2) }}</h5>
                     <h5><strong>Quantity Available:</strong> {{ $carbonCredits->quantity_available }}</h5>
                     <h5><strong>Minimum Purchase:</strong> {{ $carbonCredits->minimum_purchase }}</h5>
