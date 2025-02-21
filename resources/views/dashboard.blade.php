@@ -78,7 +78,7 @@
                                 </a>
                             </div> --}}
                             <div class="col">
-                                <a href="{{ route('orders.index') }}" >
+                                <a href="{{ route('user.orders.index') }}" >
                                     <button class="btn btn-outline-info w-100 bi bi-list-ul">View Orders</button>
                                 </a>
                             </div>
@@ -90,7 +90,7 @@
                                 </div>
                             @endif
                             <div class="col">
-                                <a href="{{ route('profile.edit') }}" >
+                                <a href="{{ route('user.profile.edit') }}" >
                                     <button class="btn btn-outline-warning w-100 bi bi-gear-fill">Settings</button>
                                 </a>
                             </div>

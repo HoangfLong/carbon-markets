@@ -51,7 +51,7 @@
                                             <td>${{ number_format($item->price, 2) }}</td>
                                             <td class="total-price">${{ number_format($item->quantity * $item->price, 2) }}</td>
                                             <td>
-                                                <form action="{{ route('cart.clear', $item->id) }}" method="POST">
+                                                <form action="{{ route('user.cart.clear', $item->id) }}" method="POST">
                                                     @csrf
                                                     <button type="submit" class="btn btn-danger">Remove</button>
                                                 </form>
@@ -74,7 +74,7 @@
                         <hr class="group-divider">
                         <p><strong>Total Amount:</strong><span id="grand-total" class="font-weight-bold">${{ number_format($cartItems->sum(fn($item) => $item->quantity * $item->price), 2) }}</span></p>
                         <div class="actions text-center">
-                            <form action="{{ route('cart.checkout') }}" method="POST">
+                            <form action="{{ route('user.cart.checkout') }}" method="POST">
                                 @csrf
                                 <button id="checkout-button" class="btn btn-primary w-100">Proceed to Checkout</button>
                             </form>

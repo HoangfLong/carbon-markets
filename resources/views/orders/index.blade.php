@@ -1,3 +1,7 @@
+@php
+    $hideWelcomeSection = true;
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
@@ -41,7 +45,9 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('orders.show', $order->id) }}" class="btn btn-outline-secondary">View</a>
+                            <a href="{{ route('user.orders.show', $order->id) }}">
+                                <button class="btn btn-outline-secondary">View</button>
+                            </a>
                         </td>
                     </tr>
                     @endforeach
