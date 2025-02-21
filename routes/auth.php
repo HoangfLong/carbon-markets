@@ -61,10 +61,10 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 
     // Admin-only access
-    Route::middleware(['role:admin'])->group(function () {
-        Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::prefix('admin')->middleware(['role:admin'])->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     });
-
+    
     // Admin & Manager access for CRUD
     Route::middleware(['role:admin,manager'])->group(function () {
         //Project route

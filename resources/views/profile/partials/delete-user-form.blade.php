@@ -24,7 +24,7 @@
         aria-hidden="true"
     >
         <div class="modal-dialog">
-            <form method="POST" action="{{ route('profile.destroy') }}" class="modal-content">
+            <form method="POST" action="{{ route('user.profile.destroy') }}" class="modal-content">
                 @csrf
                 @method('DELETE')
 

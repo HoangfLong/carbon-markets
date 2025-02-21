@@ -126,41 +126,59 @@
     </div>
 </section>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const amountInput = document.getElementById("amount");
-    const pricePerTon = parseFloat(document.getElementById("pricePerTon").textContent.replace(/[^0-9.]/g, ""));
-    const discountElement = document.getElementById("discount");
-    const transactionFeeElement = document.getElementById("transactionFee");
-    const vatElement = document.getElementById("vat");
-    const totalPriceElement = document.getElementById("totalPrice");
-
-    const minAmount = parseInt(amountInput.min);
-    const maxAmount = parseInt(amountInput.max);
-
-    function calculatePricing() {
-        const amount = parseInt(amountInput.value);
-        const discount = amount >= 20000 ? amount * pricePerTon * 0.1 : 0;
-        const transactionFee = 0.30;
-        const vat = (amount * pricePerTon - discount) * 0.2;
-        const totalPrice = amount * pricePerTon - discount + transactionFee + vat;
-
-        discountElement.textContent = `- $${discount.toFixed(2)}`;
-        transactionFeeElement.textContent = `$${transactionFee.toFixed(2)}`;
-        vatElement.textContent = `$${vat.toFixed(2)}`;
-        totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
-    }
-
-    amountInput.addEventListener("input", function () {
-        let currentValue = parseInt(amountInput.value);
-        if (currentValue < minAmount) {
-            amountInput.value = minAmount;
-        } else if (currentValue > maxAmount) {
-            amountInput.value = maxAmount;
+    document.addEventListener("DOMContentLoaded", function () {
+        const amountInput = document.getElementById("amount");
+        const pricePerTon = parseFloat(document.getElementById("pricePerTon").textContent.replace(/[^0-9.]/g, ""));
+        const transactionFeeElement = document.getElementById("transactionFee");
+        const totalPriceElement = document.getElementById("totalPrice");
+        const checkoutButton = document.querySelector("button[type='submit']"); // Nút "Buy now"
+        const errorElement = document.createElement("p"); // Thông báo lỗi
+        errorElement.style.color = "red";
+        errorElement.style.fontSize = "14px";
+        errorElement.style.display = "none"; // Mặc định ẩn
+        amountInput.parentNode.appendChild(errorElement); // Thêm vào form
+    
+        const minAmount = parseInt(amountInput.min);
+        const maxAmount = parseInt(amountInput.max);
+    
+        function calculatePricing() {
+            let amount = amountInput.value.replace(/\D/g, ""); // Xóa ký tự không phải số
+            if (amount.length > 6) {
+                amount = amount.substring(0, 6); // Giới hạn tối đa 6 chữ số
+            }
+            amountInput.value = amount; // Cập nhật giá trị trong ô nhập
+    
+            const amountNum = parseInt(amount);
+    
+            // Kiểm tra số lượng hợp lệ
+            if (isNaN(amountNum) || amountNum < minAmount) {
+                errorElement.textContent = `⚠️ Minimum purchase is ${minAmount} tCO₂e.`;
+                errorElement.style.display = "block";
+                checkoutButton.disabled = true;
+                checkoutButton.classList.add("disabled");
+                return;
+            } else if (amountNum > maxAmount) {
+                errorElement.textContent = `⚠️ Only ${maxAmount} tCO₂e available.`;
+                errorElement.style.display = "block";
+                checkoutButton.disabled = true;
+                checkoutButton.classList.add("disabled");
+            } else {
+                errorElement.style.display = "none"; // Ẩn lỗi khi hợp lệ
+                checkoutButton.disabled = false;
+                checkoutButton.classList.remove("disabled");
+            }
+    
+            // Tính giá nếu hợp lệ
+            const transactionFee = 0.30;
+            const totalPrice = amountNum * pricePerTon + transactionFee;
+    
+            transactionFeeElement.textContent = `$${transactionFee.toFixed(2)}`;
+            totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
         }
-        calculatePricing();
+    
+        amountInput.addEventListener("input", calculatePricing);
+        
+        calculatePricing(); // Gọi ngay khi tải trang
     });
-
-    calculatePricing();
-});
 </script>
 @endsection

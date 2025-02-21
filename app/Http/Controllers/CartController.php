@@ -91,12 +91,12 @@ class CartController extends Controller
             $response = $this->cartItemRepo->clearCartItems($cartItemId); // Gọi repository để xóa mục giỏ hàng
     
             if ($response['success']) {
-                return redirect()->route('cart.index')->with('success', $response['message']);
+                return redirect()->route('cser.cart.index')->with('success', $response['message']);
             }
     
-            return redirect()->route('cart.index')->withErrors(['message' => $response['message']]);
+            return redirect()->route('user.cart.index')->withErrors(['message' => $response['message']]);
         } catch (\Exception $e) {
-            return redirect()->route('cart.index')->withErrors(['message' => 'An error occurred while removing the item from the cart']);
+            return redirect()->route('user.cart.index')->withErrors(['message' => 'An error occurred while removing the item from the cart']);
         }
     }
 
@@ -162,8 +162,8 @@ class CartController extends Controller
                 ];
             })->toArray(),
             'mode' => 'payment',
-            'success_url' => route('cart.success', ['orderId' => $order->id]),
-            'cancel_url' => route('cart.cancel'),
+            'success_url' => route('user.cart.success', ['orderId' => $order->id]),
+            'cancel_url' => route('user.cart.cancel'),
         ]);
 
         // Redirect to checkout
@@ -191,12 +191,12 @@ class CartController extends Controller
 
         // Check status transaction
         if (!$transaction || $transaction->status !== 'success') {
-            return response()->json(['error' => 'Invalid transaction'], 400);
+            return view('payments.success', ['order' => $order]);
         }
     
         // Check if credit has created before
         if (CreditSerial::where('transaction_ID', $transaction->id)->exists()) {
-            return response()->json(['message' => 'Invalid transaction'], 200);
+            return view('payments.success', ['order' => $order]);
         }
 
         // Check if no order item

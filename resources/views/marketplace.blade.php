@@ -269,7 +269,7 @@
                                             <div class="hover-content">
                                                 <!-- Add to Cart -->
                                                 <div class="add-to-cart-btn">
-                                                    <form class="addToCartForm" action="{{ route('cart.add') }}" method="POST">
+                                                    <form class="addToCartForm" action="{{ route('user.cart.add') }}" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="credit_id" value="{{ $project->credits->first()->id }}">
                                                         <input type="hidden" name="quantity" value="1">

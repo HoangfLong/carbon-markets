@@ -5,7 +5,7 @@
         <p><strong>Order ID:</strong> <span class="badge bg-primary">#{{ $order->id }}</span></p>
 
         <div class="mt-4">
-            <a href="{{ route('orders.show', $order->id) }}" >
+            <a href="{{ route('user.orders.show', $order->id) }}" >
                 <button class="btn btn-outline-primary bi bi-eye">View Order</button>
             </a>
             <a href="{{ route('home') }}">
