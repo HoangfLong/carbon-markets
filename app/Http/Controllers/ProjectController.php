@@ -3,81 +3,70 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Project\ProjectStoreRequest;
-use App\Http\Requests\Project\ProjectUpdateRequest;
+use App\Http\Requests\Project\ProjectRequest;
 use App\Models\ProjectType;
 use App\Models\Standard;
-use App\Repositories\Eloquent\ProjectRepository;
+use App\Services\ProjectService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class ProjectController extends Controller
-{   
-    protected $projectRepository;
+{
+    protected $projectService;
 
-    public function __construct(ProjectRepository $projectRepository)
+    public function __construct(ProjectService $projectService)
     {
-        $this->projectRepository = $projectRepository;
+        $this->projectService = $projectService;
     }
 
-    //Index project
-    public function index(): View 
+    // Danh sách dự án
+    public function index(): View
     {
-        $carbonProjects = $this->projectRepository->getAll();
-        
-        return view('admin.projects.index',compact('carbonProjects'));
+        $projects = $this->projectService->getAllProjects();
+        return view('admin.projects.index', compact('projects'));
     }
 
-   //View project
-    public function show($id): View 
+    // Xem chi tiết dự án
+    public function show($id): View
     {
-        $carbonProjects = $this->projectRepository->getById($id);
-        
-        return view('admin.projects.show',compact('carbonProjects'));
+        $project = $this->projectService->getProjectById($id);
+        return view('admin.projects.show', compact('project'));
     }
 
-    //Create project
-    public function create(): View 
+    // Form tạo dự án
+    public function create(): View
     {
         $projectTypes = ProjectType::all();
         $standards = Standard::all();
-        
-        return view('admin.projects.create',compact(['projectTypes','standards']));
+        return view('admin.projects.create', compact(['projectTypes', 'standards']));
     }
 
-    //Store project
-    public function store(ProjectStoreRequest $request): RedirectResponse
+    // Lưu dự án
+    public function store(ProjectRequest $request): RedirectResponse
     {
-        // Lưu thông tin dự án vào cơ sở dữ liệu
-        $this->projectRepository->create($request->validated());
-        
+        $this->projectService->createProject($request->validated());
         return redirect()->route('projects.index')->with('success', 'Project created successfully.');
     }
 
-    //edit project
-    public function edit($id): View 
+    // Form chỉnh sửa dự án
+    public function edit($id): View
     {
-        $carbonProjects = $this->projectRepository->getById($id);
+        $project = $this->projectService->getProjectById($id);
         $projectTypes = ProjectType::all();
-        
-        return view('admin.projects.edit',compact(['carbonProjects', 'projectTypes']));
+        return view('admin.projects.edit', compact(['project', 'projectTypes']));
     }
 
-    //update project
-    public function update(ProjectUpdateRequest $request, $id) : RedirectResponse
+    // Cập nhật dự án
+    public function update(ProjectRequest $request, $id): RedirectResponse
     {
-        //Cập nhật các thông tin dự án
-        $this->projectRepository->update($id, $request->validated());
-        
-        return redirect()->route('projects.index')->with('success','project up go');
+        $this->projectService->updateProject($id, $request->validated());
+        return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
     }
 
-    //Destroy project
+    // Xóa dự án
     public function destroy($id): RedirectResponse
     {
-        $this->projectRepository->delete($id);
-        
-        return redirect()->route('projects.index')->with('success','project deleted');
+        $this->projectService->deleteProject($id);
+        return redirect()->route('projects.index')->with('success', 'Project deleted successfully.');
     }
 }

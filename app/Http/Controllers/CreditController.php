@@ -3,94 +3,76 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Credit\CreditUpdateRequest;
-use App\Http\Requests\Credit\CreditStoreRequest;
+use App\Http\Requests\Credit\CreditRequest;
 use App\Models\Standard;
-use App\Repositories\Eloquent\CreditRepository;
-use App\Repositories\Eloquent\ProjectRepository;
+use App\Services\CreditService;
+use App\Services\ProjectService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
 
 class CreditController extends Controller
 {
-    protected $creditRepository;
-    protected $projectRepository;
+    protected $creditService;
+    protected $projectService;
 
     public function __construct(
-        CreditRepository $creditRepository,
-        ProjectRepository $projectRepository,
-        )
-    {
-        $this->creditRepository = $creditRepository;
-        $this->projectRepository = $projectRepository;
+        CreditService $creditService,
+        ProjectService $projectService
+    ) {
+        $this->creditService = $creditService;
+        $this->projectService = $projectService;
     }
 
     //Index
     public function index(): View
     {
-        $carbonCredits = $this->creditRepository->getAll();
-
-        return view('admin.credits.index', compact('carbonCredits'));
-        /*compact() dùng để truyền dữ liệu từ controller vào view. Nó tạo một mảng liên kết giữa tên biến và giá trị 
-            của biến đó. Ví dụ, compact('carbonCredits') 
-            tạo ra một mảng ['carbonCredits' => $carbonCredits] và gửi dữ liệu vào view carbon_credits.index.*/
+        $credits = $this->creditService->getAllCredits();
+        return view('admin.credits.index', compact('credits'));
     }
 
     //Create
     public function create(): View
     {
-        //Lấy tất cả các dự án carbon để người dùng chọn khi tạo tín chỉ mới
-        $carbonProjects = $this->projectRepository->getAll();
+        $projects = $this->projectService->getAllProjects();
         $standards = Standard::all();
-        //Trả về view tạo tín chỉ với dữ liệu dự án
-        return view('admin.credits.create', compact('carbonProjects','standards'));
-        /*Dữ liệu các dự án được truyền vào view carbon-credits.create dưới dạng biến $carbonProjects, 
-            dùng để người dùng có thể chọn dự án khi tạo tín chỉ carbon mới.*/
+        return view('admin.credits.create', compact('projects', 'standards'));
     }
 
     //Store
-    public function store(CreditStoreRequest $request): RedirectResponse
+    public function store(CreditRequest $request): RedirectResponse
     {
-        // dd($request->all());
-        $this->creditRepository->create($request->validated());
-        //Redirect if successed
-        return redirect()->route('credits.index')->with('success', 'carbon');
+        $this->creditService->createCredit($request->validated());
+        return redirect()->route('credits.index')->with('success', 'Carbon credit created successfully');
     }
 
     //Show
     public function show($id): View
     {
-        $carbonCredits = $this->creditRepository->getById($id);
-        //Return a view
+        $carbonCredits = $this->creditService->getCreditById($id);
         return view('admin.credits.show', compact('carbonCredits'));
     }
 
     //Edit
     public function edit($id): View
     {
-        $carbonCredits = $this->creditRepository->getById($id);
-        $carbonProjects = $this->projectRepository->getAll();
+        $credits = $this->creditService->getCreditById($id);
+        $projects = $this->projectService->getAllProjects();
         $standards = Standard::all();
-        //Return a view
-        return view('admin.credits.edit', compact('carbonCredits', 'carbonProjects','standards'));
+        return view('admin.credits.edit', compact('credits', 'projects', 'standards'));
     }
 
     //Update
-    public function update(CreditUpdateRequest $request, $id): RedirectResponse
+    public function update(CreditRequest $request, $id): RedirectResponse
     {
-        $this->creditRepository->update($id, $request->validated());
-        //Cập nhật tín chỉ carbon trong cơ sở dữ liệu
-        //Chuyển hướng về trang danh sách với thông báo thành công
-        return redirect()->route('credits.index')->with('success', 'carbon up go');
+        $this->creditService->updateCredit($id, $request->validated());
+        return redirect()->route('credits.index')->with('success', 'Carbon credit updated successfully');
     }
 
     //Destroy
     public function destroy($id): RedirectResponse
     {
-        //Delete credit
-        $this->creditRepository->delete($id);
-        //Redirect if successed
-        return redirect()->route('credits.index')->with('success', 'carbon deleted');
+        $this->creditService->deleteCredit($id);
+        return redirect()->route('credits.index')->with('success', 'Carbon credit deleted successfully');
     }
 }
