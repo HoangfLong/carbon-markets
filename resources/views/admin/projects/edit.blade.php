@@ -27,7 +27,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('projects.update', $carbonProjects->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('projects.update', $project->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -35,13 +35,13 @@
                     <!-- Project Name -->
                     <div class="col-md-6 mb-4">
                         <label for="name" class="form-label fw-bold">Project Name</label>
-                        <input type="text" class="form-control shadow-sm" id="name" name="name" value="{{ $carbonProjects->name }}" required>
+                        <input type="text" class="form-control shadow-sm" id="name" name="name" value="{{ $project->name }}" required>
                     </div>
 
                     <!-- Developer -->
                     <div class="col-md-6 mb-4">
                         <label for="developer" class="form-label fw-bold">Developer</label>
-                        <input type="text" class="form-control shadow-sm" id="developer" name="developer" value="{{ $carbonProjects->developer }}">
+                        <input type="text" class="form-control shadow-sm" id="developer" name="developer" value="{{ $project->developer }}">
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@
                         <label for="project_type" class="form-label fw-bold">Project Type</label>
                         <select class="form-select shadow-sm" id="project_type" name="project_type_ID" required>
                             @foreach($projectTypes as $type)
-                                <option value="{{ $type->id }}" {{ $carbonProjects->project_type_ID == $type->id ? 'selected' : '' }}>
+                                <option value="{{ $type->id }}" {{ $project->project_type_ID == $type->id ? 'selected' : '' }}>
                                     {{ $type->type_name }}
                                 </option>
                             @endforeach
@@ -60,7 +60,7 @@
                      <!-- Total Credits -->
                      <div class="col-md-6 mb-4">
                         <label for="total_credits" class="form-label fw-bold">Total Credits</label>
-                        <input type="number" step="0.01" class="form-control shadow-sm" id="total_credits" name="total_credits" value="{{ $carbonProjects->total_credits }}" required>
+                        <input type="number" step="0.01" class="form-control shadow-sm" id="total_credits" name="total_credits" value="{{ $project->total_credits }}" required>
                     </div>
                 </div>
 
@@ -69,8 +69,8 @@
                     <div class="col-md-6 mb-4">
                         <label for="is_verified" class="form-label fw-bold">Verified</label>
                         <select class="form-select shadow-sm" id="is_verified" name="is_verified" required>
-                            <option value="1" {{ $carbonProjects->is_verified ? 'selected' : '' }}>Yes</option>
-                            <option value="0" {{ !$carbonProjects->is_verified ? 'selected' : '' }}>No</option>
+                            <option value="1" {{ $project->is_verified ? 'selected' : '' }}>Yes</option>
+                            <option value="0" {{ !$project->is_verified ? 'selected' : '' }}>No</option>
                         </select>
                     </div>
 
@@ -78,16 +78,16 @@
                     <div class="col-md-6 mb-4">
                         <label for="status" class="form-label fw-bold">Status</label>
                         <select class="form-select shadow-sm" id="status" name="status" required>
-                            <option value="Planned" {{ $carbonProjects->status == 'Planned' ? 'selected' : '' }}>Planned</option>
-                            <option value="Estimated" {{ $carbonProjects->status == 'Estimated' ? 'selected' : '' }}>Estimated</option>
-                            <option value="Certified" {{ $carbonProjects->status == 'Certified' ? 'selected' : '' }}>Certified</option>
+                            <option value="Planned" {{ $project->status == 'Planned' ? 'selected' : '' }}>Planned</option>
+                            <option value="Estimated" {{ $project->status == 'Estimated' ? 'selected' : '' }}>Estimated</option>
+                            <option value="Certified" {{ $project->status == 'Certified' ? 'selected' : '' }}>Certified</option>
                         </select>
                     </div>
 
                     <!-- Address -->
                     <div class="col-md-6 mb-4">
                         <label for="address" class="form-label fw-bold">Address</label>
-                            <input type="text" class="form-control shadow-sm" id="address" name="address" value="{{ $carbonProjects->address }}">
+                            <input type="text" class="form-control shadow-sm" id="address" name="address" value="{{ $project->address }}">
                     </div>
                 </div>
 
@@ -95,20 +95,20 @@
                     <!-- Registered At -->
                     <div class="col-md-6 mb-4">
                         <label for="registered_at" class="form-label fw-bold">Registered At</label>
-                        <input type="date" class="form-control shadow-sm" id="registered_at" name="registered_at" value="{{ $carbonProjects->registered_at }}">
+                        <input type="date" class="form-control shadow-sm" id="registered_at" name="registered_at" value="{{ $project->registered_at }}">
                     </div>
 
                     <!-- Location -->
                     <div class="col-md-6 mb-4">
                         <label for="location" class="form-label fw-bold">Location</label>
-                        <input type="text" class="form-control shadow-sm" id="location" name="location" value="{{ $carbonProjects->location }}">
+                        <input type="text" class="form-control shadow-sm" id="location" name="location" value="{{ $project->location }}">
                     </div>
                 </div>
 
                 <!-- Description -->
                 <div class="mb-4">
                     <label for="description" class="form-label fw-bold">Description</label>
-                    <textarea class="form-control shadow-sm" id="description" name="description" rows="4">{{ $carbonProjects->description }}</textarea>
+                    <textarea class="form-control shadow-sm" id="description" name="description" rows="4">{{ $project->description }}</textarea>
                 </div>
 
                 <!-- Upload Images -->

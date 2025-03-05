@@ -4,7 +4,7 @@ namespace App\Http\Requests\Credit;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreditUpdateRequest extends FormRequest
+class CreditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,6 @@ class CreditUpdateRequest extends FormRequest
     {
         return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -26,7 +25,7 @@ class CreditUpdateRequest extends FormRequest
             'price_per_ton' => 'required|numeric|min:0',
             'quantity_available' => 'required|integer|min:0',
             'minimum_purchase' => 'required|integer|min:1',
-            'validator' => 'required|string|max:255',
+            'validator' => 'nullable|string|max:255',
             'standard_id' => 'required|exists:standards,id',
             'status' => 'required|in:Registered,Retired',
             'start_date' => 'nullable|date|before_or_equal:end_date',

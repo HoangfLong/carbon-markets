@@ -32,30 +32,19 @@ class CreditRepository implements IBaseRepository
 
     public function create(array $data)
     {
-        // $data['serial_number'] = $data['serial_number'] ?? SerialNumberGenerator::generate();
-
-        $credit = $this->credit->create($data);
-
-        if(isset($data['project_ID'])) {
-            $project = Project::find($data['project_ID']);
-            if($project) {
-                $project->carbon_credit_ID = $credit->id;
-                $project->save();
-            }
-        }
-        return $credit;
+        return $this->credit->create($data);
     }
 
-    public function update($id, array $data) 
+    public function update($id, array $data)
     {
-        $credit = $this->credit->findOrFail($id);
+        $credit = $this->getById($id);
         $credit->update($data);
-            return $credit;
+        return $credit;
     }
 
     public function delete($id)
     {
-        $credit = $this->credit->findOrFail($id);
-            return $credit->delete();
+        $credit = $this->getById($id);
+        return $credit->delete();
     }
 }
