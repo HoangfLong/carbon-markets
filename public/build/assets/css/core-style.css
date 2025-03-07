@@ -500,6 +500,7 @@ body {
 
 /* Phần thanh toán */
 .payment-section {
+  position: sticky;
   max-width: 400px;
   margin-top: 20px;
 }

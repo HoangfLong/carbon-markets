@@ -83,7 +83,7 @@
 
         <!-- Cột thanh toán (Cố định khi cuộn) -->
         <div class="col-lg-4">
-            <div class="payment-section sticky-top">
+            <div class="payment-section">
                 <form action="{{ route('payment.checkout', $carbonProject->id) }}" method="POST" id="checkoutForm">
                     @csrf
                     <div class="pricing-card p-4 border rounded shadow">
