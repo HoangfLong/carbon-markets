@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +14,7 @@ class OrderController extends Controller
         $orders = Order::where('user_ID', Auth::id())
                         ->with(['orderItems.credit','transaction'])
                         ->latest()
-                        ->get();
+                        ->paginate(10);
         
         return view('orders.index',compact('orders'));
     }

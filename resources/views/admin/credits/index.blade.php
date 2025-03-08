@@ -24,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white">
-                    @foreach ($carbonCredits as $credit)
+                    @foreach ($credits as $credit)
                         <tr>
                             <td class="text-center border">{{ $credit->id }}</td>
                             <td class="text-center border">{{ $credit->quantity_available }}</td>

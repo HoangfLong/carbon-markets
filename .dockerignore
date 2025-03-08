@@ -1,0 +1,7 @@
+echo "node_modules
+vendor
+storage/logs
+.env
+.git
+docker-compose.override.yml
+" > .dockerignore

@@ -103,8 +103,8 @@
                 {{-- <a href="#"><img src="build/assets/img/core-img/heart.svg" alt=""></a> --}}
             </div>
             <!-- User Login Info -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-                <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid px-2">
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto">
                             @auth
@@ -144,14 +144,16 @@
                 </div>
             </nav>
             <!-- Cart Area -->
-            <a href="{{ route('cart.index') }}" class="position-relative ms-3 d-flex align-items-center">
+            <a href="{{ route('user.cart.index') }}" class="position-relative ms-1 d-flex align-items-center px-3">
                 <i class='fa fa-shopping-bag'></i>
-                <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{-- <span id="cart-count" class="position-absolute top-5 start-50 translate-middle badge rounded-pill bg-danger"> --}}
                     @php
                         // Lấy số lượng từ session khi tải trang
                         $cartItemsCount = session('cartItemsCount', 0); 
                     @endphp
-                    {{ $cartItemsCount }}
+                     <script>
+                        console.log('Min value for item :', {{$cartItemsCount = session('cartItemsCount', 0);  }});
+                    </script>
                 </span>
             </a>
         </div>

@@ -2,7 +2,6 @@
 
 namespace App\Repositories\Eloquent;
 
-use Illuminate\Support\Facades\Storage;
 use App\Models\Project;
 use App\Repositories\Contracts\IBaseRepository;
 
@@ -32,56 +31,26 @@ class ProjectRepository implements IBaseRepository
 
     public function create(array $data)
     {
-        $project = $this->project->create($data);
-        // Lưu hình ảnh nếu có
-        if (!empty($data['images'])) {
-            foreach ($data['images'] as $image) {
-                $path = $image->store('images', 'public');
-
-                $project->images()->create([
-                    'image_path' => $path,
-                ]);
-            }
-        }
-        return $project;
+        return $this->project->create($data);
     }
 
     public function update($id, array $data)
     {
         $project = $this->project->findOrFail($id);
-        //Update the project fields
         $project->update($data);
-
-        if (!empty($data['images'])) {
-            $project->images()->delete();
-            foreach ($data['images'] as $image) {
-
-                $path = $image->store('images', 'public');
-
-                $project->images()->create([
-                    'image_path' => $path,
-                ]);
-            }
-        }
         return $project;
     }
 
     public function delete($id)
     {
         $project = $this->project->findOrFail($id);
-        foreach($project->images as $image) { 
-            if(Storage::disk('public')->exists($image->image_path)) {
-                Storage::disk('public')->delete($image->image_path);
-            }
-        }
         return $project->delete();
     }
 
-
     public function search($search)
     {
-        $keywords = preg_split('/\s+/', $search); // Tách theo khoảng trắng
-    
+        $keywords = preg_split('/\s+/', $search);
+
         return $this->project->where(function ($query) use ($keywords) {
             foreach ($keywords as $keyword) {
                 $query->whereRaw('LOWER(name) LIKE LOWER(?)', ["%{$keyword}%"])
@@ -93,4 +62,3 @@ class ProjectRepository implements IBaseRepository
         ->get();
     }
 }
-

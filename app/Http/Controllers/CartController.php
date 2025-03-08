@@ -25,7 +25,7 @@ class CartController extends Controller
         $this->cartItemRepo = $cartItemRepo;
     }
 
-    //Add to cart
+    // Add to cart
     public function addToCart(Request $request)
     {
         $request->validate([
@@ -35,7 +35,7 @@ class CartController extends Controller
 
         $user = Auth::user();
 
-        // Kiểm tra nếu người dùng không có giỏ hàng, tạo mới giỏ hàng
+        // Check if user has cart, if not create one
         $cart = $user->cart;
         if (!$cart) {
             $cart = new Cart();
@@ -43,12 +43,11 @@ class CartController extends Controller
             $cart->save();
         }
         
-
-        // Thêm sản phẩm vào giỏ hàng
+        // Add item to cart
         $this->cartItemRepo->addToCart($request->credit_id, $request->quantity);
 
-        // Cập nhật lại số lượng trong giỏ hàng
-        $cartItemsCount = $cart->cartItems ? $cart->cartItems->pluck('credit_id')->unique()->count() : 0;
+        // Update quantity item
+        $cartItemsCount = $cart->cartItems ? $cart->cartItems->quantity->count() : 0;
 
         return response()->json([
             'cartItemsCount' => $cartItemsCount,
@@ -92,12 +91,12 @@ class CartController extends Controller
             $response = $this->cartItemRepo->clearCartItems($cartItemId); // Gọi repository để xóa mục giỏ hàng
     
             if ($response['success']) {
-                return redirect()->route('cart.index')->with('success', $response['message']);
+                return redirect()->route('cser.cart.index')->with('success', $response['message']);
             }
     
-            return redirect()->route('cart.index')->withErrors(['message' => $response['message']]);
+            return redirect()->route('user.cart.index')->withErrors(['message' => $response['message']]);
         } catch (\Exception $e) {
-            return redirect()->route('cart.index')->withErrors(['message' => 'An error occurred while removing the item from the cart']);
+            return redirect()->route('user.cart.index')->withErrors(['message' => 'An error occurred while removing the item from the cart']);
         }
     }
 
@@ -133,7 +132,7 @@ class CartController extends Controller
             'address' => Auth::user()->address,
         ]);
 
-        // create order item
+        // Create order item
         foreach ($cartItems as $cartItem) {
             OrderItem::create([
                 'order_ID' => $order->id,
@@ -163,8 +162,8 @@ class CartController extends Controller
                 ];
             })->toArray(),
             'mode' => 'payment',
-            'success_url' => route('cart.success', ['orderId' => $order->id]),
-            'cancel_url' => route('cart.cancel'),
+            'success_url' => route('user.cart.success', ['orderId' => $order->id]),
+            'cancel_url' => route('user.cart.cancel'),
         ]);
 
         // Redirect to checkout
@@ -176,29 +175,56 @@ class CartController extends Controller
     {
         $order = Order::with('orderItems.credit')->findOrFail($orderId);
 
+        //Check transaction
+        $transaction = Transaction::where('order_ID', $orderId)->latest()->first();
+
+        //Create transaction record
+        if(!$transaction) {
+            $transaction = Transaction::create([
+                'order_ID' => $order->id,
+                'amount' => $order->total_amount,
+                'payment_method' => 'credit_card',
+                'status' => 'success',
+                'transaction_date' => now(),
+            ]);
+        }
+
+        // Check status transaction
+        if (!$transaction || $transaction->status !== 'success') {
+            return view('payments.success', ['order' => $order]);
+        }
+    
+        // Check if credit has created before
+        if (CreditSerial::where('transaction_ID', $transaction->id)->exists()) {
+            return view('payments.success', ['order' => $order]);
+        }
+
+        // Check if no order item
+        if ($order->orderItems->isEmpty()) {
+            return redirect()->back()->withErrors(['message' => 'No order items found for this order.']);
+        }
+
+        // Check orderItem if don't have credit
+        foreach ($order->orderItems as $orderItem) {
+            if (!$orderItem->credit) {
+                return redirect()->back()->withErrors(['message' => 'No credit found for the order item.']);
+            }
+        }
+
         // Update order
         $order->status = 'completed';
         $order->save();
-
-        // Create transaction
-        $transaction = Transaction::create([
-            'order_ID' => $order->id,
-            'amount' => $order->total_amount,
-            'payment_method' => 'credit_card',
-            'status' => 'success',
-            'transaction_date' => now(),
-        ]);
 
         // Save serial code
         foreach ($order->orderItems as $orderItem) {
             $credit = $orderItem->credit;
 
-            // Kiểm tra nếu tín chỉ không đủ số lượng
+            // Check if enough quantity_available
             if ($credit->quantity_available < $orderItem->quantity) {
                 return redirect()->back()->withErrors(['message' => 'Không đủ tín chỉ để thanh toán.']);
             }
 
-            // Giảm số lượng tín chỉ có sẵn
+            // Decrease available quantity
             $credit->quantity_available -= $orderItem->quantity;
             $credit->save();
 

@@ -9,7 +9,7 @@
             <button class="btn btn-secondary">Go to Dashboard</button>
         </a>
     </div>
-    <form method="post" action="{{ route('profile.update') }}" class="form-horizontal">
+    <form method="post" action="{{ route('user.profile.update') }}" class="form-horizontal">
         @csrf
         @method('patch')
         <!-- Trường Name -->

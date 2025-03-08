@@ -1,25 +1,30 @@
 @php
     $hideWelcomeSection = true;
-    $hideFooterSection = true;
 @endphp
+
 @extends('layouts.app')
 
 @section('content')
 <div class="container mt-5 pt-5 mb-5">
-    <a href="{{ url()->previous() }}" >
-        <button class="btn btn-outline-secondary position-absolute start-3 ms-3 mt-3">&larr; Back</button>
-    </a>    
+    <!-- Nút Back -->
+    <a href="{{ route('dashboard') }}" >
+        <button class="btn btn-outline-secondary">
+            &larr; Back
+        </button>
+   </a>
+
     <h2 class="text-center mb-4">Your Order</h2>
+
     @if($orders->isEmpty())
-        <div class="alert alert-warning text-center">Your order empty.</div>
+        <div class="alert alert-warning text-center">Your order is empty.</div>
     @else
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered">
+        <div class="table-responsive" style="max-width: 100%; overflow-x: auto;">
+            <table class="table table-hover table-bordered text-center">
                 <thead class="table-dark">
                     <tr>
-                        <th>Order id</th>
+                        <th>Order ID</th>
                         <th>Date</th>
-                        <th>Total amount</th>
+                        <th>Total Amount</th>
                         <th>Status</th>
                         <th>Details</th>
                     </tr>
@@ -40,14 +45,42 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('orders.show', $order->id) }}">
-                                <button type="button" class="btn btn-outline-secondary" >View</button>
+                            <a href="{{ route('user.orders.show', $order->id) }}">
+                                <button class="btn btn-outline-secondary">View</button>
                             </a>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center mt-4">
+            <nav>
+                <ul class="pagination shadow-sm">
+                    {{-- Previous --}}
+                    @if ($orders->onFirstPage())
+                        <li class="page-item disabled"><span class="page-link">&laquo; Previous</span></li>
+                    @else
+                        <li class="page-item"><a class="page-link" href="{{ $orders->previousPageUrl() }}">&laquo;</a></li>
+                    @endif
+
+                    {{-- Page Numbers --}}
+                    @foreach ($orders->getUrlRange(1, $orders->lastPage()) as $page => $url)
+                        <li class="page-item {{ $page == $orders->currentPage() ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                        </li>
+                    @endforeach
+
+                    {{-- Next --}}
+                    @if ($orders->hasMorePages())
+                        <li class="page-item"><a class="page-link" href="{{ $orders->nextPageUrl() }}">&raquo;</a></li>
+                    @else
+                        <li class="page-item disabled"><span class="page-link">Next &raquo;</span></li>
+                    @endif
+                </ul>
+            </nav>
         </div>
     @endif
 </div>

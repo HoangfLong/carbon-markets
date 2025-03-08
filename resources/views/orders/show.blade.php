@@ -61,9 +61,8 @@
             </tbody>
         </table>
     </div>
-
-    <a href="{{ route('orders.index') }}">
-        <button type="button" class="btn btn-outline-secondary">Return</button>
-    </a>
-</div>
+        <a href="{{ route('user.orders.index') }}" class="mb-4 d-inline-block">
+            <button type="button" class="btn btn-outline-secondary">Return</button>
+        </a>
+    </div>
 @endsection

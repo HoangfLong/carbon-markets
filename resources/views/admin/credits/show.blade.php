@@ -3,41 +3,40 @@
 @section('content')
 <div class="container mt-5">
     <div class="card shadow-lg border-0 rounded-lg">
-        <div class="card-body bg-light p-4">
-            <h1 class="text-center mb-4 text-dark font-weight-bold">Credit Details</h1>
-            
-            <!-- Credit Details -->
+        <div class="card-header bg-primary text-white text-center">
+            <h1 class="mb-0">Credit Details</h1>
+        </div>
+        <div class="card-body bg-white p-5">
+            <!-- Chi tiết Credit -->
             <div class="row">
                 <div class="col-md-6">
-                    <h5><strong>Project Name:</strong> {{ $carbonCredits->projects->name ?? 'N/A' }}</h5>
-                    <h5><strong>Price per Ton:</strong> ${{ number_format($carbonCredits->price_per_ton, 2) }}</h5>
-                    <h5><strong>Quantity Available:</strong> {{ $carbonCredits->quantity_available }}</h5>
-                    <h5><strong>Minimum Purchase:</strong> {{ $carbonCredits->minimum_purchase }}</h5>
-                    <h5><strong>Standard:</strong> {{ $carbonCredits->standard->name ?? 'N/A' }}</h5>
+                    <div class="info-box">
+                        <p><strong>Project Name:</strong> {{ $carbonCredits->project->name ?? 'N/A' }}</p>
+                        <p><strong>Price per Ton:</strong> ${{ number_format($carbonCredits->price_per_ton, 2) }}</p>
+                        <p><strong>Quantity Available:</strong> {{ $carbonCredits->quantity_available }}</p>
+                        <p><strong>Minimum Purchase:</strong> {{ $carbonCredits->minimum_purchase }}</p>
+                        <p><strong>Standard:</strong> {{ $carbonCredits->standard->name ?? 'N/A' }}</p>
+                    </div>
                 </div>
                 <div class="col-md-6">
-                    <h5><strong>Validator:</strong> {{ $carbonCredits->validator }}</h5>
-                    <h5><strong>Status:</strong> 
-                        <span class="badge" style="background-color: 
-                            {{ $carbonCredits->status === 'available' ? '#28a745' : ($carbonCredits->status === 'sold' ? '#ffc107' : '#dc3545') }};
-                            padding: 5px 10px; border-radius: 5px; color: white;">
-                            {{ ucfirst($carbonCredits->status) }}
-                        </span>
-                    </h5>
-                    <h5><strong>Start Date:</strong> {{ $carbonCredits->start_date }}</h5>
-                    <h5><strong>End Date:</strong> {{ $carbonCredits->end_date }}</h5>
+                    <div class="info-box">
+                        <p><strong>Validator:</strong> {{ $carbonCredits->validator }}</p>
+                        <p><strong>Status:</strong> 
+                            <span class="badge bg-{{ $carbonCredits->status === 'available' ? 'success' : ($carbonCredits->status === 'sold' ? 'warning' : 'danger') }}">
+                                {{ ucfirst($carbonCredits->status) }}
+                            </span>
+                        </p>
+                        <p><strong>Start Date:</strong> {{ $carbonCredits->start_date }}</p>
+                        <p><strong>End Date:</strong> {{ $carbonCredits->end_date }}</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Action Buttons -->
+            <!-- Nút hành động -->
             <div class="text-center mt-4">
-                <a href="{{ route('credits.index') }}" class="btn btn-secondary">Back to Credits</a>
-                {{-- <a href="{{ route('credits.edit', $carbonCredits) }}" class="btn btn-warning">Edit</a>
-                <form action="{{ route('credits.destroy', $carbonCredits) }}" method="POST" class="d-inline-block">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this credit?')">Delete</button>
-                </form> --}}
+                <a href="{{ route('credits.index') }}" class="btn btn-secondary">
+                    Back to Credits
+                </a>
             </div>
         </div>
     </div>

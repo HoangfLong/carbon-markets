@@ -74,39 +74,55 @@ class PaymentController extends Controller
 
     public function success($orderId)
     {
-        // Kiểm tra và cập nhật order nếu cần
+        // Verify and update the order if needed
         $order = Order::with('orderItems.credit')->findOrFail($orderId);
 
-        // Kiểm tra nếu không có order items
+        // Check if a transaction already exists
+        $transaction = Transaction::where('order_ID', $orderId)->latest()->first();
+
+        // Create a new transaction record if none exists
+        if(!$transaction) {
+            $transaction = Transaction::create([
+                'order_ID' => $order->id,
+                'amount' => $order->total_amount,
+                'payment_method' => 'credit_card',
+                'status' => 'success',
+                'transaction_date' => now(),
+            ]);
+        }
+
+        // Validate transaction status
+        if (!$transaction || $transaction->status !== 'success') {
+            return view('payments.success', ['order' => $order]);
+        }
+    
+        // Check if credits have already been generated
+        if (CreditSerial::where('transaction_ID', $transaction->id)->exists()) {
+            return view('payments.success', ['order' => $order]);
+        }
+
+        // Check if there are no order items
         if ($order->orderItems->isEmpty()) {
             return redirect()->back()->withErrors(['message' => 'No order items found for this order.']);
         }
 
-        // Kiểm tra nếu mỗi orderItem không có tín chỉ (credit)
+        // Ensure each order item has a credit associated with it
         foreach ($order->orderItems as $orderItem) {
             if (!$orderItem->credit) {
                 return redirect()->back()->withErrors(['message' => 'No credit found for the order item.']);
             }
         }
-        // Cập nhật trạng thái order
+
+        // Update order status
         $order->status = 'completed';
         $order->save();
 
-        // Create transaction record
-        Transaction::create([
-            'order_ID' => $order->id,
-            'amount' => $order->total_amount,
-            'payment_method' => 'credit_card',
-            'status' => 'success',
-            'transaction_date' => now(),
-        ]);
-        // Sinh một mã serial code duy nhất cho tất cả các tín chỉ trong đơn hàng
+        // Generate a unique serial code for all credits in the order
         $serialCode = SerialCodeGenerator::generate();
 
-        // Lưu thông tin mã serial vào bảng credit_serials cho tất cả tín chỉ đã mua
+        // Store serial code information in the credit_serials table for all purchased credits
         foreach ($order->orderItems as $orderItem) {
-            $credit = $orderItem->credit; // Lấy tín chỉ (credit) từ order item
-            // Lưu thông tin mã serial vào bảng credit_serials
+            $credit = $orderItem->credit; // Get credit from order item
 
             // Deduct the quantity from Quantity_available
             if ($credit->quantity_available < $orderItem->quantity) {
@@ -118,9 +134,10 @@ class PaymentController extends Controller
 
             CreditSerial::create([
                 'transaction_ID' => $order->transaction->id ?? null,
+                'order_item_ID' => $orderItem->id,
                 'carbon_credit_ID' => $credit->id,
                 'quantity' => $orderItem->quantity,
-                'serial_code' => $serialCode, // Mã serial duy nhất cho tất cả tín chỉ
+                'serial_code' => $serialCode, // Unique serial code for all credits
             ]);
         }
         return view('payments.success', ['order' => $order]);

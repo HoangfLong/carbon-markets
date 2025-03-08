@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white">
-                    @foreach ($carbonProjects as $project)
+                    @foreach ($projects as $project)
                         <tr>
                             <td class="text-center border">{{ $project->id }}</td>
                             <td class="text-center border">{{ $project->name }}</td>
