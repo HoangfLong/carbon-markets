@@ -151,9 +151,6 @@
                         // Lấy số lượng từ session khi tải trang
                         $cartItemsCount = session('cartItemsCount', 0); 
                     @endphp
-                     <script>
-                        console.log('Min value for item :', {{$cartItemsCount = session('cartItemsCount', 0);  }});
-                    </script>
                 </span>
             </a>
         </div>

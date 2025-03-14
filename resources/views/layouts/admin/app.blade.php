@@ -43,8 +43,6 @@
 
   <script src="{{ asset('build/assets/js/app.min.js') }}"></script>
 
-  <script src="{{ asset('build/assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
-
   <script src="{{ asset('build/assets/libs/simplebar/dist/simplebar.js') }}"></script>
 </body>
 
