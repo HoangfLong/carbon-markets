@@ -203,11 +203,11 @@
                             </div>
                         </div>
                     </div> --}}
-                </div>
+                {{-- </div>
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 <!-- ##### New Arrivals Area End ##### -->
 
 <!-- ##### Brands Area Start ##### -->

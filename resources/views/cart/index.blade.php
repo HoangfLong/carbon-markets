@@ -9,7 +9,7 @@
         <h2 class="mb-4 text-center">Your Cart</h2>
 
         @if($cartItems->isEmpty())
-            <div class="row justify-content-center" style="min-height: 70vh;">
+            <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="text-center p-4">
                         <h4 class="mb-3">Your cart is currently empty!</h4>

@@ -124,22 +124,24 @@
         </section>
     @endif
 
-    <!-- Nội dung chính của trang -->
-    <main>
-        @yield('content')
-    </main>
+    <div style="display: flex; flex-direction: column; min-height: 100vh;">
+        <main style="flex-grow: 1;">
+            @yield('content')
+        </main>
 
-    <!-- Footer Area -->
-    @if (!isset($hideFooterSection) || !$hideFooterSection)
-        @include('layouts.footer')
-    @endif    
+        @if (!isset($hideFooterSection) || !$hideFooterSection)
+            @include('layouts.footer')
+        @endif
+    </div>
 
     <!-- Các file JS của giao diện mới -->
-    <script src="{{ asset('build/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Thêm jQuery Easing Plugin (nếu cần) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <!-- Tải các plugin khác -->
     <script src="{{ asset('build/assets/js/popper.min.js') }}"></script>
@@ -148,7 +150,5 @@
     <script src="{{ asset('build/assets/js/classy-nav.min.js') }}"></script>
     <script src="{{ asset('build/assets/js/active.js') }}"></script>
 
-    <!-- Tải Bootstrap và các thư viện cần thiết -->
-    <script src="{{ asset('build/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

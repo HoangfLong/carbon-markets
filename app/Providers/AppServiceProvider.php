@@ -14,8 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(IBaseRepository::class,CreditRepository::class);
-        $this->app->bind(IBaseRepository::class,ProjectRepository::class);
+        // $this->app->bind(IBaseRepository::class,CreditRepository::class);
+        // $this->app->bind(IBaseRepository::class,ProjectRepository::class);
     }
 
     /**
